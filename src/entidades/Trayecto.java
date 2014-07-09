@@ -12,5 +12,24 @@ import javax.persistence.OneToMany;
 public class Trayecto {
     @Id @GeneratedValue int idTrayecto;   
     @OneToMany (mappedBy="trayecto") Set<Ciudad> ciudades;
+
+    public Trayecto() {
+    }
+
+    public int getIdTrayecto() {
+        return idTrayecto;
+    }
+
+    public void setIdTrayecto(int idTrayecto) {
+        this.idTrayecto = idTrayecto;
+    }
+
+    public Set<Ciudad> getCiudades() {
+        return ciudades;
+    }
+
+    public void setCiudades(Set<Ciudad> ciudades) {
+        this.ciudades = ciudades;
+    }
     
 }

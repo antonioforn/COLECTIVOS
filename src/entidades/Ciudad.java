@@ -12,4 +12,36 @@ public class Ciudad {
     @Id @GeneratedValue int idCiudad;
     String nombre;
     @ManyToOne Trayecto trayecto;
+
+    public Ciudad() {
+    }
+
+    public Ciudad(String nombre, Trayecto trayecto) {
+        this.nombre = nombre;
+        this.trayecto = trayecto;
+    }
+
+    public int getIdCiudad() {
+        return idCiudad;
+    }
+
+    public void setIdCiudad(int idCiudad) {
+        this.idCiudad = idCiudad;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public Trayecto getTrayecto() {
+        return trayecto;
+    }
+
+    public void setTrayecto(Trayecto trayecto) {
+        this.trayecto = trayecto;
+    }
 }
