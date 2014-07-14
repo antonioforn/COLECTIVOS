@@ -5,9 +5,7 @@ package forms;
 
 public class frmPrincipal extends javax.swing.JFrame {
 
-    /**
-     * Creates new form frmPrincipal
-     */
+    
     public frmPrincipal() {
         initComponents();
     }
