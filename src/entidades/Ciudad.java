@@ -16,9 +16,8 @@ public class Ciudad {
     public Ciudad() {
     }
 
-    public Ciudad(String nombre, Trayecto trayecto) {
+    public Ciudad(String nombre) {
         this.nombre = nombre;
-        this.trayecto = trayecto;
     }
 
     public int getIdCiudad() {

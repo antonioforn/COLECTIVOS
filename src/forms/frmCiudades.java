@@ -2,11 +2,18 @@
 
 package forms;
 
+import clasesUtiles.ModeloTabla;
+import entidades.Ciudad;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 
 
 public class frmCiudades extends javax.swing.JFrame {
@@ -237,7 +244,7 @@ public class frmCiudades extends javax.swing.JFrame {
             btnEditar.setEnabled(true);
             btnEliminar.setEnabled(true);
             txtNombre.setEnabled(true);
-//            conecta.execSQLrs("select * from estados where id_estado = " + tblEstado.getValueAt(tblEstado.getSelectedRow(), 0));
+//            conecta.execSQLrs("select * from estados where id_estado = " + tabla.getValueAt(tabla.getSelectedRow(), 0));
 //            conecta.rs.next();
             txtId.setText("");
             txtNombre.setText("");
@@ -247,7 +254,11 @@ public class frmCiudades extends javax.swing.JFrame {
     }//GEN-LAST:event_tablaMouseClicked
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        
+        em.getTransaction().begin();
+        Ciudad ciu = new Ciudad(txtNombre.getText());
+        em.persist(ciu);
+        em.getTransaction().commit();
+        cargarTabla();        
         
         txtId.setText(null);
         txtNombre.setText(null);
@@ -309,4 +320,30 @@ public class frmCiudades extends javax.swing.JFrame {
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
+
+    private void cargarTabla() {
+        ArrayList datos= new ArrayList();
+        String[] cols = new String[]{"Id", "Nombre"}; 
+        try{
+            TypedQuery<Ciudad> q1 = em.createQuery("SELECT ciu FROM Ciudad ciu", Ciudad.class);
+            List<Ciudad> results = q1.getResultList();
+            //System.out.println( results.toString());
+           
+            for(Ciudad c: results){
+                datos.add(new Object[]{c.getIdCiudad(), c.getNombre()});
+            }
+                
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(this, "Error al cargar ArrayList. \n" + ex.getMessage());        
+        }
+        ModeloTabla modelo= new ModeloTabla(datos, cols);
+        tabla.setModel(modelo);
+        tabla.getColumnModel().getColumn(0).setPreferredWidth(90);
+        tabla.getColumnModel().getColumn(0).setResizable(false);
+        tabla.getColumnModel().getColumn(1).setPreferredWidth(190);
+        tabla.getColumnModel().getColumn(1).setResizable(false);
+        tabla.getTableHeader().setReorderingAllowed(false);
+        tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    }
 }
