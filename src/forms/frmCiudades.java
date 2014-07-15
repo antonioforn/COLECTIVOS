@@ -3,6 +3,7 @@
 package forms;
 
 import clasesUtiles.ModeloTabla;
+import clasesUtiles.Util;
 import entidades.Ciudad;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -20,10 +21,13 @@ public class frmCiudades extends javax.swing.JFrame {
 
     EntityManagerFactory emf;
     EntityManager em;
+    boolean flag;
+    
     public frmCiudades() {
         initComponents();
         emf= Persistence.createEntityManagerFactory("colectivos.odb");
         em = emf.createEntityManager();
+        cargarTabla();
     }
 
     /**
@@ -78,10 +82,18 @@ public class frmCiudades extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tablaMouseClicked(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tablaMousePressed(evt);
+            }
         });
         jScrollPane1.setViewportView(tabla);
 
         txtNombre.setEnabled(false);
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreKeyTyped(evt);
+            }
+        });
 
         jLabel2.setText("Nombre:");
 
@@ -94,6 +106,11 @@ public class frmCiudades extends javax.swing.JFrame {
 
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit32.png"))); // NOI18N
         btnEditar.setEnabled(false);
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
 
         btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/eliminar.png"))); // NOI18N
         btnEliminar.setEnabled(false);
@@ -115,7 +132,7 @@ public class frmCiudades extends javax.swing.JFrame {
 
         jLabel3.setText("Id:");
 
-        txtId.setEditable(false);
+        txtId.setEnabled(false);
 
         btnCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Right32Green.png"))); // NOI18N
         btnCerrar.addActionListener(new java.awt.event.ActionListener() {
@@ -218,21 +235,26 @@ public class frmCiudades extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosed
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-        txtId.setText(null);
-        txtNombre.setText(null);
+        flag= true;
+        Util.limpiarCampos(jPanel1);
         txtNombre.setEnabled(true);
         btnGuardar.setEnabled(true);
         btnNuevo.setEnabled(false);
+        btnEditar.setEnabled(false);
+        btnEliminar.setEnabled(false);
         tabla.setEnabled(false);
+        txtNombre.requestFocusInWindow();
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        txtId.setText(null);
-        txtNombre.setText(null);
+        Util.limpiarCampos(jPanel1);
         txtNombre.setEnabled(false);
         btnGuardar.setEnabled(false);
+        btnEditar.setEnabled(false);
+        btnEliminar.setEnabled(false);
         btnNuevo.setEnabled(true);    
         tabla.setEnabled(true);
+        cargarTabla();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
@@ -240,33 +262,61 @@ public class frmCiudades extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCerrarActionPerformed
 
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
-          try {
-            btnEditar.setEnabled(true);
-            btnEliminar.setEnabled(true);
-            txtNombre.setEnabled(true);
-//            conecta.execSQLrs("select * from estados where id_estado = " + tabla.getValueAt(tabla.getSelectedRow(), 0));
-//            conecta.rs.next();
-            txtId.setText("");
-            txtNombre.setText("");
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Erro ao mostrar dados \n" + ex.getMessage() );
-        } 
+
     }//GEN-LAST:event_tablaMouseClicked
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        em.getTransaction().begin();
-        Ciudad ciu = new Ciudad(txtNombre.getText());
-        em.persist(ciu);
-        em.getTransaction().commit();
+        if(txtNombre.getText().equals("")){
+            JOptionPane.showMessageDialog(rootPane, "Debe ingresar datos");
+            txtNombre.requestFocusInWindow();
+            return;
+        }
+        
+        if (flag){
+            em.getTransaction().begin();
+            Ciudad ciu = new Ciudad(txtNombre.getText().trim());
+            em.persist(ciu);
+            em.getTransaction().commit();
+        }else{
+            
+        }
         cargarTabla();        
         
-        txtId.setText(null);
-        txtNombre.setText(null);
+        Util.limpiarCampos(jPanel1);
         txtNombre.setEnabled(false);
         btnGuardar.setEnabled(false);
-        btnNuevo.setEnabled(true);    
+        btnNuevo.setEnabled(true);
+        btnEditar.setEnabled(false);
+        btnEliminar.setEnabled(false);
         tabla.setEnabled(true);
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void tablaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMousePressed
+           try {
+            btnEditar.setEnabled(true);
+            btnEliminar.setEnabled(true);
+            txtId.setText(tabla.getValueAt(tabla.getSelectedRow(), 0).toString());
+            txtNombre.setText(tabla.getValueAt(tabla.getSelectedRow(), 1).toString());
+//            conecta.execSQLrs("select * from estados where id_estado = " + tabla.getValueAt(tabla.getSelectedRow(), 0));
+//            conecta.rs.next();
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao mostrar dados \n" + ex.getMessage() );
+        } 
+    }//GEN-LAST:event_tablaMousePressed
+
+    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
+        Util.soloLetras(txtNombre);
+    }//GEN-LAST:event_txtNombreKeyTyped
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        flag= false;
+        txtNombre.setEnabled(true);
+        txtNombre.requestFocusInWindow();
+        tabla.setEnabled(false);
+        btnGuardar.setEnabled(true);
+        
+    }//GEN-LAST:event_btnEditarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -340,7 +390,7 @@ public class frmCiudades extends javax.swing.JFrame {
         tabla.setModel(modelo);
         tabla.getColumnModel().getColumn(0).setPreferredWidth(90);
         tabla.getColumnModel().getColumn(0).setResizable(false);
-        tabla.getColumnModel().getColumn(1).setPreferredWidth(190);
+        tabla.getColumnModel().getColumn(1).setPreferredWidth(277);
         tabla.getColumnModel().getColumn(1).setResizable(false);
         tabla.getTableHeader().setReorderingAllowed(false);
         tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);

@@ -2,6 +2,9 @@
 
 package clasesUtiles;
 
+import java.awt.Toolkit;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -22,6 +25,17 @@ public class Util {
                ((JPasswordField)jPanel.getComponents()[i]).setText("");
            }          
        }
-     
+    }
+    
+    public static void soloLetras(JTextField txt){
+        txt.addKeyListener(new KeyAdapter(){
+            @Override
+            public void keyTyped(KeyEvent e){
+                char c= e.getKeyChar();
+                if (Character.isDigit(c)){
+                    e.consume();
+                }
+            }
+        });
     }
 }
