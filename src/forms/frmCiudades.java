@@ -27,7 +27,7 @@ public class frmCiudades extends javax.swing.JFrame {
         initComponents();
         emf= Persistence.createEntityManagerFactory("colectivos.odb");
         em = emf.createEntityManager();
-        cargarTabla();
+        cargarTabla("SELECT ciu FROM Ciudad ciu");
     }
     
     /**
@@ -44,7 +44,7 @@ public class frmCiudades extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
         txtNombre = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
+        lbNombre = new javax.swing.JLabel();
         btnNuevo = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
@@ -54,6 +54,7 @@ public class frmCiudades extends javax.swing.JFrame {
         txtId = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         btnCerrar = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Ciudades");
@@ -95,7 +96,7 @@ public class frmCiudades extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Nombre:");
+        lbNombre.setText("Nombre:");
 
         btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/adicionar.png"))); // NOI18N
         btnNuevo.setToolTipText("Añadir Ciudad");
@@ -152,6 +153,14 @@ public class frmCiudades extends javax.swing.JFrame {
             }
         });
 
+        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/viewmag.png"))); // NOI18N
+        btnBuscar.setToolTipText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -164,12 +173,15 @@ public class frmCiudades extends javax.swing.JFrame {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
+                                    .addComponent(lbNombre)
                                     .addComponent(jLabel3))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnNuevo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -189,7 +201,7 @@ public class frmCiudades extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(14, 14, 14)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -210,11 +222,13 @@ public class frmCiudades extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(lbNombre)
+                                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
@@ -258,6 +272,8 @@ public class frmCiudades extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        btnBuscar.setSelected(false);
+        lbNombre.setText("Nombre:");
         Util.limpiarCampos(jPanel1);
         txtNombre.setEnabled(false);
         btnGuardar.setEnabled(false);
@@ -265,7 +281,7 @@ public class frmCiudades extends javax.swing.JFrame {
         btnEliminar.setEnabled(false);
         btnNuevo.setEnabled(true);    
         tabla.setEnabled(true);
-        cargarTabla();
+        cargarTabla("SELECT ciu FROM Ciudad ciu");
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
@@ -298,7 +314,7 @@ public class frmCiudades extends javax.swing.JFrame {
             ciu.setNombre(txtNombre.getText());
             em.getTransaction().commit();
         }
-        cargarTabla();        
+        cargarTabla("SELECT ciu FROM Ciudad ciu");        
         
         Util.limpiarCampos(jPanel1);
         txtNombre.setEnabled(false);
@@ -315,9 +331,8 @@ public class frmCiudades extends javax.swing.JFrame {
             btnEliminar.setEnabled(true);
             txtId.setText(tabla.getValueAt(tabla.getSelectedRow(), 0).toString());
             txtNombre.setText(tabla.getValueAt(tabla.getSelectedRow(), 1).toString());
-//            conecta.execSQLrs("select * from estados where id_estado = " + tabla.getValueAt(tabla.getSelectedRow(), 0));
-//            conecta.rs.next();
-
+            btnBuscar.setSelected(false);
+ 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Erro ao mostrar dados \n" + ex.getMessage() );
         } 
@@ -325,6 +340,9 @@ public class frmCiudades extends javax.swing.JFrame {
 
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
         Util.soloLetras(txtNombre);
+        if(btnBuscar.isSelected()){
+            cargarTabla("SELECT ciu FROM Ciudad ciu WHERE ciu.nombre LIKE '%" + txtNombre.getText() + "%'");
+        }
     }//GEN-LAST:event_txtNombreKeyTyped
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
@@ -351,8 +369,21 @@ public class frmCiudades extends javax.swing.JFrame {
         Util.limpiarCampos(jPanel1);
         btnEditar.setEnabled(false);
         btnEliminar.setEnabled(false);
-        cargarTabla();        
+        cargarTabla("SELECT ciu FROM Ciudad ciu");        
     }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+       if(btnBuscar.isSelected()){
+            lbNombre.setText("Filtrar:");
+            txtNombre.setEnabled(true);
+            txtNombre.requestFocusInWindow();
+            Util.limpiarCampos(jPanel1);
+       }else{
+            lbNombre.setText("Nombre:");
+            txtNombre.setEnabled(false);           
+            cargarTabla("SELECT ciu FROM Ciudad ciu");
+       }
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -390,6 +421,7 @@ public class frmCiudades extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JToggleButton btnBuscar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnCerrar;
     private javax.swing.JButton btnEditar;
@@ -397,21 +429,21 @@ public class frmCiudades extends javax.swing.JFrame {
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lbNombre;
     private javax.swing.JTable tabla;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 
-    private void cargarTabla() {
+    private void cargarTabla(String jpql) {
         ArrayList datos= new ArrayList();
         String[] cols = new String[]{"Id", "Nombre"}; 
         try{
-            TypedQuery<Ciudad> q1 = em.createQuery("SELECT ciu FROM Ciudad ciu", Ciudad.class);
+            TypedQuery<Ciudad> q1 = em.createQuery(jpql, Ciudad.class);
             List<Ciudad> results = q1.getResultList();
             //System.out.println( results.toString());
            

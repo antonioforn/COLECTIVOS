@@ -3,6 +3,7 @@
 package forms;
 
 import clasesUtiles.ModeloTabla;
+import clasesUtiles.Util;
 import entidades.Ciudad;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,18 +16,17 @@ import javax.swing.ListSelectionModel;
 
 public class frmSelectCiudad extends javax.swing.JFrame {
     EntityManager em;
-    Ciudad ciud;
 
-    public frmSelectCiudad(EntityManager emg, Ciudad c) {
+
+    public frmSelectCiudad(EntityManager emg) {
         this.em= emg;
-        ciud= c;
         initComponents();
-        cargarTabla();
+        cargarTabla("SELECT ciu FROM Ciudad ciu");
     }
     
     public frmSelectCiudad() {
         initComponents();
-        cargarTabla();
+        cargarTabla("SELECT ciu FROM Ciudad ciu");
     }    
 
     /**
@@ -40,14 +40,19 @@ public class frmSelectCiudad extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabla = new javax.swing.JTable();
+        tablaC = new javax.swing.JTable();
+        btnBuscar = new javax.swing.JToggleButton();
+        txtNombre = new javax.swing.JTextField();
+        lbNombre = new javax.swing.JLabel();
+        btnGuardar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Seleccione una Ciudad");
         setResizable(false);
         setType(java.awt.Window.Type.POPUP);
 
-        tabla.setModel(new javax.swing.table.DefaultTableModel(
+        tablaC.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -58,7 +63,46 @@ public class frmSelectCiudad extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(tabla);
+        tablaC.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaCMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tablaC);
+
+        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/viewmag.png"))); // NOI18N
+        btnBuscar.setToolTipText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+
+        txtNombre.setEnabled(false);
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreKeyTyped(evt);
+            }
+        });
+
+        lbNombre.setText("Nombre:");
+
+        btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/confirmar.png"))); // NOI18N
+        btnGuardar.setToolTipText("Guardar");
+        btnGuardar.setEnabled(false);
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
+
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cancel.png"))); // NOI18N
+        btnCancelar.setToolTipText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -66,15 +110,38 @@ public class frmSelectCiudad extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(89, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnGuardar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnCancelar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lbNombre)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lbNombre)
+                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnGuardar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnCancelar)))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -90,12 +157,55 @@ public class frmSelectCiudad extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        if(btnBuscar.isSelected()){
+            lbNombre.setText("Filtrar:");
+            txtNombre.setEnabled(true);
+            txtNombre.requestFocusInWindow();
+            Util.limpiarCampos(jPanel1);
+        }else{
+            lbNombre.setText("Nombre:");
+            txtNombre.setEnabled(false);
+            cargarTabla("SELECT ciu FROM Ciudad ciu");
+        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
+        Util.soloLetras(txtNombre);
+        if(btnBuscar.isSelected()){
+            cargarTabla("SELECT ciu FROM Ciudad ciu WHERE ciu.nombre LIKE '%" + txtNombre.getText() + "%'");
+        }
+    }//GEN-LAST:event_txtNombreKeyTyped
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        int id= Integer.parseInt(tablaC.getValueAt(tablaC.getSelectedRow(), 0).toString());
+        Ciudad ciud = em.find(Ciudad.class, id);
+        frmTrayectos.setCiuToAdd(ciud);
+        dispose();
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+//        btnBuscar.setSelected(false);
+//        lbNombre.setText("Nombre:");
+//        Util.limpiarCampos(jPanel1);
+//        txtNombre.setEnabled(false);
+//        btnGuardar.setEnabled(false);
+//        tablaC.setEnabled(true);
+//        cargarTabla("SELECT ciu FROM Ciudad ciu");
+        dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void tablaCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaCMouseClicked
+        btnGuardar.setEnabled(true);
+    }//GEN-LAST:event_tablaCMouseClicked
 
     /**
      * @param args the command line arguments
@@ -133,16 +243,21 @@ public class frmSelectCiudad extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JToggleButton btnBuscar;
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnGuardar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tabla;
+    private javax.swing.JLabel lbNombre;
+    private javax.swing.JTable tablaC;
+    private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 
-    private void cargarTabla() {
+    private void cargarTabla(String jpql) {
         ArrayList datos= new ArrayList();
         String[] cols = new String[]{"Id", "Nombre"}; 
         try{
-            TypedQuery<Ciudad> q1 = em.createQuery("SELECT ciu FROM Ciudad ciu", Ciudad.class);
+            TypedQuery<Ciudad> q1 = em.createQuery(jpql, Ciudad.class);
             List<Ciudad> results = q1.getResultList();
             //System.out.println( results.toString());
            
@@ -155,14 +270,14 @@ public class frmSelectCiudad extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Error al cargar ArrayList. \n" + ex.getMessage() );        
         }
         ModeloTabla modelo= new ModeloTabla(datos, cols);
-        tabla.setModel(modelo);
-        tabla.getColumnModel().getColumn(0).setPreferredWidth(90);
-        tabla.getColumnModel().getColumn(0).setResizable(false);
-        tabla.getColumnModel().getColumn(1).setPreferredWidth(277);
-        tabla.getColumnModel().getColumn(1).setResizable(false);
-        tabla.getTableHeader().setReorderingAllowed(false);
-        tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tablaC.setModel(modelo);
+        tablaC.getColumnModel().getColumn(0).setPreferredWidth(90);
+        tablaC.getColumnModel().getColumn(0).setResizable(false);
+        tablaC.getColumnModel().getColumn(1).setPreferredWidth(277);
+        tablaC.getColumnModel().getColumn(1).setResizable(false);
+        tablaC.getTableHeader().setReorderingAllowed(false);
+        tablaC.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        tablaC.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
 }
