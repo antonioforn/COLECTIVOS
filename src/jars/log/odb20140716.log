@@ -1,0 +1,665 @@
+------------------------------------------------------------------------------------------------------------------------
+
+[2014-07-16 08:32:16 #1 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is opened by 12228@faster-PC
+
+[2014-07-16 08:32:16 #2 type] 
+Type entidades.Trayecto is not enhanced.
+
+[2014-07-16 08:32:16 #3 type] 
+Type entidades.Ciudad is not enhanced.
+
+[2014-07-16 08:32:35 #4 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is closed by 12228@faster-PC
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2014-07-16 08:33:14 #1 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is opened by 4028@faster-PC
+
+[2014-07-16 08:33:14 #2 type] 
+Type entidades.Trayecto is not enhanced.
+
+[2014-07-16 08:33:14 #3 type] 
+Type entidades.Ciudad is not enhanced.
+
+[2014-07-16 08:34:13 #4 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is closed by 4028@faster-PC
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2014-07-16 08:51:12 #1 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is opened by 2164@faster-PC
+
+[2014-07-16 08:51:12 #2 type.registry] 
+New type entidades.Trayecto
+
+[2014-07-16 08:51:12 #3 type] 
+Type entidades.Trayecto is not enhanced.
+
+[2014-07-16 08:51:12 #4 type.registry] 
+New type entidades.Ciudad
+
+[2014-07-16 08:51:12 #5 type] 
+Type entidades.Ciudad is not enhanced.
+
+[2014-07-16 08:51:18 #6 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is closed by 2164@faster-PC
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2014-07-16 08:52:31 #1 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is opened by 12348@faster-PC
+
+[2014-07-16 08:52:31 #2 type] 
+Type entidades.Trayecto is not enhanced.
+
+[2014-07-16 08:52:31 #3 type] 
+Type entidades.Ciudad is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2014-07-16 08:55:44 #1 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is opened by 13348@faster-PC
+
+[2014-07-16 08:55:44 #2 type] 
+Type entidades.Trayecto is not enhanced.
+
+[2014-07-16 08:55:44 #3 type] 
+Type entidades.Ciudad is not enhanced.
+
+[2014-07-16 08:56:18 #4 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is closed by 13348@faster-PC
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2014-07-16 09:07:41 #1 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is opened by 12756@faster-PC
+
+[2014-07-16 09:07:41 #2 type] 
+Type entidades.Trayecto is not enhanced.
+
+[2014-07-16 09:07:41 #3 type] 
+Type entidades.Ciudad is not enhanced.
+
+[2014-07-16 09:07:47 #4 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is closed by 12756@faster-PC
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2014-07-16 09:10:40 #1 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is opened by 11544@faster-PC
+
+[2014-07-16 09:10:40 #2 type] 
+Type entidades.Trayecto is not enhanced.
+
+[2014-07-16 09:10:40 #3 type] 
+Type entidades.Ciudad is not enhanced.
+
+[2014-07-16 09:11:02 #4 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is closed by 11544@faster-PC
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2014-07-16 09:14:27 #1 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is opened by 2304@faster-PC
+
+[2014-07-16 09:14:28 #2 type] 
+Type entidades.Trayecto is not enhanced.
+
+[2014-07-16 09:14:28 #3 type] 
+Type entidades.Ciudad is not enhanced.
+
+[2014-07-16 09:14:28 #4 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is closed by 2304@faster-PC
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2014-07-16 09:14:36 #1 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is opened by 13284@faster-PC
+
+[2014-07-16 09:14:36 #2 type] 
+Type entidades.Trayecto is not enhanced.
+
+[2014-07-16 09:14:36 #3 type] 
+Type entidades.Ciudad is not enhanced.
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2014-07-16 09:23:23 #1 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is opened by 768@faster-PC
+
+[2014-07-16 09:23:23 #2 type] 
+Type entidades.Trayecto is not enhanced.
+
+[2014-07-16 09:23:23 #3 type] 
+Type entidades.Ciudad is not enhanced.
+
+[2014-07-16 09:23:47 #4 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is closed by 768@faster-PC
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2014-07-16 09:24:22 #1 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is opened by 2788@faster-PC
+
+[2014-07-16 09:24:22 #2 type] 
+Type entidades.Trayecto is not enhanced.
+
+[2014-07-16 09:24:22 #3 type] 
+Type entidades.Ciudad is not enhanced.
+
+[2014-07-16 09:24:27 #4 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is closed by 2788@faster-PC
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2014-07-16 09:38:20 #1 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is opened by 10548@faster-PC
+
+[2014-07-16 09:38:20 #2 type] 
+Type entidades.Trayecto is not enhanced.
+
+[2014-07-16 09:38:20 #3 type] 
+Type entidades.Ciudad is not enhanced.
+
+[2014-07-16 09:38:40 #4 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is closed by 10548@faster-PC
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2014-07-16 09:39:29 #1 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is opened by 12956@faster-PC
+
+[2014-07-16 09:39:29 #2 type] 
+Type entidades.Trayecto is not enhanced.
+
+[2014-07-16 09:39:29 #3 type] 
+Type entidades.Ciudad is not enhanced.
+
+[2014-07-16 09:39:29 #4 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is closed by 12956@faster-PC
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2014-07-16 09:40:06 #1 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is opened by 12844@faster-PC
+
+[2014-07-16 09:40:06 #2 type.registry] 
+New type entidades.Ciudad
+
+[2014-07-16 09:40:06 #3 type] 
+Type entidades.Ciudad is not enhanced.
+
+[2014-07-16 09:40:06 #4 type.registry] 
+New type entidades.Trayecto
+
+[2014-07-16 09:40:06 #5 type] 
+Type entidades.Trayecto is not enhanced.
+
+[2014-07-16 09:40:06 #6 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is closed by 12844@faster-PC
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2014-07-16 09:40:16 #1 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is opened by 10880@faster-PC
+
+[2014-07-16 09:40:17 #2 type] 
+Type entidades.Ciudad is not enhanced.
+
+[2014-07-16 09:40:17 #3 type] 
+Type entidades.Trayecto is not enhanced.
+
+[2014-07-16 09:40:36 #4 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is closed by 10880@faster-PC
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2014-07-16 09:42:38 #1 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is opened by 11768@faster-PC
+
+[2014-07-16 09:42:38 #2 type] 
+Type entidades.Ciudad is not enhanced.
+
+[2014-07-16 09:42:38 #3 type] 
+Type entidades.Trayecto is not enhanced.
+
+[2014-07-16 09:43:02 #4 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is closed by 11768@faster-PC
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2014-07-16 09:43:23 #1 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is opened by 14316@faster-PC
+
+[2014-07-16 09:43:23 #2 type] 
+Type entidades.Ciudad is not enhanced.
+
+[2014-07-16 09:43:23 #3 type] 
+Type entidades.Trayecto is not enhanced.
+
+[2014-07-16 09:43:48 #4 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is closed by 14316@faster-PC
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2014-07-16 09:44:22 #1 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is opened by 14308@faster-PC
+
+[2014-07-16 09:44:22 #2 type] 
+Type entidades.Ciudad is not enhanced.
+
+[2014-07-16 09:44:22 #3 type] 
+Type entidades.Trayecto is not enhanced.
+
+[2014-07-16 09:44:29 #4 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is closed by 14308@faster-PC
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2014-07-16 09:44:35 #1 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is opened by 7220@faster-PC
+
+[2014-07-16 09:44:35 #2 type] 
+Type entidades.Ciudad is not enhanced.
+
+[2014-07-16 09:44:35 #3 type] 
+Type entidades.Trayecto is not enhanced.
+
+[2014-07-16 09:44:42 #4 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is closed by 7220@faster-PC
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2014-07-16 09:46:47 #1 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is opened by 8984@faster-PC
+
+[2014-07-16 09:46:47 #2 type.registry] 
+New type entidades.Trayecto
+
+[2014-07-16 09:46:47 #3 type] 
+Type entidades.Trayecto is not enhanced.
+
+[2014-07-16 09:46:47 #4 type.registry] 
+New type entidades.Ciudad
+
+[2014-07-16 09:46:48 #5 type] 
+Type entidades.Ciudad is not enhanced.
+
+[2014-07-16 09:46:50 #6 type.registry] 
+New type java.util.ArrayList<java.lang.Object>
+
+[2014-07-16 09:46:50 #7 type.registry] 
+New type java.util.ArrayList<entidades.Ciudad>
+
+[2014-07-16 09:46:56 #8 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is closed by 8984@faster-PC
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2014-07-16 09:47:02 #1 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is opened by 3140@faster-PC
+
+[2014-07-16 09:47:02 #2 type] 
+Type entidades.Trayecto is not enhanced.
+
+[2014-07-16 09:47:02 #3 type] 
+Type entidades.Ciudad is not enhanced.
+
+[2014-07-16 09:47:03 #4 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is closed by 3140@faster-PC
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2014-07-16 09:47:38 #1 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is opened by 10688@faster-PC
+
+[2014-07-16 09:47:38 #2 type] 
+Type entidades.Trayecto is not enhanced.
+
+[2014-07-16 09:47:38 #3 type] 
+Type entidades.Ciudad is not enhanced.
+
+[2014-07-16 09:47:38 #4 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is closed by 10688@faster-PC
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2014-07-16 09:48:12 #1 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is opened by 9504@faster-PC
+
+[2014-07-16 09:48:13 #2 type.registry] 
+New type entidades.Ciudad
+
+[2014-07-16 09:48:13 #3 type] 
+Type entidades.Ciudad is not enhanced.
+
+[2014-07-16 09:48:13 #4 type.registry] 
+New type entidades.Trayecto
+
+[2014-07-16 09:48:13 #5 type] 
+Type entidades.Trayecto is not enhanced.
+
+[2014-07-16 09:48:13 #6 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is closed by 9504@faster-PC
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2014-07-16 09:48:25 #1 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is opened by 13428@faster-PC
+
+[2014-07-16 09:48:25 #2 type] 
+Type entidades.Ciudad is not enhanced.
+
+[2014-07-16 09:48:25 #3 type] 
+Type entidades.Trayecto is not enhanced.
+
+[2014-07-16 09:48:29 #4 type.registry] 
+New type java.util.ArrayList<java.lang.Object>
+
+[2014-07-16 09:48:29 #5 type.registry] 
+New type java.util.ArrayList<entidades.Ciudad>
+
+[2014-07-16 09:48:38 #6 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is closed by 13428@faster-PC
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2014-07-16 10:00:34 #1 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is opened by 13064@faster-PC
+
+[2014-07-16 10:00:35 #2 type.registry] 
+New type entidades.Ciudad
+
+[2014-07-16 10:00:35 #3 type] 
+Type entidades.Ciudad is not enhanced.
+
+[2014-07-16 10:00:35 #4 type.registry] 
+New type entidades.Trayecto
+
+[2014-07-16 10:00:35 #5 type] 
+Type entidades.Trayecto is not enhanced.
+
+[2014-07-16 10:00:35 #6 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is closed by 13064@faster-PC
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2014-07-16 10:00:49 #1 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is opened by 7824@faster-PC
+
+[2014-07-16 10:00:49 #2 type] 
+Type entidades.Ciudad is not enhanced.
+
+[2014-07-16 10:00:49 #3 type] 
+Type entidades.Trayecto is not enhanced.
+
+[2014-07-16 10:00:54 #4 type.registry] 
+New type java.util.ArrayList<java.lang.Object>
+
+[2014-07-16 10:00:54 #5 type.registry] 
+New type java.util.ArrayList<entidades.Ciudad>
+
+[2014-07-16 10:01:27 #6 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is closed by 7824@faster-PC
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2014-07-16 10:13:04 #1 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is opened by 11544@faster-PC
+
+[2014-07-16 10:13:04 #2 type] 
+Type entidades.Ciudad is not enhanced.
+
+[2014-07-16 10:13:04 #3 type] 
+Type entidades.Trayecto is not enhanced.
+
+[2014-07-16 10:13:05 #4 type.registry] 
+New type com.objectdb.o.LMT
+
+[2014-07-16 10:13:05 #5 type.registry] 
+New type com.objectdb.o.VAL
+
+[2014-07-16 10:13:05 #6 type.registry] 
+New type com.objectdb.o.RFV
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2014-07-16 10:14:46 #1 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' has been recovered (tr. 35-35)
+
+[2014-07-16 10:14:47 #2 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is opened by 12544@faster-PC
+
+[2014-07-16 10:14:47 #3 type] 
+Type entidades.Ciudad is not enhanced.
+
+[2014-07-16 10:14:47 #4 type] 
+Type entidades.Trayecto is not enhanced.
+
+[2014-07-16 10:15:17 #5 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is closed by 12544@faster-PC
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2014-07-16 10:16:13 #1 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is opened by 10376@faster-PC
+
+[2014-07-16 10:16:13 #2 type] 
+Type entidades.Ciudad is not enhanced.
+
+[2014-07-16 10:16:13 #3 type] 
+Type entidades.Trayecto is not enhanced.
+
+[2014-07-16 10:17:57 #4 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is closed by 10376@faster-PC
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2014-07-16 10:28:25 #1 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is opened by 2404@faster-PC
+
+[2014-07-16 10:28:25 #2 type] 
+Type entidades.Ciudad is not enhanced.
+
+[2014-07-16 10:28:25 #3 type] 
+Type entidades.Trayecto is not enhanced.
+
+[2014-07-16 10:28:32 #4 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is closed by 2404@faster-PC
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2014-07-16 10:29:02 #1 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is opened by 7856@faster-PC
+
+[2014-07-16 10:29:03 #2 type] 
+Type entidades.Ciudad is not enhanced.
+
+[2014-07-16 10:29:03 #3 type] 
+Type entidades.Trayecto is not enhanced.
+
+[2014-07-16 10:29:44 #4 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is closed by 7856@faster-PC
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2014-07-16 10:30:56 #1 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is opened by 7960@faster-PC
+
+[2014-07-16 10:30:56 #2 type] 
+Type entidades.Ciudad is not enhanced.
+
+[2014-07-16 10:30:56 #3 type] 
+Type entidades.Trayecto is not enhanced.
+
+[2014-07-16 10:31:28 #4 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is closed by 7960@faster-PC
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2014-07-16 10:52:13 #1 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is opened by 8596@faster-PC
+
+[2014-07-16 10:52:13 #2 type] 
+Type entidades.Ciudad is not enhanced.
+
+[2014-07-16 10:52:13 #3 type] 
+Type entidades.Trayecto is not enhanced.
+
+[2014-07-16 10:53:20 #4 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is closed by 8596@faster-PC
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2014-07-16 10:53:29 #1 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is opened by 11312@faster-PC
+
+[2014-07-16 10:53:29 #2 type] 
+Type entidades.Ciudad is not enhanced.
+
+[2014-07-16 10:53:29 #3 type] 
+Type entidades.Trayecto is not enhanced.
+
+[2014-07-16 10:53:45 #4 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is closed by 11312@faster-PC
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2014-07-16 11:00:35 #1 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is opened by 7760@faster-PC
+
+[2014-07-16 11:00:35 #2 type] 
+Type entidades.Ciudad is not enhanced.
+
+[2014-07-16 11:00:35 #3 type] 
+Type entidades.Trayecto is not enhanced.
+
+[2014-07-16 11:00:54 #4 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is closed by 7760@faster-PC
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2014-07-16 11:03:40 #1 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is opened by 13876@faster-PC
+
+[2014-07-16 11:03:40 #2 type] 
+Type entidades.Ciudad is not enhanced.
+
+[2014-07-16 11:03:40 #3 type] 
+Type entidades.Trayecto is not enhanced.
+
+[2014-07-16 11:04:40 #4 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is closed by 13876@faster-PC
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2014-07-16 11:13:38 #1 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is opened by 6964@faster-PC
+
+[2014-07-16 11:13:38 #2 type] 
+Type entidades.Ciudad is not enhanced.
+
+[2014-07-16 11:13:38 #3 type] 
+Type entidades.Trayecto is not enhanced.
+
+[2014-07-16 11:13:49 #4 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is closed by 6964@faster-PC
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2014-07-16 11:13:55 #1 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is opened by 14084@faster-PC
+
+[2014-07-16 11:13:55 #2 type] 
+Type entidades.Ciudad is not enhanced.
+
+[2014-07-16 11:13:55 #3 type] 
+Type entidades.Trayecto is not enhanced.
+
+[2014-07-16 11:14:06 #4 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is closed by 14084@faster-PC
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2014-07-16 11:15:30 #1 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is opened by 2792@faster-PC
+
+[2014-07-16 11:15:30 #2 type.registry] 
+New type entidades.Trayecto
+
+[2014-07-16 11:15:30 #3 type] 
+Type entidades.Trayecto is not enhanced.
+
+[2014-07-16 11:15:30 #4 type.registry] 
+New type entidades.Ciudad
+
+[2014-07-16 11:15:30 #5 type] 
+Type entidades.Ciudad is not enhanced.
+
+[2014-07-16 11:15:36 #6 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is closed by 2792@faster-PC
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2014-07-16 11:15:42 #1 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is opened by 8324@faster-PC
+
+[2014-07-16 11:15:42 #2 type] 
+Type entidades.Trayecto is not enhanced.
+
+[2014-07-16 11:15:42 #3 type] 
+Type entidades.Ciudad is not enhanced.
+
+[2014-07-16 11:15:42 #4 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is closed by 8324@faster-PC
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2014-07-16 11:15:48 #1 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is opened by 10448@faster-PC
+
+[2014-07-16 11:15:48 #2 type] 
+Type entidades.Trayecto is not enhanced.
+
+[2014-07-16 11:15:48 #3 type] 
+Type entidades.Ciudad is not enhanced.
+
+[2014-07-16 11:15:51 #4 type.registry] 
+New type java.util.ArrayList<java.lang.Object>
+
+[2014-07-16 11:15:51 #5 type.registry] 
+New type java.util.ArrayList<entidades.Ciudad>
+
+[2014-07-16 11:16:33 #6 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is closed by 10448@faster-PC
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2014-07-16 11:16:41 #1 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is opened by 8296@faster-PC
+
+[2014-07-16 11:16:41 #2 type] 
+Type entidades.Trayecto is not enhanced.
+
+[2014-07-16 11:16:41 #3 type] 
+Type entidades.Ciudad is not enhanced.
+
+[2014-07-16 11:17:00 #4 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is closed by 8296@faster-PC
+
+------------------------------------------------------------------------------------------------------------------------
+
+[2014-07-16 11:18:31 #1 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is opened by 7208@faster-PC
+
+[2014-07-16 11:18:31 #2 type] 
+Type entidades.Trayecto is not enhanced.
+
+[2014-07-16 11:18:31 #3 type] 
+Type entidades.Ciudad is not enhanced.
+
+[2014-07-16 11:18:46 #4 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is closed by 7208@faster-PC
+

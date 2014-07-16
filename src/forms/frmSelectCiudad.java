@@ -187,8 +187,7 @@ public class frmSelectCiudad extends javax.swing.JFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         int id= Integer.parseInt(tablaC.getValueAt(tablaC.getSelectedRow(), 0).toString());
-        Ciudad ciud = em.find(Ciudad.class, id);
-        frmTrayectos.setCiuToAdd(ciud);
+        frmTrayectos.ciuToAdd= id;
         dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
