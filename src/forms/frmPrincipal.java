@@ -20,39 +20,59 @@ public class frmPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         dpprincipal = new javax.swing.JDesktopPane();
-        jToolBar1 = new javax.swing.JToolBar();
+        toolBar = new javax.swing.JToolBar();
         btnCiudades = new javax.swing.JButton();
+        btnTrayectos = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Sistema COLECTIVOS");
 
         dpprincipal.setBackground(java.awt.SystemColor.controlHighlight);
 
-        jToolBar1.setRollover(true);
+        toolBar.setRollover(true);
 
         btnCiudades.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/rsz_city.png"))); // NOI18N
+        btnCiudades.setToolTipText("Ciudades");
         btnCiudades.setFocusable(false);
         btnCiudades.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnCiudades.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(btnCiudades);
+        btnCiudades.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCiudadesActionPerformed(evt);
+            }
+        });
+        toolBar.add(btnCiudades);
+
+        btnTrayectos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/1373221794_invoice.png"))); // NOI18N
+        btnTrayectos.setToolTipText("Trayectos");
+        btnTrayectos.setFocusable(false);
+        btnTrayectos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnTrayectos.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnTrayectos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTrayectosActionPerformed(evt);
+            }
+        });
+        toolBar.add(btnTrayectos);
 
         javax.swing.GroupLayout dpprincipalLayout = new javax.swing.GroupLayout(dpprincipal);
         dpprincipal.setLayout(dpprincipalLayout);
         dpprincipalLayout.setHorizontalGroup(
             dpprincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dpprincipalLayout.createSequentialGroup()
-                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 596, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(toolBar, javax.swing.GroupLayout.PREFERRED_SIZE, 596, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 437, Short.MAX_VALUE))
         );
         dpprincipalLayout.setVerticalGroup(
             dpprincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dpprincipalLayout.createSequentialGroup()
-                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(toolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 619, Short.MAX_VALUE))
         );
-        dpprincipal.setLayer(jToolBar1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        dpprincipal.setLayer(toolBar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -76,6 +96,14 @@ public class frmPrincipal extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCiudadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCiudadesActionPerformed
+        new frmCiudades().setVisible(true);
+    }//GEN-LAST:event_btnCiudadesActionPerformed
+
+    private void btnTrayectosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrayectosActionPerformed
+        new frmTrayectos().setVisible(true);
+    }//GEN-LAST:event_btnTrayectosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -114,10 +142,11 @@ public class frmPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCiudades;
+    private javax.swing.JButton btnTrayectos;
     private javax.swing.JDesktopPane dpprincipal;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JToolBar toolBar;
     // End of variables declaration//GEN-END:variables
 }

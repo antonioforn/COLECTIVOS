@@ -4,12 +4,13 @@ package entidades;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
 public class Ciudad {
-    @Id @GeneratedValue int idCiudad;
+    @Id @GeneratedValue(strategy=GenerationType.IDENTITY) int idCiudad;
     String nombre;
     @ManyToOne Trayecto trayecto;
 
