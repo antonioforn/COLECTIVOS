@@ -1,7 +1,5 @@
 
-
 package forms;
-
 
 public class frmPrincipal extends javax.swing.JFrame {
 
