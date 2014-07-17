@@ -45,10 +45,20 @@ public class Util {
             public void keyTyped(KeyEvent e){
                 char c= e.getKeyChar();
                 if (!Character.isDigit(c)){
+                    
                     e.consume();
                 }
             }
         });
     }
+    
+    public static boolean isNumeric(String cadena){
+        try{
+            Integer.parseInt(cadena);
+            return true;
+        } catch(NumberFormatException nfe){
+            return false;
+        }
+    }    
     
 }
