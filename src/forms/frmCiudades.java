@@ -343,7 +343,7 @@ public class frmCiudades extends javax.swing.JFrame {
             btnBuscar.setSelected(false);
  
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Erro ao mostrar dados \n" + ex.getMessage() );
+            JOptionPane.showMessageDialog(this, "Error al mostrar datos \n" + ex.getMessage() );
         } 
     }//GEN-LAST:event_tablaMousePressed
 

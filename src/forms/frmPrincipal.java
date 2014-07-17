@@ -21,6 +21,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         toolBar = new javax.swing.JToolBar();
         btnCiudades = new javax.swing.JButton();
         btnTrayectos = new javax.swing.JButton();
+        btnChofer = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -55,6 +56,18 @@ public class frmPrincipal extends javax.swing.JFrame {
             }
         });
         toolBar.add(btnTrayectos);
+
+        btnChofer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/workers.png"))); // NOI18N
+        btnChofer.setToolTipText("Choferes");
+        btnChofer.setFocusable(false);
+        btnChofer.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnChofer.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnChofer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChoferActionPerformed(evt);
+            }
+        });
+        toolBar.add(btnChofer);
 
         javax.swing.GroupLayout dpprincipalLayout = new javax.swing.GroupLayout(dpprincipal);
         dpprincipal.setLayout(dpprincipalLayout);
@@ -103,6 +116,10 @@ public class frmPrincipal extends javax.swing.JFrame {
         new frmTrayectos().setVisible(true);
     }//GEN-LAST:event_btnTrayectosActionPerformed
 
+    private void btnChoferActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChoferActionPerformed
+        new frmChoferes().setVisible(true);
+    }//GEN-LAST:event_btnChoferActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -139,6 +156,7 @@ public class frmPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnChofer;
     private javax.swing.JButton btnCiudades;
     private javax.swing.JButton btnTrayectos;
     private javax.swing.JDesktopPane dpprincipal;

@@ -1,13 +1,14 @@
 
-
 package forms;
 
 import clasesUtiles.ModeloTabla;
 import clasesUtiles.Util;
+import entidades.Chofer;
 import entidades.Ciudad;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
@@ -17,6 +18,7 @@ import javax.persistence.TypedQuery;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableModel;
 
 
 public class frmChoferes extends javax.swing.JFrame {
@@ -24,12 +26,13 @@ public class frmChoferes extends javax.swing.JFrame {
     EntityManagerFactory emf;
     EntityManager em;
     boolean flag;
+    DefaultTableModel mtbl;
     
     public frmChoferes() {
         initComponents();
         emf= Persistence.createEntityManagerFactory("colectivos.odb");
         em = emf.createEntityManager();
-        cargarTabla("SELECT ciu FROM Ciudad ciu");
+        cargarTabla("SELECT ch FROM Chofer ch ORDER BY ch.apellido");
     }
     
     /**
@@ -52,12 +55,12 @@ public class frmChoferes extends javax.swing.JFrame {
         btnEliminar = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
+        lbCI = new javax.swing.JLabel();
         txtCI = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         btnCerrar = new javax.swing.JButton();
         btnBuscarN = new javax.swing.JToggleButton();
-        lbNombre1 = new javax.swing.JLabel();
+        lbApellido = new javax.swing.JLabel();
         txtApellido = new javax.swing.JTextField();
         btnBuscarA = new javax.swing.JToggleButton();
         btnBuscarCI = new javax.swing.JToggleButton();
@@ -147,9 +150,14 @@ public class frmChoferes extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("C.I.:");
+        lbCI.setText("C.I.:");
 
         txtCI.setEnabled(false);
+        txtCI.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCIKeyTyped(evt);
+            }
+        });
 
         btnCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Right32Green.png"))); // NOI18N
         btnCerrar.setToolTipText("Cerrar ventana");
@@ -167,7 +175,7 @@ public class frmChoferes extends javax.swing.JFrame {
             }
         });
 
-        lbNombre1.setText("Apellidos");
+        lbApellido.setText("Apellidos");
 
         txtApellido.setEnabled(false);
         txtApellido.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -205,7 +213,7 @@ public class frmChoferes extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lbNombre)
-                                    .addComponent(jLabel3))
+                                    .addComponent(lbCI))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
@@ -215,7 +223,7 @@ public class frmChoferes extends javax.swing.JFrame {
                                     .addComponent(btnBuscarN, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnBuscarCI, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(lbNombre1)
+                                .addComponent(lbApellido)
                                 .addGap(18, 18, 18)
                                 .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -244,7 +252,7 @@ public class frmChoferes extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 10, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
+                            .addComponent(lbCI)
                             .addComponent(txtCI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -255,7 +263,7 @@ public class frmChoferes extends javax.swing.JFrame {
                         .addGap(8, 8, 8)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(lbNombre1)
+                                .addComponent(lbApellido)
                                 .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(btnBuscarA, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -311,12 +319,14 @@ public class frmChoferes extends javax.swing.JFrame {
         flag= true;
         Util.limpiarCampos(jPanel1);
         txtNombre.setEnabled(true);
+        txtCI.setEnabled(true);
+        txtApellido.setEnabled(true);
         btnGuardar.setEnabled(true);
         btnNuevo.setEnabled(false);
         btnEditar.setEnabled(false);
         btnEliminar.setEnabled(false);
         tabla.setEnabled(false);
-        txtNombre.requestFocusInWindow();
+        txtCI.requestFocusInWindow();
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -329,7 +339,7 @@ public class frmChoferes extends javax.swing.JFrame {
         btnEliminar.setEnabled(false);
         btnNuevo.setEnabled(true);    
         tabla.setEnabled(true);
-        cargarTabla("SELECT ciu FROM Ciudad ciu");
+        cargarTabla("SELECT ch FROM Chofer ch");
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
@@ -342,37 +352,51 @@ public class frmChoferes extends javax.swing.JFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         
-        Ciudad ciu;
+        Chofer ch;
         
-        if(txtNombre.getText().equals("")){
+        if(txtNombre.getText().trim().equals("")){
             JOptionPane.showMessageDialog(rootPane, "Debe ingresar datos");
             txtNombre.requestFocusInWindow();
             return;
         }
         
+        if(txtCI.getText().trim().equals("") || Integer.parseInt(txtCI.getText().trim()) > 9999999){
+            JOptionPane.showMessageDialog(rootPane, "Revise datos");
+            txtCI.requestFocusInWindow();
+            return;
+        }        
+        
+        if(txtApellido.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(rootPane, "Debe ingresar datos");
+            txtApellido.requestFocusInWindow();
+            return;
+        }        
+        
         if (flag){
             try{
-            Query query = em.createQuery("SELECT c.idCiudad FROM Ciudad c WHERE c.nombre = '" + txtNombre.getText().trim() + "'");
-            int id= (Integer) query.getSingleResult();
-            JOptionPane.showMessageDialog(rootPane, "Esta ciudad ya existe");
-            }
-            catch(NoResultException ex){
                 em.getTransaction().begin();
-                ciu = new Ciudad(txtNombre.getText().trim());
-                em.persist(ciu);
-                em.getTransaction().commit();
-            }
+                ch = new Chofer(Integer.parseInt(txtCI.getText().trim()),txtNombre.getText().trim(), txtApellido.getText().trim());
+                em.persist(ch);
+                em.getTransaction().commit();            
+            }catch(EntityExistsException ex){
+                JOptionPane.showMessageDialog(rootPane, "Ya se encuentra registrado");
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(rootPane, "Ya se encuentra registrado" + e.getMessage());
+            }    
         }else{
             int id= Integer.parseInt(txtCI.getText());
             em.getTransaction().begin();
-            ciu = em.find(Ciudad.class, id);
-            ciu.setNombre(txtNombre.getText());
+            ch = em.find(Chofer.class, id);
+            ch.setNombre(txtNombre.getText().trim());
+            ch.setApellido(txtApellido.getText().trim());
             em.getTransaction().commit();
         }
-        cargarTabla("SELECT ciu FROM Ciudad ciu");        
+        cargarTabla("SELECT ch FROM Chofer ch ORDER BY ch.apellido");        
         
         Util.limpiarCampos(jPanel1);
         txtNombre.setEnabled(false);
+        txtApellido.setEnabled(false);
+        txtCI.setEnabled(false);
         btnGuardar.setEnabled(false);
         btnNuevo.setEnabled(true);
         btnEditar.setEnabled(false);
@@ -384,47 +408,50 @@ public class frmChoferes extends javax.swing.JFrame {
            try {
             btnEditar.setEnabled(true);
             btnEliminar.setEnabled(true);
-            txtCI.setText(tabla.getValueAt(tabla.getSelectedRow(), 0).toString());
+            txtCI.setText(tabla.getValueAt(tabla.getSelectedRow(), 2).toString());
             txtNombre.setText(tabla.getValueAt(tabla.getSelectedRow(), 1).toString());
+            txtApellido.setText(tabla.getValueAt(tabla.getSelectedRow(), 0).toString());
             btnBuscarN.setSelected(false);
- 
+            btnBuscarA.setSelected(false);
+            btnBuscarCI.setSelected(false);
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Erro ao mostrar dados \n" + ex.getMessage() );
+            JOptionPane.showMessageDialog(this, "Error al mostrar datos \n" + ex.getMessage() );
         } 
     }//GEN-LAST:event_tablaMousePressed
 
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
         Util.soloLetras(txtNombre);
         if(btnBuscarN.isSelected()){
-            cargarTabla("SELECT ciu FROM Ciudad ciu WHERE ciu.nombre LIKE '%" + txtNombre.getText() + "%'");
+            cargarTabla("SELECT ch FROM Chofer ch WHERE ch.nombre LIKE '%" + txtNombre.getText().trim() + "%'");
         }
     }//GEN-LAST:event_txtNombreKeyTyped
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         flag= false;
         txtNombre.setEnabled(true);
+        txtApellido.setEnabled(true);
         txtNombre.requestFocusInWindow();
         tabla.setEnabled(false);
         btnGuardar.setEnabled(true);
-        
+        btnEliminar.setEnabled(false);
+        btnNuevo.setEnabled(false);
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         int resp = JOptionPane.showConfirmDialog(rootPane, "¿Desea eliminar el registro?", "Eliminar?", JOptionPane.YES_NO_OPTION);
         
         if(resp!=0){
-            //System.out.println("Respuesta yes igual a: " + resp);
             return;
         }
         int id = Integer.parseInt(txtCI.getText()) ;
-        Ciudad ciu = em.find(Ciudad.class, id);
+        Chofer ch = em.find(Chofer.class, id);
         em.getTransaction().begin();
-        em.remove(ciu);
+        em.remove(ch);
         em.getTransaction().commit();
         Util.limpiarCampos(jPanel1);
         btnEditar.setEnabled(false);
         btnEliminar.setEnabled(false);
-        cargarTabla("SELECT ciu FROM Ciudad ciu");        
+        cargarTabla("SELECT ch FROM Chofer ch ORDER BY ch.apellido");        
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnBuscarNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarNActionPerformed
@@ -433,24 +460,64 @@ public class frmChoferes extends javax.swing.JFrame {
             txtNombre.setEnabled(true);
             txtNombre.requestFocusInWindow();
             Util.limpiarCampos(jPanel1);
+            lbApellido.setText("Apellido:");
+            txtApellido.setEnabled(false);
+            lbCI.setText("CI:");
+            txtCI.setEnabled(false);
        }else{
             lbNombre.setText("Nombre:");
             txtNombre.setEnabled(false);           
-            cargarTabla("SELECT ciu FROM Ciudad ciu");
+            cargarTabla("SELECT ch FROM Chofer ch ORBER BY ch.apellido");
        }
     }//GEN-LAST:event_btnBuscarNActionPerformed
 
     private void txtApellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoKeyTyped
-        // TODO add your handling code here:
+        Util.soloLetras(txtApellido);
+        if(btnBuscarA.isSelected()){
+            cargarTabla("SELECT ch FROM Chofer ch WHERE ch.apellido LIKE '%" + txtApellido.getText().trim() + "%'");
+        }
     }//GEN-LAST:event_txtApellidoKeyTyped
 
     private void btnBuscarAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarAActionPerformed
-        // TODO add your handling code here:
+       if(btnBuscarA.isSelected()){
+            lbApellido.setText("Filtrar:");
+            txtApellido.setEnabled(true);
+            txtApellido.requestFocusInWindow();
+            Util.limpiarCampos(jPanel1);
+            lbNombre.setText("Nombre:");
+            txtNombre.setEnabled(false);
+            lbCI.setText("CI:");
+            txtCI.setEnabled(false);            
+       }else{
+            lbApellido.setText("Nombre:");
+            txtApellido.setEnabled(false);           
+            cargarTabla("SELECT ch FROM Chofer ch ORBER BY ch.apellido");
+       }
     }//GEN-LAST:event_btnBuscarAActionPerformed
 
     private void btnBuscarCIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarCIActionPerformed
-        // TODO add your handling code here:
+       if(btnBuscarCI.isSelected()){
+            lbCI.setText("Filtrar:");
+            txtCI.setEnabled(true);
+            txtCI.requestFocusInWindow();
+            Util.limpiarCampos(jPanel1);
+            lbNombre.setText("Nombre:");
+            txtNombre.setEnabled(false);
+            lbApellido.setText("Apellido:");
+            txtApellido.setEnabled(false);            
+       }else{
+            lbApellido.setText("Nombre:");
+            txtApellido.setEnabled(false);           
+            cargarTabla("SELECT ch FROM Chofer ch ORBER BY ch.apellido");
+       }
     }//GEN-LAST:event_btnBuscarCIActionPerformed
+
+    private void txtCIKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCIKeyTyped
+        Util.soloNumeros(txtCI);
+        if(btnBuscarCI.isSelected()){
+            cargarTabla("SELECT ch FROM Chofer ch WHERE ch.ci LIKE '%" + txtNombre.getText().trim() + "%'");
+        }       
+    }//GEN-LAST:event_txtCIKeyTyped
 
     /**
      * @param args the command line arguments
@@ -498,12 +565,12 @@ public class frmChoferes extends javax.swing.JFrame {
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lbApellido;
+    private javax.swing.JLabel lbCI;
     private javax.swing.JLabel lbNombre;
-    private javax.swing.JLabel lbNombre1;
     private javax.swing.JTable tabla;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtCI;
@@ -511,28 +578,21 @@ public class frmChoferes extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void cargarTabla(String jpql) {
-        ArrayList datos= new ArrayList();
-        String[] cols = new String[]{"Id", "Nombre"}; 
-        try{
-            TypedQuery<Ciudad> q1 = em.createQuery(jpql, Ciudad.class);
-            List<Ciudad> results = q1.getResultList();
-            //System.out.println( results.toString());
-           
-            for(Ciudad c: results){
-                datos.add(new Object[]{c.getIdCiudad(), c.getNombre()});
-            }
-                
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(this, "Error al cargar ArrayList. \n" + ex.getMessage());        
+    
+       String [] titulos = {"Id","Nombre", "CI Nº"} ;
+       mtbl= null;
+       mtbl= new DefaultTableModel(null, titulos);
+        TypedQuery<Chofer> q1 = em.createQuery(jpql, Chofer.class);
+        List<Chofer> results = q1.getResultList();
+        //System.out.println( results.toString());
+        String[] nombre= new String[3];
+        for(Chofer c: results){
+         nombre[0]= c.getApellido();
+         nombre[1]= c.getNombre();
+         nombre[2]= String.valueOf(c.getCi());
+         mtbl.addRow(nombre);
         }
-        ModeloTabla modelo= new ModeloTabla(datos, cols);
-        tabla.setModel(modelo);
-        tabla.getColumnModel().getColumn(0).setPreferredWidth(90);
-        tabla.getColumnModel().getColumn(0).setResizable(false);
-        tabla.getColumnModel().getColumn(1).setPreferredWidth(277);
-        tabla.getColumnModel().getColumn(1).setResizable(false);
-        tabla.getTableHeader().setReorderingAllowed(false);
-        tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+       tabla.setModel(mtbl);
+    
     }
 }
