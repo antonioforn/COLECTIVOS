@@ -14,15 +14,17 @@ import javax.persistence.OneToOne;
 @Entity
 public class Vehiculo {
      @Id String matricula;
-     int asientos;
-     @OneToOne (cascade=CascadeType.ALL) Chofer chofer;  
+     String modelo;
+     int año;
+     int capacidad;
+     @OneToOne Chofer chofer;  
 
     public Vehiculo() {
     }
 
     public Vehiculo(String matricula, int asientos) {
         this.matricula = matricula;
-        this.asientos = asientos;
+        this.capacidad = asientos;
     }
 
     public String getMatricula() {
@@ -33,12 +35,12 @@ public class Vehiculo {
         this.matricula = matricula;
     }
 
-    public int getAsientos() {
-        return asientos;
+    public int getCapacidad() {
+        return capacidad;
     }
 
-    public void setAsientos(int asientos) {
-        this.asientos = asientos;
+    public void setCapacidad(int capacidad) {
+        this.capacidad = capacidad;
     }
 
     public Chofer getChofer() {

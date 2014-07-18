@@ -10,7 +10,7 @@ import javax.persistence.OneToOne;
 
 @Entity
 public class Chofer extends Persona{
-    @OneToOne (cascade=CascadeType.ALL) Vehiculo vehiculo;   
+    @OneToOne  Vehiculo vehiculo;   
 
     public Chofer() {
     }
