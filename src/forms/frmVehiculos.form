@@ -58,8 +58,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jScrollPane1" alignment="0" min="-2" pref="504" max="-2" attributes="0"/>
-                                      <Group type="102" alignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Component id="lbModelo" alignment="0" min="-2" max="-2" attributes="0"/>
                                               <Component id="lbCI" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -71,7 +70,7 @@
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Group type="102" attributes="0">
                                                   <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Component id="txtAño1" alignment="0" min="-2" pref="192" max="-2" attributes="0"/>
+                                                      <Component id="txtCapacidad" alignment="0" min="-2" pref="192" max="-2" attributes="0"/>
                                                       <Group type="102" alignment="0" attributes="0">
                                                           <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
                                                           <Group type="103" groupAlignment="0" attributes="0">
@@ -83,29 +82,41 @@
                                                               </Group>
                                                           </Group>
                                                       </Group>
-                                                      <Component id="txtAño" alignment="0" min="-2" pref="192" max="-2" attributes="0"/>
+                                                      <Component id="txtAnho" alignment="0" min="-2" pref="192" max="-2" attributes="0"/>
                                                   </Group>
-                                                  <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
                                                   <Group type="103" groupAlignment="0" attributes="0">
                                                       <Group type="102" alignment="0" attributes="0">
-                                                          <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
+                                                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                                                           <Group type="103" groupAlignment="0" attributes="0">
-                                                              <Component id="btnBuscarN" min="-2" pref="42" max="-2" attributes="0"/>
+                                                              <Component id="btnBuscarA" alignment="0" min="-2" pref="42" max="-2" attributes="0"/>
                                                               <Group type="102" alignment="0" attributes="0">
-                                                                  <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
-                                                                  <Component id="lbComentario" min="-2" max="-2" attributes="0"/>
+                                                                  <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                                      <Component id="btnBuscarN" min="-2" pref="42" max="-2" attributes="0"/>
+                                                                      <Component id="btnBuscarCI" alignment="0" min="-2" pref="42" max="-2" attributes="0"/>
+                                                                  </Group>
                                                               </Group>
-                                                              <Component id="btnBuscarCI" alignment="0" min="-2" pref="42" max="-2" attributes="0"/>
                                                           </Group>
+                                                          <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+                                                          <Component id="lbComentario" min="-2" max="-2" attributes="0"/>
                                                       </Group>
-                                                      <Component id="btnBuscarA" alignment="0" min="-2" pref="42" max="-2" attributes="0"/>
+                                                      <Group type="102" alignment="1" attributes="0">
+                                                          <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
+                                                          <Component id="btnChofer" min="-2" max="-2" attributes="0"/>
+                                                      </Group>
                                                   </Group>
                                               </Group>
-                                              <Component id="jComboBox1" min="-2" pref="104" max="-2" attributes="0"/>
+                                              <Group type="102" attributes="0">
+                                                  <Component id="txtChNom" min="-2" pref="122" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="txtChCI" min="-2" pref="122" max="-2" attributes="0"/>
+                                              </Group>
                                           </Group>
+                                          <EmptySpace min="0" pref="49" max="32767" attributes="0"/>
                                       </Group>
+                                      <Component id="jScrollPane1" max="32767" attributes="0"/>
                                   </Group>
-                                  <EmptySpace max="32767" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="btnNuevo" alignment="1" min="-2" pref="89" max="-2" attributes="0"/>
                                       <Component id="btnEditar" alignment="1" min="-2" pref="89" max="-2" attributes="0"/>
@@ -149,17 +160,17 @@
                                           <Component id="btnBuscarA" min="-2" pref="35" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="134" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
                                   <Component id="btnNuevo" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="btnEditar" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="btnEliminar" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                          <Component id="btnEliminar" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
                           <Component id="btnGuardar" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="btnCancelar" min="-2" max="-2" attributes="0"/>
@@ -178,9 +189,9 @@
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="txtModelo" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                                  <Component id="txtAño" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtAnho" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                                  <Component id="txtAño1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtCapacidad" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="lbCI" min="-2" max="-2" attributes="0"/>
@@ -195,7 +206,9 @@
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="lbChofer" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
-                              <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtChNom" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtChCI" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnChofer" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="jScrollPane1" min="-2" pref="262" max="-2" attributes="0"/>
@@ -349,12 +362,12 @@
             <Property name="text" type="java.lang.String" value="A&#xf1;o:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtA&#xf1;o">
+        <Component class="javax.swing.JTextField" name="txtAnho">
           <Properties>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
-            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtA&#xf1;oKeyTyped"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtAnhoKeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JToggleButton" name="btnBuscarA">
@@ -401,12 +414,12 @@
             <Property name="text" type="java.lang.String" value="Capacidad: "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtA&#xf1;o1">
+        <Component class="javax.swing.JTextField" name="txtCapacidad">
           <Properties>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
-            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtA&#xf1;o1KeyTyped"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtCapacidadKeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lbChofer">
@@ -414,17 +427,23 @@
             <Property name="text" type="java.lang.String" value="Chofer:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="jComboBox1">
+        <Component class="javax.swing.JTextField" name="txtChNom">
           <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
-              </StringArray>
-            </Property>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtChCI">
+          <Properties>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnChofer">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Elegir Chofer"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnChoferActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

@@ -18,6 +18,7 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
@@ -29,6 +30,9 @@ public class frmChoferes extends javax.swing.JFrame {
     boolean flag;
     DefaultTableModel mtbl;
     String cadena;
+    JTextField chNom;
+    JTextField chCI;
+    boolean tofrmVehic;
     
     public frmChoferes() {
         initComponents();
@@ -36,6 +40,22 @@ public class frmChoferes extends javax.swing.JFrame {
         emf= Persistence.createEntityManagerFactory("colectivos.odb");
         em = emf.createEntityManager();
         cargarTabla("SELECT ch FROM Chofer ch ORDER BY ch.apellido");
+        chNom = new JTextField();
+        chCI= new JTextField();
+        chNom.setText("");
+        chCI.setText("");
+        tofrmVehic= false;
+    }
+    
+    public frmChoferes(JTextField chNom, JTextField chCI) {
+        initComponents();
+        txtCI.setDocument(new ControlNum(7));
+        emf= Persistence.createEntityManagerFactory("colectivos.odb");
+        em = emf.createEntityManager();
+        cargarTabla("SELECT ch FROM Chofer ch ORDER BY ch.apellido");
+        this.chNom= chNom;
+        this.chCI= chCI;
+        tofrmVehic= true;
     }
     
     /**
@@ -450,6 +470,10 @@ public class frmChoferes extends javax.swing.JFrame {
             btnBuscarN.setSelected(false);
             btnBuscarA.setSelected(false);
             btnBuscarCI.setSelected(false);
+            if(tofrmVehic== true){
+                chNom.setText(txtNombre.getText());
+                chCI.setText(txtCI.getText());
+            }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Error al mostrar datos \n" + ex.getMessage() );
         } 

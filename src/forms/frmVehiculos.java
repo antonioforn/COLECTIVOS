@@ -5,6 +5,7 @@ import clasesUtiles.ModeloTabla;
 import clasesUtiles.Util;
 import entidades.Chofer;
 import entidades.Ciudad;
+import entidades.Vehiculo;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +34,7 @@ public class frmVehiculos extends javax.swing.JFrame {
         initComponents();
         emf= Persistence.createEntityManagerFactory("colectivos.odb");
         em = emf.createEntityManager();
-        cargarTabla("SELECT ch FROM Chofer ch ORDER BY ch.apellido");
+        cargarTabla("SELECT ve FROM Vehiculo ve ORDER BY ve.anho");
     }
     
     /**
@@ -62,15 +63,17 @@ public class frmVehiculos extends javax.swing.JFrame {
         btnCerrar = new javax.swing.JButton();
         btnBuscarN = new javax.swing.JToggleButton();
         lbAnho = new javax.swing.JLabel();
-        txtAño = new javax.swing.JTextField();
+        txtAnho = new javax.swing.JTextField();
         btnBuscarA = new javax.swing.JToggleButton();
         btnBuscarCI = new javax.swing.JToggleButton();
         lbComentario = new javax.swing.JButton();
         ftxtChapa = new javax.swing.JFormattedTextField();
         lbCapacidad = new javax.swing.JLabel();
-        txtAño1 = new javax.swing.JTextField();
+        txtCapacidad = new javax.swing.JTextField();
         lbChofer = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        txtChNom = new javax.swing.JTextField();
+        txtChCI = new javax.swing.JTextField();
+        btnChofer = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Vehículos");
@@ -187,10 +190,10 @@ public class frmVehiculos extends javax.swing.JFrame {
 
         lbAnho.setText("Año:");
 
-        txtAño.setEnabled(false);
-        txtAño.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtAnho.setEnabled(false);
+        txtAnho.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtAñoKeyTyped(evt);
+                txtAnhoKeyTyped(evt);
             }
         });
 
@@ -227,16 +230,25 @@ public class frmVehiculos extends javax.swing.JFrame {
 
         lbCapacidad.setText("Capacidad: ");
 
-        txtAño1.setEnabled(false);
-        txtAño1.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtCapacidad.setEnabled(false);
+        txtCapacidad.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtAño1KeyTyped(evt);
+                txtCapacidadKeyTyped(evt);
             }
         });
 
         lbChofer.setText("Chofer:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        txtChNom.setEnabled(false);
+
+        txtChCI.setEnabled(false);
+
+        btnChofer.setText("Elegir Chofer");
+        btnChofer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChoferActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -249,7 +261,6 @@ public class frmVehiculos extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(lbModelo)
@@ -261,7 +272,7 @@ public class frmVehiculos extends javax.swing.JFrame {
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(txtAño1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(txtCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                                         .addGap(1, 1, 1)
                                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -270,20 +281,29 @@ public class frmVehiculos extends javax.swing.JFrame {
                                                                 .addComponent(ftxtChapa, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                 .addGap(48, 48, 48)
                                                                 .addComponent(txtCI, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                                    .addComponent(txtAño, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGap(63, 63, 63)
+                                                    .addComponent(txtAnho, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                                        .addGap(1, 1, 1)
+                                                        .addGap(18, 18, 18)
                                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                            .addComponent(btnBuscarN, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                            .addComponent(btnBuscarA, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                                                .addGap(49, 49, 49)
-                                                                .addComponent(lbComentario))
-                                                            .addComponent(btnBuscarCI, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                                    .addComponent(btnBuscarA, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                .addGap(1, 1, 1)
+                                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                    .addComponent(btnBuscarN, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                    .addComponent(btnBuscarCI, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                        .addGap(52, 52, 52)
+                                                        .addComponent(lbComentario))
+                                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                                        .addGap(64, 64, 64)
+                                                        .addComponent(btnChofer))))
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(txtChNom, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(txtChCI, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGap(0, 49, Short.MAX_VALUE))
+                                    .addComponent(jScrollPane1))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btnNuevo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnEditar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -317,14 +337,14 @@ public class frmVehiculos extends javax.swing.JFrame {
                                         .addComponent(btnBuscarN, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(btnBuscarA, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(17, 17, 17))
+                                .addGap(134, 134, 134))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(btnNuevo)
-                                .addGap(49, 49, 49)
-                                .addComponent(btnEditar)))
-                        .addGap(12, 12, 12)
-                        .addComponent(btnEliminar)
-                        .addGap(64, 64, 64)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnEditar)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnEliminar)
+                                .addGap(89, 89, 89)))
                         .addComponent(btnGuardar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnCancelar)
@@ -341,9 +361,9 @@ public class frmVehiculos extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(26, 26, 26)
-                                .addComponent(txtAño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtAnho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(26, 26, 26)
-                                .addComponent(txtAño1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(lbCI)
                                 .addGap(18, 18, 18)
@@ -355,7 +375,9 @@ public class frmVehiculos extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lbChofer, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtChNom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtChCI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnChofer))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(58, 58, 58))))
@@ -403,11 +425,11 @@ public class frmVehiculos extends javax.swing.JFrame {
             lbModelo.setText("Nombre:");
             txtModelo.setEnabled(false);
             lbAnho.setText("Apellido:");
-            txtAño.setEnabled(false);
+            txtAnho.setEnabled(false);
             lbComentario.setEnabled(true);
         }else{
             lbAnho.setText("Apellido:");
-            txtAño.setEnabled(false);
+            txtAnho.setEnabled(false);
             lbCI.setText("CI:");
             ftxtChapa.setEnabled(false);
             ftxtChapa.setText(null);
@@ -419,8 +441,8 @@ public class frmVehiculos extends javax.swing.JFrame {
     private void btnBuscarAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarAActionPerformed
         if(btnBuscarA.isSelected()){
             lbAnho.setText("Filtrar:");
-            txtAño.setEnabled(true);
-            txtAño.requestFocusInWindow();
+            txtAnho.setEnabled(true);
+            txtAnho.requestFocusInWindow();
             Util.limpiarCampos(jPanel1);
             lbModelo.setText("Nombre:");
             txtModelo.setEnabled(false);
@@ -428,17 +450,17 @@ public class frmVehiculos extends javax.swing.JFrame {
             ftxtChapa.setEnabled(false);
         }else{
             lbAnho.setText("Nombre:");
-            txtAño.setEnabled(false);
+            txtAnho.setEnabled(false);
             cargarTabla("SELECT ch FROM Chofer ch ORDER BY ch.apellido");
         }
     }//GEN-LAST:event_btnBuscarAActionPerformed
 
-    private void txtAñoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAñoKeyTyped
-        Util.soloLetras(txtAño);
+    private void txtAnhoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAnhoKeyTyped
+        Util.soloLetras(txtAnho);
         if(btnBuscarA.isSelected()){
-            cargarTabla("SELECT ch FROM Chofer ch WHERE ch.apellido LIKE '%" + txtAño.getText().trim() + "%'");
+            cargarTabla("SELECT ch FROM Chofer ch WHERE ch.apellido LIKE '%" + txtAnho.getText().trim() + "%'");
         }
-    }//GEN-LAST:event_txtAñoKeyTyped
+    }//GEN-LAST:event_txtAnhoKeyTyped
 
     private void btnBuscarNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarNActionPerformed
         if(btnBuscarN.isSelected()){
@@ -447,7 +469,7 @@ public class frmVehiculos extends javax.swing.JFrame {
             txtModelo.requestFocusInWindow();
             Util.limpiarCampos(jPanel1);
             lbAnho.setText("Apellido:");
-            txtAño.setEnabled(false);
+            txtAnho.setEnabled(false);
             lbCI.setText("CI:");
             ftxtChapa.setEnabled(false);
         }else{
@@ -475,7 +497,7 @@ public class frmVehiculos extends javax.swing.JFrame {
         lbModelo.setText("Nombre:");
         Util.limpiarCampos(jPanel1);
         txtModelo.setEnabled(false);
-        txtAño.setEnabled(false);
+        txtAnho.setEnabled(false);
         ftxtChapa.setEnabled(false);
         btnGuardar.setEnabled(false);
         btnEditar.setEnabled(false);
@@ -487,7 +509,7 @@ public class frmVehiculos extends javax.swing.JFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
 
-        Chofer ch;
+        Vehiculo veh;
 
         if(txtModelo.getText().trim().equals("")){
             JOptionPane.showMessageDialog(rootPane, "Debe ingresar datos");
@@ -501,36 +523,45 @@ public class frmVehiculos extends javax.swing.JFrame {
             return;
         }
 
-        if(txtAño.getText().trim().equals("")){
+        if(txtAnho.getText().trim().equals("")){
             JOptionPane.showMessageDialog(rootPane, "Debe ingresar datos");
-            txtAño.requestFocusInWindow();
+            txtAnho.requestFocusInWindow();
+            return;
+        }
+        
+        if(txtCapacidad.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(rootPane, "Debe ingresar datos");
+            txtCapacidad.requestFocusInWindow();
             return;
         }
 
         if (flag){
             try{
                 em.getTransaction().begin();
-                ch = new Chofer(Integer.parseInt(ftxtChapa.getText().trim()),txtModelo.getText().trim(), txtAño.getText().trim());
-                em.persist(ch);
+                veh = new Vehiculo(ftxtChapa.getText().trim(),txtModelo.getText().trim(), 
+                        Integer.parseInt(txtAnho.getText().trim()),
+                        Integer.parseInt(txtCapacidad.getText()));
+                em.persist(veh);
                 em.getTransaction().commit();
             }catch(EntityExistsException ex){
                 JOptionPane.showMessageDialog(rootPane, "Ya se encuentra registrado");
             }catch(Exception e){
-                JOptionPane.showMessageDialog(rootPane, "Ya se encuentra registrado" + e.getMessage());
+                JOptionPane.showMessageDialog(rootPane, "Error al guardar" + e.getMessage());
             }
         }else{
-            int id= Integer.parseInt(ftxtChapa.getText());
+            String id= ftxtChapa.getText();
             em.getTransaction().begin();
-            ch = em.find(Chofer.class, id);
-            ch.setNombre(txtModelo.getText().trim());
-            ch.setApellido(txtAño.getText().trim());
+            veh = em.find(Vehiculo.class, id);
+            veh.setModelo(txtModelo.getText().trim());
+            veh.setAnho(Integer.parseInt(txtAnho.getText().trim()));
+            veh.setCapacidad(Integer.parseInt(txtCapacidad.getText().trim()));
             em.getTransaction().commit();
         }
-        cargarTabla("SELECT ch FROM Chofer ch ORDER BY ch.apellido");
+        cargarTabla("SELECT ve FROM Vehiculo ve ORDER BY ve.anho");
 
         Util.limpiarCampos(jPanel1);
         txtModelo.setEnabled(false);
-        txtAño.setEnabled(false);
+        txtAnho.setEnabled(false);
         ftxtChapa.setEnabled(false);
         btnGuardar.setEnabled(false);
         btnNuevo.setEnabled(true);
@@ -559,7 +590,7 @@ public class frmVehiculos extends javax.swing.JFrame {
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         flag= false;
         txtModelo.setEnabled(true);
-        txtAño.setEnabled(true);
+        txtAnho.setEnabled(true);
         txtModelo.requestFocusInWindow();
         tabla.setEnabled(false);
         btnGuardar.setEnabled(true);
@@ -572,7 +603,8 @@ public class frmVehiculos extends javax.swing.JFrame {
         Util.limpiarCampos(jPanel1);
         txtModelo.setEnabled(true);
         ftxtChapa.setEnabled(true);
-        txtAño.setEnabled(true);
+        txtAnho.setEnabled(true);
+        txtCapacidad.setEnabled(true);
         btnGuardar.setEnabled(true);
         btnNuevo.setEnabled(false);
         btnEditar.setEnabled(false);
@@ -592,9 +624,9 @@ public class frmVehiculos extends javax.swing.JFrame {
         try {
             btnEditar.setEnabled(true);
             btnEliminar.setEnabled(true);
-            ftxtChapa.setText(tabla.getValueAt(tabla.getSelectedRow(), 2).toString());
+            ftxtChapa.setText(tabla.getValueAt(tabla.getSelectedRow(), 0).toString());
             txtModelo.setText(tabla.getValueAt(tabla.getSelectedRow(), 1).toString());
-            txtAño.setText(tabla.getValueAt(tabla.getSelectedRow(), 0).toString());
+            txtAnho.setText(tabla.getValueAt(tabla.getSelectedRow(), 2).toString());
             btnBuscarN.setSelected(false);
             btnBuscarA.setSelected(false);
             btnBuscarCI.setSelected(false);
@@ -607,9 +639,13 @@ public class frmVehiculos extends javax.swing.JFrame {
 
     }//GEN-LAST:event_tablaMouseClicked
 
-    private void txtAño1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAño1KeyTyped
+    private void txtCapacidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCapacidadKeyTyped
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtAño1KeyTyped
+    }//GEN-LAST:event_txtCapacidadKeyTyped
+
+    private void btnChoferActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChoferActionPerformed
+        new frmChoferes(txtChNom, txtChCI).setVisible(true);
+    }//GEN-LAST:event_btnChoferActionPerformed
 
     /**
      * @param args the command line arguments
@@ -652,12 +688,12 @@ public class frmVehiculos extends javax.swing.JFrame {
     private javax.swing.JToggleButton btnBuscarN;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnCerrar;
+    private javax.swing.JButton btnChofer;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JFormattedTextField ftxtChapa;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -669,26 +705,35 @@ public class frmVehiculos extends javax.swing.JFrame {
     private javax.swing.JButton lbComentario;
     private javax.swing.JLabel lbModelo;
     private javax.swing.JTable tabla;
-    private javax.swing.JTextField txtAño;
-    private javax.swing.JTextField txtAño1;
+    private javax.swing.JTextField txtAnho;
     private javax.swing.JTextField txtCI;
+    private javax.swing.JTextField txtCapacidad;
+    private javax.swing.JTextField txtChCI;
+    private javax.swing.JTextField txtChNom;
     private javax.swing.JTextField txtModelo;
     // End of variables declaration//GEN-END:variables
 
     private void cargarTabla(String jpql) {
     
-       String [] titulos = {"Apellido","Nombre", "CI Nº"} ;
+       String [] titulos = {"Matrícula","Modelo", "Año", "Capacidad", "Chofer"} ;
        mtbl= null;
        mtbl= new DefaultTableModel(null, titulos);
-        TypedQuery<Chofer> q1 = em.createQuery(jpql, Chofer.class);
-        List<Chofer> results = q1.getResultList();
+        TypedQuery<Vehiculo> q1 = em.createQuery(jpql, Vehiculo.class);
+        List<Vehiculo> results = q1.getResultList();
         //System.out.println( results.toString());
-        String[] nombre= new String[3];
-        for(Chofer c: results){
-         nombre[0]= c.getApellido();
-         nombre[1]= c.getNombre();
-         nombre[2]= String.valueOf(c.getCi());
-         mtbl.addRow(nombre);
+        String[] fila= new String[5];
+        for(Vehiculo v: results){
+         fila[0]= v.getMatricula();
+         fila[1]= v.getModelo();
+         fila[2]= String.valueOf(v.getAnho());
+         fila[3]= String.valueOf(v.getCapacidad());
+         if(v.getChofer()==null){
+            fila[4]="No asignado";
+         }
+         else{
+            fila[4]= v.getChofer().getNombre() + v.getChofer().getApellido();
+         }
+         mtbl.addRow(fila);
         }
        tabla.setModel(mtbl);
     

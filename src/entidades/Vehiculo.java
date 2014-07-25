@@ -15,16 +15,34 @@ import javax.persistence.OneToOne;
 public class Vehiculo {
      @Id String matricula;
      String modelo;
-     int año;
+     int anho;
      int capacidad;
      @OneToOne Chofer chofer;  
 
     public Vehiculo() {
     }
 
-    public Vehiculo(String matricula, int asientos) {
+    public Vehiculo(String matricula, String modelo, int anho, int asientos) {
         this.matricula = matricula;
+        this.modelo= modelo;
+        this.anho= anho;
         this.capacidad = asientos;
+    }
+
+    public String getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
+
+    public int getAnho() {
+        return anho;
+    }
+
+    public void setAnho(int anho) {
+        this.anho = anho;
     }
 
     public String getMatricula() {

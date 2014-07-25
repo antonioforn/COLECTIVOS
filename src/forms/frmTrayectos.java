@@ -25,7 +25,7 @@ public class frmTrayectos extends javax.swing.JFrame {
     int idCiudad;
     public static int ciuToAdd;
     ArrayList datos= new ArrayList();
-    String[] cols = new String[]{"Id", "Ciudad"}; 
+    String[] cols = new String[]{"Id", "Ciudad", "Orden"}; 
     
     
     public frmTrayectos() {
@@ -35,7 +35,7 @@ public class frmTrayectos extends javax.swing.JFrame {
         cargarCombo();
         cargarTabla();
         formatearTabla();
-        cargarCiudades("SELECT ciu FROM Ciudad ciu ORDER BY ciu.idCiudad");
+        cargarCiudades("SELECT ciu FROM Ciudad ciu ORDER BY ciu.orden");
     }
 
     /**
@@ -229,10 +229,10 @@ public class frmTrayectos extends javax.swing.JFrame {
                                         .addComponent(btnNuevo1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(btnEliminar1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))
+                                        .addGap(0, 84, Short.MAX_VALUE))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(16, 16, 16)))
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btnNuevo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnEliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -242,8 +242,8 @@ public class frmTrayectos extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(26, 26, 26)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btnCancelar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btnCerrar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -286,7 +286,6 @@ public class frmTrayectos extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnCancelar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnCerrar)
@@ -348,7 +347,7 @@ public class frmTrayectos extends javax.swing.JFrame {
         tabla.setEnabled(true);
         cargarTabla();
         formatearTabla();
-        cargarCiudades("SELECT ciu FROM Ciudad ciu ORDER BY ciu.idCiudad");
+        cargarCiudades("SELECT ciu FROM Ciudad ciu ORDER BY ciu.orden");
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
@@ -440,7 +439,7 @@ public class frmTrayectos extends javax.swing.JFrame {
         }else{
             lbNombre.setText("Nombre:");
             txtNombre.setEnabled(false);
-            cargarCiudades("SELECT ciu FROM Ciudad ciu ORDER BY ciu.idCiudad");
+            cargarCiudades("SELECT ciu FROM Ciudad ciu ORDER BY ciu.orden");
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
@@ -448,7 +447,7 @@ public class frmTrayectos extends javax.swing.JFrame {
         Util.soloLetras(txtNombre);
         if(btnBuscar.isSelected()){
             cargarCiudades("SELECT ciu FROM Ciudad ciu ORDER BY ciu.id WHERE ciu.nombre LIKE '%" + txtNombre.getText() + 
-                    "%' ORDER BY ciu.idCiudad");
+                    "%' ORDER BY ciu.orden");
         }
     }//GEN-LAST:event_txtNombreKeyTyped
 
@@ -522,7 +521,7 @@ public class frmTrayectos extends javax.swing.JFrame {
             Trayecto tr= em.find(Trayecto.class, id);
             
             for(Ciudad c: tr.getCiudades()){
-                datos.add(new Object[]{c.getIdCiudad(), c.getNombre()});
+                datos.add(new Object[]{c.getIdCiudad(), c.getNombre(), c.getOrden()});
             }
                 
         }
@@ -534,10 +533,12 @@ public class frmTrayectos extends javax.swing.JFrame {
     private void formatearTabla(){
         ModeloTabla modelo= new ModeloTabla(datos, cols);
         tabla.setModel(modelo);
-        tabla.getColumnModel().getColumn(0).setPreferredWidth(90);
+        tabla.getColumnModel().getColumn(0).setPreferredWidth(50);
         tabla.getColumnModel().getColumn(0).setResizable(false);
-        tabla.getColumnModel().getColumn(1).setPreferredWidth(277);
+        tabla.getColumnModel().getColumn(1).setPreferredWidth(257);
         tabla.getColumnModel().getColumn(1).setResizable(false);
+        tabla.getColumnModel().getColumn(2).setPreferredWidth(50);
+        tabla.getColumnModel().getColumn(2).setResizable(false);
         tabla.getTableHeader().setReorderingAllowed(false);
         tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);    
@@ -554,14 +555,14 @@ public class frmTrayectos extends javax.swing.JFrame {
     
     private void cargarCiudades(String jpql) {
         ArrayList datosC= new ArrayList();
-        String[] colsC = new String[]{"Id", "Nombre"}; 
+        String[] colsC = new String[]{"Id", "Nombre", "Orden"}; 
         try{
             TypedQuery<Ciudad> q1 = em.createQuery(jpql, Ciudad.class);
             List<Ciudad> results = q1.getResultList();
             //System.out.println( results.toString());
            
             for(Ciudad c: results){
-                datosC.add(new Object[]{c.getIdCiudad(), c.getNombre()});
+                datosC.add(new Object[]{c.getIdCiudad(), c.getNombre(), c.getOrden()});
             }
               
         }catch(Exception ex){
@@ -569,10 +570,12 @@ public class frmTrayectos extends javax.swing.JFrame {
         }
         ModeloTabla modeloC= new ModeloTabla(datosC, colsC);
         tablaC.setModel(modeloC);
-        tablaC.getColumnModel().getColumn(0).setPreferredWidth(90);
+        tablaC.getColumnModel().getColumn(0).setPreferredWidth(50);
         tablaC.getColumnModel().getColumn(0).setResizable(false);
-        tablaC.getColumnModel().getColumn(1).setPreferredWidth(277);
+        tablaC.getColumnModel().getColumn(1).setPreferredWidth(257);
         tablaC.getColumnModel().getColumn(1).setResizable(false);
+        tablaC.getColumnModel().getColumn(2).setPreferredWidth(50);
+        tablaC.getColumnModel().getColumn(2).setResizable(false);
         tablaC.getTableHeader().setReorderingAllowed(false);
         tablaC.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         tablaC.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);

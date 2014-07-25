@@ -1,0 +1,23 @@
+------------------------------------------------------------------------------------------------------------------------
+
+[2014-07-23 19:30:20 #1 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is opened by 11860@faster-PC
+
+[2014-07-23 19:30:20 #2 type] 
+Type entidades.Persona is not enhanced.
+
+[2014-07-23 19:30:20 #3 type] 
+Type entidades.Chofer is not enhanced.
+
+[2014-07-23 19:30:20 #4 type] 
+Type entidades.Vehiculo is not enhanced.
+
+[2014-07-23 19:30:20 #5 type] 
+Type entidades.Ciudad is not enhanced.
+
+[2014-07-23 19:30:20 #6 type] 
+Type entidades.Trayecto is not enhanced.
+
+[2014-07-23 19:30:48 #7 store] 
+Database 'C:\Users\faster\Documents\NetBeansProjects\COLECTIVOS\colectivos.odb' is closed by 11860@faster-PC
+

@@ -41,6 +41,11 @@ public class cargarCiudades {
          for(i=0; i < ciudades.length;i++){
             em.getTransaction().begin();
             ciu= new Ciudad(ciudades[i]);
+            if(i<9){
+                ciu.setOrden("0"+(i+1)+"");
+            }else{
+                ciu.setOrden(""+(i+1)+"");
+            }
             em.persist(ciu);
             em.getTransaction().commit();
             if(i%10==0 ){

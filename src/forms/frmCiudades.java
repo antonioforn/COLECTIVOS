@@ -2,6 +2,7 @@
 
 package forms;
 
+import clasesUtiles.ControlNum;
 import clasesUtiles.ModeloTabla;
 import clasesUtiles.Util;
 import entidades.Ciudad;
@@ -29,7 +30,8 @@ public class frmCiudades extends javax.swing.JFrame {
         initComponents();
         emf= Persistence.createEntityManagerFactory("colectivos.odb");
         em = emf.createEntityManager();
-        cargarTabla("SELECT ciu FROM Ciudad ciu");
+        cargarTabla("SELECT ciu FROM Ciudad ciu ORDER BY ciu.orden");
+        txtOrden.setDocument(new ControlNum(5));
     }
     
     /**
@@ -57,6 +59,8 @@ public class frmCiudades extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         btnCerrar = new javax.swing.JButton();
         btnBuscar = new javax.swing.JToggleButton();
+        txtOrden = new javax.swing.JTextField();
+        lbNombre1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Ciudades");
@@ -163,6 +167,15 @@ public class frmCiudades extends javax.swing.JFrame {
             }
         });
 
+        txtOrden.setEnabled(false);
+        txtOrden.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtOrdenKeyTyped(evt);
+            }
+        });
+
+        lbNombre1.setText("Orden:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -176,14 +189,17 @@ public class frmCiudades extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lbNombre)
-                                    .addComponent(jLabel3))
+                                    .addComponent(jLabel3)
+                                    .addComponent(lbNombre1))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnNuevo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -221,17 +237,22 @@ public class frmCiudades extends javax.swing.JFrame {
                         .addComponent(btnCerrar)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(lbNombre)
-                                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel3)
+                                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lbNombre)
+                                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbNombre1)
+                            .addComponent(txtOrden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 442, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -265,6 +286,7 @@ public class frmCiudades extends javax.swing.JFrame {
         flag= true;
         Util.limpiarCampos(jPanel1);
         txtNombre.setEnabled(true);
+        txtOrden.setEnabled(true);
         btnGuardar.setEnabled(true);
         btnNuevo.setEnabled(false);
         btnEditar.setEnabled(false);
@@ -278,6 +300,7 @@ public class frmCiudades extends javax.swing.JFrame {
         lbNombre.setText("Nombre:");
         Util.limpiarCampos(jPanel1);
         txtNombre.setEnabled(false);
+        txtOrden.setEnabled(false);
         btnGuardar.setEnabled(false);
         btnEditar.setEnabled(false);
         btnEliminar.setEnabled(false);
@@ -313,6 +336,7 @@ public class frmCiudades extends javax.swing.JFrame {
             catch(NoResultException ex){
                 em.getTransaction().begin();
                 ciu = new Ciudad(txtNombre.getText().trim());
+                ciu.setOrden(txtOrden.getText().trim());
                 em.persist(ciu);
                 em.getTransaction().commit();
             }
@@ -320,13 +344,15 @@ public class frmCiudades extends javax.swing.JFrame {
             int id= Integer.parseInt(txtId.getText());
             em.getTransaction().begin();
             ciu = em.find(Ciudad.class, id);
-            ciu.setNombre(txtNombre.getText());
+            ciu.setNombre(txtNombre.getText().trim());
+            ciu.setOrden(txtOrden.getText().trim());
             em.getTransaction().commit();
         }
-        cargarTabla("SELECT ciu FROM Ciudad ciu");        
+        cargarTabla("SELECT ciu FROM Ciudad ciu ORDER BY ciu.orden");        
         
         Util.limpiarCampos(jPanel1);
         txtNombre.setEnabled(false);
+        txtOrden.setEnabled(false);
         btnGuardar.setEnabled(false);
         btnNuevo.setEnabled(true);
         btnEditar.setEnabled(false);
@@ -340,6 +366,7 @@ public class frmCiudades extends javax.swing.JFrame {
             btnEliminar.setEnabled(true);
             txtId.setText(tabla.getValueAt(tabla.getSelectedRow(), 0).toString());
             txtNombre.setText(tabla.getValueAt(tabla.getSelectedRow(), 1).toString());
+            txtOrden.setText(tabla.getValueAt(tabla.getSelectedRow(), 2).toString());
             btnBuscar.setSelected(false);
  
         } catch (Exception ex) {
@@ -350,13 +377,14 @@ public class frmCiudades extends javax.swing.JFrame {
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
         Util.soloLetras(txtNombre);
         if(btnBuscar.isSelected()){
-            cargarTabla("SELECT ciu FROM Ciudad ciu WHERE ciu.nombre LIKE '%" + txtNombre.getText() + "%'");
+            cargarTabla("SELECT ciu FROM Ciudad ciu WHERE ciu.nombre LIKE '%" + txtNombre.getText() + "%' ORDER BY ciu.orden");
         }
     }//GEN-LAST:event_txtNombreKeyTyped
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         flag= false;
         txtNombre.setEnabled(true);
+        txtOrden.setEnabled(true);
         txtNombre.requestFocusInWindow();
         tabla.setEnabled(false);
         btnGuardar.setEnabled(true);
@@ -378,7 +406,7 @@ public class frmCiudades extends javax.swing.JFrame {
         Util.limpiarCampos(jPanel1);
         btnEditar.setEnabled(false);
         btnEliminar.setEnabled(false);
-        cargarTabla("SELECT ciu FROM Ciudad ciu");        
+        cargarTabla("SELECT ciu FROM Ciudad ciu ORDER BY ciu.orden");        
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
@@ -390,9 +418,13 @@ public class frmCiudades extends javax.swing.JFrame {
        }else{
             lbNombre.setText("Nombre:");
             txtNombre.setEnabled(false);           
-            cargarTabla("SELECT ciu FROM Ciudad ciu");
+            cargarTabla("SELECT ciu FROM Ciudad ciu ORDER BY ciu.orden");
        }
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void txtOrdenKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtOrdenKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtOrdenKeyTyped
 
     /**
      * @param args the command line arguments
@@ -443,21 +475,23 @@ public class frmCiudades extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lbNombre;
+    private javax.swing.JLabel lbNombre1;
     private javax.swing.JTable tabla;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtOrden;
     // End of variables declaration//GEN-END:variables
 
     private void cargarTabla(String jpql) {
         ArrayList datos= new ArrayList();
-        String[] cols = new String[]{"Id", "Nombre"}; 
+        String[] cols = new String[]{"Id", "Nombre", "Orden"}; 
         try{
             TypedQuery<Ciudad> q1 = em.createQuery(jpql, Ciudad.class);
             List<Ciudad> results = q1.getResultList();
             //System.out.println( results.toString());
            
             for(Ciudad c: results){
-                datos.add(new Object[]{c.getIdCiudad(), c.getNombre()});
+                datos.add(new Object[]{c.getIdCiudad(), c.getNombre(), c.getOrden()});
             }
                 
         }catch(Exception ex){
@@ -465,10 +499,12 @@ public class frmCiudades extends javax.swing.JFrame {
         }
         ModeloTabla modelo= new ModeloTabla(datos, cols);
         tabla.setModel(modelo);
-        tabla.getColumnModel().getColumn(0).setPreferredWidth(90);
+        tabla.getColumnModel().getColumn(0).setPreferredWidth(55);
         tabla.getColumnModel().getColumn(0).setResizable(false);
-        tabla.getColumnModel().getColumn(1).setPreferredWidth(277);
+        tabla.getColumnModel().getColumn(1).setPreferredWidth(256);
         tabla.getColumnModel().getColumn(1).setResizable(false);
+        tabla.getColumnModel().getColumn(2).setPreferredWidth(55);
+        tabla.getColumnModel().getColumn(2).setResizable(false);        
         tabla.getTableHeader().setReorderingAllowed(false);
         tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);

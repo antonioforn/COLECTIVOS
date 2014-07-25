@@ -13,6 +13,15 @@ import javax.persistence.ManyToOne;
 public class Ciudad {
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY) int idCiudad;
     String nombre;
+    String orden;
+
+    public String getOrden() {
+        return orden;
+    }
+
+    public void setOrden(String orden) {
+        this.orden = orden;
+    }
     @ManyToOne(fetch=FetchType.EAGER) Trayecto trayecto;
 
     public Ciudad() {
