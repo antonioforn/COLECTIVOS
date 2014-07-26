@@ -45,6 +45,7 @@ public class frmChoferes extends javax.swing.JFrame {
         chNom.setText("");
         chCI.setText("");
         tofrmVehic= false;
+        lbVolver.setText(null);
     }
     
     public frmChoferes(JTextField chNom, JTextField chCI) {
@@ -89,6 +90,7 @@ public class frmChoferes extends javax.swing.JFrame {
         btnBuscarCI = new javax.swing.JToggleButton();
         lbComentario = new javax.swing.JButton();
         ftxtCI = new javax.swing.JFormattedTextField();
+        lbVolver = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Choferes");
@@ -239,6 +241,8 @@ public class frmChoferes extends javax.swing.JFrame {
         ftxtCI.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
         ftxtCI.setEnabled(false);
 
+        lbVolver.setText("Volver ");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -262,7 +266,8 @@ public class frmChoferes extends javax.swing.JFrame {
                             .addComponent(btnEliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnGuardar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnCancelar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnCerrar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnCerrar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbVolver, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbNombre)
@@ -335,6 +340,8 @@ public class frmChoferes extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnCerrar))
                             .addComponent(btnBuscarCI, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbVolver)
                         .addContainerGap())))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
@@ -471,8 +478,9 @@ public class frmChoferes extends javax.swing.JFrame {
             btnBuscarA.setSelected(false);
             btnBuscarCI.setSelected(false);
             if(tofrmVehic== true){
-                chNom.setText(txtNombre.getText());
+                chNom.setText(txtNombre.getText()+" "+ txtApellido.getText());
                 chCI.setText(txtCI.getText());
+                frmVehiculos.chof = returnChofer(txtCI.getText());
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Error al mostrar datos \n" + ex.getMessage() );
@@ -646,6 +654,7 @@ public class frmChoferes extends javax.swing.JFrame {
     private javax.swing.JLabel lbCI;
     private javax.swing.JButton lbComentario;
     private javax.swing.JLabel lbNombre;
+    private javax.swing.JLabel lbVolver;
     private javax.swing.JTable tabla;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtCI;
@@ -669,5 +678,11 @@ public class frmChoferes extends javax.swing.JFrame {
         }
        tabla.setModel(mtbl);
     
+    }
+    
+    private Chofer returnChofer(String ci){
+        int id= Integer.parseInt(ci);
+        Chofer ch= em.find(Chofer.class, id);
+        return ch;
     }
 }

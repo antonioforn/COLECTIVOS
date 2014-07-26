@@ -1,12 +1,14 @@
 
 package forms;
 
+import clasesUtiles.Comparador;
 import clasesUtiles.ModeloTabla;
 import clasesUtiles.Util;
 import entidades.Ciudad;
 import entidades.Trayecto;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -523,7 +525,7 @@ public class frmTrayectos extends javax.swing.JFrame {
             for(Ciudad c: tr.getCiudades()){
                 datos.add(new Object[]{c.getIdCiudad(), c.getNombre(), c.getOrden()});
             }
-                
+            Collections.sort(datos, new Comparador());
         }
         catch(Exception ex){
             return;        
@@ -539,7 +541,7 @@ public class frmTrayectos extends javax.swing.JFrame {
         tabla.getColumnModel().getColumn(1).setResizable(false);
         tabla.getColumnModel().getColumn(2).setPreferredWidth(50);
         tabla.getColumnModel().getColumn(2).setResizable(false);
-        tabla.getTableHeader().setReorderingAllowed(false);
+        tabla.getTableHeader().setReorderingAllowed(true);
         tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);    
     }

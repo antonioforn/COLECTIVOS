@@ -73,6 +73,7 @@
                               <Component id="btnGuardar" alignment="1" min="-2" pref="89" max="-2" attributes="0"/>
                               <Component id="btnCancelar" alignment="1" min="-2" pref="89" max="-2" attributes="0"/>
                               <Component id="btnCerrar" alignment="1" min="-2" pref="89" max="-2" attributes="0"/>
+                              <Component id="lbVolver" alignment="1" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" attributes="0">
@@ -168,6 +169,8 @@
                               </Group>
                               <Component id="btnBuscarCI" min="-2" pref="35" max="-2" attributes="0"/>
                           </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="lbVolver" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -368,6 +371,11 @@
               <Format subtype="1" type="0"/>
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lbVolver">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Volver "/>
           </Properties>
         </Component>
       </SubComponents>

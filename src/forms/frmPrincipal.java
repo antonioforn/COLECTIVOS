@@ -22,6 +22,8 @@ public class frmPrincipal extends javax.swing.JFrame {
         btnCiudades = new javax.swing.JButton();
         btnTrayectos = new javax.swing.JButton();
         btnChofer = new javax.swing.JButton();
+        btnVehiculos = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -69,21 +71,34 @@ public class frmPrincipal extends javax.swing.JFrame {
         });
         toolBar.add(btnChofer);
 
+        btnVehiculos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/transp.png"))); // NOI18N
+        btnVehiculos.setToolTipText("Vehículos");
+        btnVehiculos.setFocusable(false);
+        btnVehiculos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnVehiculos.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        toolBar.add(btnVehiculos);
+
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/abstract.jpg"))); // NOI18N
+
         javax.swing.GroupLayout dpprincipalLayout = new javax.swing.GroupLayout(dpprincipal);
         dpprincipal.setLayout(dpprincipalLayout);
         dpprincipalLayout.setHorizontalGroup(
             dpprincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(toolBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(dpprincipalLayout.createSequentialGroup()
-                .addComponent(toolBar, javax.swing.GroupLayout.PREFERRED_SIZE, 596, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 437, Short.MAX_VALUE))
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(3, 3, 3))
         );
         dpprincipalLayout.setVerticalGroup(
             dpprincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dpprincipalLayout.createSequentialGroup()
                 .addComponent(toolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 619, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1))
         );
         dpprincipal.setLayer(toolBar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        dpprincipal.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -97,11 +112,13 @@ public class frmPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(dpprincipal)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(dpprincipal)
+                .addGap(3, 3, 3))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(dpprincipal)
+            .addComponent(dpprincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -159,7 +176,9 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnChofer;
     private javax.swing.JButton btnCiudades;
     private javax.swing.JButton btnTrayectos;
+    private javax.swing.JButton btnVehiculos;
     private javax.swing.JDesktopPane dpprincipal;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;

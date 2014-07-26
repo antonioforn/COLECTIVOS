@@ -31,7 +31,7 @@ public class frmCiudades extends javax.swing.JFrame {
         emf= Persistence.createEntityManagerFactory("colectivos.odb");
         em = emf.createEntityManager();
         cargarTabla("SELECT ciu FROM Ciudad ciu ORDER BY ciu.orden");
-        txtOrden.setDocument(new ControlNum(5));
+//        txtOrden.setDocument(new ControlNum(5));
     }
     
     /**
