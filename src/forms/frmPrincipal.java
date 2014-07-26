@@ -23,6 +23,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         btnTrayectos = new javax.swing.JButton();
         btnChofer = new javax.swing.JButton();
         btnVehiculos = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JToolBar.Separator();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -76,7 +77,13 @@ public class frmPrincipal extends javax.swing.JFrame {
         btnVehiculos.setFocusable(false);
         btnVehiculos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnVehiculos.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnVehiculos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVehiculosActionPerformed(evt);
+            }
+        });
         toolBar.add(btnVehiculos);
+        toolBar.add(jSeparator1);
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/abstract.jpg"))); // NOI18N
@@ -137,6 +144,10 @@ public class frmPrincipal extends javax.swing.JFrame {
         new frmChoferes().setVisible(true);
     }//GEN-LAST:event_btnChoferActionPerformed
 
+    private void btnVehiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVehiculosActionPerformed
+        new frmVehiculos().setVisible(true);
+    }//GEN-LAST:event_btnVehiculosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -182,6 +193,7 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar toolBar;
     // End of variables declaration//GEN-END:variables
 }

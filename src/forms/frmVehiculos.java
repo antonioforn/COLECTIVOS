@@ -77,6 +77,8 @@ public class frmVehiculos extends javax.swing.JFrame {
         txtChNom = new javax.swing.JTextField();
         txtChCI = new javax.swing.JTextField();
         btnChofer = new javax.swing.JButton();
+        btnFiltrarA = new javax.swing.JButton();
+        btnFiltrarM = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Vehículos");
@@ -223,6 +225,11 @@ public class frmVehiculos extends javax.swing.JFrame {
         }
         ftxtChapa.setToolTipText("");
         ftxtChapa.setEnabled(false);
+        ftxtChapa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                ftxtChapaKeyTyped(evt);
+            }
+        });
 
         lbCapacidad.setText("Capacidad: ");
 
@@ -247,6 +254,22 @@ public class frmVehiculos extends javax.swing.JFrame {
             }
         });
 
+        btnFiltrarA.setText("Buscar");
+        btnFiltrarA.setEnabled(false);
+        btnFiltrarA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFiltrarAActionPerformed(evt);
+            }
+        });
+
+        btnFiltrarM.setText("Buscar");
+        btnFiltrarM.setEnabled(false);
+        btnFiltrarM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFiltrarMActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -261,44 +284,45 @@ public class frmVehiculos extends javax.swing.JFrame {
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 602, Short.MAX_VALUE)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lbCI)
+                                            .addComponent(lbModelo))
+                                        .addGap(29, 29, 29)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(lbCI)
-                                                    .addComponent(lbModelo))
-                                                .addGap(29, 29, 29)
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                                        .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(18, 18, 18)
-                                                        .addComponent(btnBuscarN, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                                        .addComponent(ftxtChapa, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(18, 18, 18)
-                                                        .addComponent(btnBuscarCI, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(18, 18, 18)
-                                                        .addComponent(txtCI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(btnBuscarN, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(lbAnho, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(lbChofer))
-                                                .addGap(30, 30, 30)
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(txtChNom, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                                        .addComponent(txtAnho, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(18, 18, 18)
-                                                        .addComponent(btnBuscarA, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addComponent(ftxtChapa, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(btnBuscarCI, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(btnFiltrarM)
+                                                .addGap(36, 36, 36)
+                                                .addComponent(txtCI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lbAnho, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(lbChofer))
+                                        .addGap(30, 30, 30)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtChNom, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(txtAnho, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(btnBuscarA, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(btnFiltrarA)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(lbCapacidad)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(txtCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(txtChCI, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(29, 29, 29)
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                                        .addComponent(lbCapacidad)
-                                                        .addGap(18, 18, 18)
-                                                        .addComponent(txtCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                                        .addComponent(txtChCI, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(29, 29, 29)
-                                                        .addComponent(btnChofer)))))
-                                        .addGap(0, 0, Short.MAX_VALUE)))
+                                                .addComponent(btnChofer)))))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btnNuevo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -323,20 +347,20 @@ public class frmVehiculos extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbCI)
-                            .addComponent(ftxtChapa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnBuscarCI, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(txtCI, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(lbCI)
+                                .addComponent(ftxtChapa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnBuscarCI, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnFiltrarM)
+                            .addComponent(txtCI, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(28, 28, 28)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnBuscarN, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(lbModelo)
                                 .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(28, 28, 28)
+                        .addGap(27, 27, 27)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnBuscarA, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -344,7 +368,8 @@ public class frmVehiculos extends javax.swing.JFrame {
                                 .addComponent(lbAnho))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(txtCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lbCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(lbCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnFiltrarA)))
                         .addGap(33, 33, 33)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lbChofer, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -405,16 +430,18 @@ public class frmVehiculos extends javax.swing.JFrame {
             ftxtChapa.setEnabled(true);
             ftxtChapa.requestFocusInWindow();
             Util.limpiarCampos(jPanel1);
-            lbModelo.setText("Nombre:");
+            lbModelo.setText("Modelo:");
             txtModelo.setEnabled(false);
-            lbAnho.setText("Apellido:");
+            lbAnho.setText("Año:");
             txtAnho.setEnabled(false);
+            btnFiltrarM.setEnabled(true);
         }else{
-            lbAnho.setText("Apellido:");
+            lbAnho.setText("Año:");
             txtAnho.setEnabled(false);
-            lbCI.setText("CI:");
+            lbCI.setText("Matrícula:");
             ftxtChapa.setEnabled(false);
             ftxtChapa.setText(null);
+            btnFiltrarM.setEnabled(false);
             cargarTabla("SELECT ve FROM Vehiculo ve ORDER BY ve.matricula");
         }
     }//GEN-LAST:event_btnBuscarCIActionPerformed
@@ -429,17 +456,18 @@ public class frmVehiculos extends javax.swing.JFrame {
             txtModelo.setEnabled(false);
             lbCI.setText("Matrícula:");
             ftxtChapa.setEnabled(false);
+            btnFiltrarA.setEnabled(true);
+            
         }else{
             lbAnho.setText("Año:");
             txtAnho.setEnabled(false);
+            btnFiltrarA.setEnabled(false);
             cargarTabla("SELECT ve FROM Vehiculo ve ORDER BY ve.matricula");
         }
     }//GEN-LAST:event_btnBuscarAActionPerformed
 
     private void txtAnhoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAnhoKeyTyped
-         if(btnBuscarA.isSelected()){
-            cargarTabla("SELECT ve FROM Vehiculo ve WHERE ve.anho =" + txtAnho.getText().trim());
-        }
+
     }//GEN-LAST:event_txtAnhoKeyTyped
 
     private void btnBuscarNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarNActionPerformed
@@ -474,7 +502,11 @@ public class frmVehiculos extends javax.swing.JFrame {
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         btnBuscarN.setSelected(false);
-        lbModelo.setText("Nombre:");
+        btnBuscarCI.setSelected(false);
+        btnBuscarA.setSelected(false);
+        lbModelo.setText("Modelo:");
+        lbAnho.setText("Año:");
+        lbCI.setText("Matrícula:");
         Util.limpiarCampos(jPanel1);
         txtModelo.setEnabled(false);
         txtAnho.setEnabled(false);
@@ -483,6 +515,8 @@ public class frmVehiculos extends javax.swing.JFrame {
         ftxtChapa.setEnabled(false);
         btnGuardar.setEnabled(false);
         btnEditar.setEnabled(false);
+        btnFiltrarM.setEnabled(false);
+        btnFiltrarA.setEnabled(false);
         btnEliminar.setEnabled(false);
         btnNuevo.setEnabled(true);
         tabla.setEnabled(true);
@@ -650,6 +684,23 @@ public class frmVehiculos extends javax.swing.JFrame {
         new frmChoferes(txtChNom, txtChCI).setVisible(true);
     }//GEN-LAST:event_btnChoferActionPerformed
 
+    private void btnFiltrarAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarAActionPerformed
+         if(btnBuscarA.isSelected()){
+            cargarTabla("SELECT ve FROM Vehiculo ve WHERE ve.anho = " + txtAnho.getText().trim());
+        }        
+    }//GEN-LAST:event_btnFiltrarAActionPerformed
+
+    private void btnFiltrarMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarMActionPerformed
+        if(btnBuscarCI.isSelected()){
+            cargarTabla("SELECT ve FROM Vehiculo ve WHERE ve.matricula = '" + ftxtChapa.getText().trim()+"'");
+            System.out.println("");
+        }   
+    }//GEN-LAST:event_btnFiltrarMActionPerformed
+
+    private void ftxtChapaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ftxtChapaKeyTyped
+    
+    }//GEN-LAST:event_ftxtChapaKeyTyped
+
     /**
      * @param args the command line arguments
      */
@@ -694,6 +745,8 @@ public class frmVehiculos extends javax.swing.JFrame {
     private javax.swing.JButton btnChofer;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnFiltrarA;
+    private javax.swing.JButton btnFiltrarM;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JFormattedTextField ftxtChapa;
@@ -720,23 +773,28 @@ public class frmVehiculos extends javax.swing.JFrame {
        String [] titulos = {"Matrícula","Modelo", "Año", "Capacidad", "Chofer"} ;
        mtbl= null;
        mtbl= new DefaultTableModel(null, titulos);
+       try{ 
         TypedQuery<Vehiculo> q1 = em.createQuery(jpql, Vehiculo.class);
-        List<Vehiculo> results = q1.getResultList();
-        //System.out.println( results.toString());
-        String[] fila= new String[5];
-        for(Vehiculo v: results){
-         fila[0]= v.getMatricula();
-         fila[1]= v.getModelo();
-         fila[2]= String.valueOf(v.getAnho());
-         fila[3]= String.valueOf(v.getCapacidad());
-         if(v.getChofer()==null){
-            fila[4]="No asignado";
+         List<Vehiculo> results = q1.getResultList();
+         //System.out.println( results.toString());
+         String[] fila= new String[5];
+         for(Vehiculo v: results){
+          fila[0]= v.getMatricula();
+          fila[1]= v.getModelo();
+          fila[2]= String.valueOf(v.getAnho());
+          fila[3]= String.valueOf(v.getCapacidad());
+          if(v.getChofer()==null){
+             fila[4]="No asignado";
+          }
+          else{
+             fila[4]= v.getChofer().getNombre() +" "+ v.getChofer().getApellido();
+          }
+          mtbl.addRow(fila);
          }
-         else{
-            fila[4]= v.getChofer().getNombre() +" "+ v.getChofer().getApellido();
-         }
-         mtbl.addRow(fila);
         }
+       catch(javax.persistence.PersistenceException ex){
+           System.out.println("error cargando tabla");
+       }
        tabla.setModel(mtbl);
     
     }
