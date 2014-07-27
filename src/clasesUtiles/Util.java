@@ -5,6 +5,10 @@ package clasesUtiles;
 import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -59,6 +63,26 @@ public class Util {
         } catch(NumberFormatException nfe){
             return false;
         }
-    }    
+    }
+    
+    public static String dateToString(Date date){
+        DateFormat df;
+        String dateString= null;
+        
+        df= new SimpleDateFormat("dd/MM/yyyy");
+        dateString = df.format(date);
+        
+        return dateString;
+    }
+    
+    public static Date stringToDate(String stringDate) throws ParseException{
+        DateFormat df;
+        Date date= new Date(new java.util.Date().getTime());
+        
+        df= new SimpleDateFormat("dd/MM/yyyy");
+        date= new Date(df.parse(stringDate).getTime());
+        
+        return date;
+    }
     
 }

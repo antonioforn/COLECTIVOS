@@ -14,6 +14,7 @@ import javax.persistence.OneToOne;
 @Entity
 public class Vehiculo {
      @Id String matricula;
+     int nro;
      String modelo;
      int anho;
      int capacidad;
@@ -22,13 +23,23 @@ public class Vehiculo {
     public Vehiculo() {
     }
 
-    public Vehiculo(String matricula, String modelo, int anho, int asientos) {
+    public Vehiculo(String matricula, String modelo, int anho, int asientos, int nro) {
         this.matricula = matricula;
         this.modelo= modelo;
         this.anho= anho;
         this.capacidad = asientos;
+        this.nro= nro;
     }
 
+
+    public int getNro() {
+        return nro;
+    }
+
+    public void setNro(int nro) {
+        this.nro = nro;
+    }    
+    
     public String getModelo() {
         return modelo;
     }
