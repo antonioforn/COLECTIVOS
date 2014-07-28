@@ -13,6 +13,8 @@ public class Pasaje {
     @Id @GeneratedValue int nro;
     java.sql.Date fechaPas;
     Pasajero cliente;
+    int monto;
     @ManyToOne Viaje viaje;
-    
+    String ciuInicio;
+    String CiuFin;
 }

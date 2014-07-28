@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 public class Viaje {
     @Id @GeneratedValue int idViaje;
     java.sql.Date fechaViaje;
+    java.sql.Time horaViaje;
     Trayecto trayecto;
     Vehiculo vehiculo;
     String estado;
