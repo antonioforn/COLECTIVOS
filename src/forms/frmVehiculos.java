@@ -83,6 +83,7 @@ public class frmVehiculos extends javax.swing.JFrame {
         txtNro = new javax.swing.JTextField();
         lbNumero = new javax.swing.JLabel();
         btnBuscarNro = new javax.swing.JToggleButton();
+        lbAvisoN = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Vehículos");
@@ -353,7 +354,9 @@ public class frmVehiculos extends javax.swing.JFrame {
                                                         .addGap(18, 18, 18)
                                                         .addComponent(txtCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(btnBuscarNro, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                                .addComponent(btnBuscarNro, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(lbAvisoN)))))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btnNuevo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -396,7 +399,8 @@ public class frmVehiculos extends javax.swing.JFrame {
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(lbModelo)
                                         .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addComponent(btnBuscarNro, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnBuscarNro, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbAvisoN))
                         .addGap(27, 27, 27)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnBuscarA, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -542,8 +546,10 @@ public class frmVehiculos extends javax.swing.JFrame {
         btnBuscarCI.setSelected(false);
         btnBuscarA.setSelected(false);
         lbModelo.setText("Modelo:");
+        lbNumero.setText("Nro:");
         lbAnho.setText("Año:");
         lbCI.setText("Matrícula:");
+        lbAvisoN.setText("");
         Util.limpiarCampos(jPanel1);
         txtModelo.setEnabled(false);
         txtAnho.setEnabled(false);
@@ -674,6 +680,7 @@ public class frmVehiculos extends javax.swing.JFrame {
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         flag= true;
+        lbAvisoN.setText("");
         Util.limpiarCampos(jPanel1);
         txtModelo.setEnabled(true);
         ftxtChapa.setEnabled(true);
@@ -766,8 +773,7 @@ public class frmVehiculos extends javax.swing.JFrame {
             txtModelo.setEnabled(false);
             lbAnho.setText("Año:");
             txtAnho.setEnabled(false);
-            txtNro.setToolTipText("Presione enter");
-            ;
+            lbAvisoN.setText("Presione enter");
         }else{
             txtNro.setEnabled(false);
             lbNumero.setText("Nro:");
@@ -777,6 +783,7 @@ public class frmVehiculos extends javax.swing.JFrame {
             ftxtChapa.setEnabled(false);
             ftxtChapa.setText(null);
             btnFiltrarM.setEnabled(false);
+            lbAvisoN.setText("");            
             cargarTabla("SELECT ve FROM Vehiculo ve ORDER BY ve.matricula");
         }
     }//GEN-LAST:event_btnBuscarNroActionPerformed
@@ -836,6 +843,7 @@ public class frmVehiculos extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lbAnho;
+    private javax.swing.JLabel lbAvisoN;
     private javax.swing.JLabel lbCI;
     private javax.swing.JLabel lbCapacidad;
     private javax.swing.JLabel lbChofer;

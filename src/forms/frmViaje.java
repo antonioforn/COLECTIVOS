@@ -2,12 +2,16 @@
 
 package forms;
 
+import clasesUtiles.Util;
+
 
 public class frmViaje extends javax.swing.JFrame {
-
+    java.sql.Date sqlDat;
 
     public frmViaje() {
         initComponents();
+        jDCViaje.setEnabled(false);
+        jDCViaje.getCalendarButton().setEnabled(true);
         
     }
 
@@ -21,25 +25,91 @@ public class frmViaje extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jDateC = new com.toedter.calendar.JDateChooser();
+        jDCViaje = new com.toedter.calendar.JDateChooser();
+        jLabel1 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel2 = new javax.swing.JLabel();
+        btnGuardar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
+        btnCerrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel1.setText("Viaje:");
+
+        jLabel2.setText("Fecha:");
+
+        btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/confirmar.png"))); // NOI18N
+        btnGuardar.setToolTipText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
+
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cancel.png"))); // NOI18N
+        btnCancelar.setToolTipText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+
+        btnCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Right32Green.png"))); // NOI18N
+        btnCerrar.setToolTipText("Cerrar ventana");
+        btnCerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator1)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(jLabel1))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(44, 44, 44)
+                                .addComponent(jDCViaje, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 619, Short.MAX_VALUE)))
+                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(631, Short.MAX_VALUE)
-                .addComponent(jDateC, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(95, 95, 95))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnGuardar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCerrar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(jDateC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(557, Short.MAX_VALUE))
+                .addGap(8, 8, 8)
+                .addComponent(jLabel1)
+                .addGap(14, 14, 14)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jDCViaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 307, Short.MAX_VALUE)
+                .addComponent(btnGuardar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnCancelar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnCerrar)
+                .addGap(61, 61, 61))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -62,6 +132,118 @@ public class frmViaje extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        sqlDat = Util.utilToSql( jDCViaje.getDate());
+        System.out.println(sqlDat.toString());
+//
+//        Vehiculo veh;
+//
+//        if(txtNro.getText().equals("")){
+//            JOptionPane.showMessageDialog(rootPane, "Debe ingresar datos");
+//            txtNro.requestFocusInWindow();
+//            return;
+//        }
+//
+//        if(txtModelo.getText().trim().equals("")){
+//            JOptionPane.showMessageDialog(rootPane, "Debe ingresar datos");
+//            txtModelo.requestFocusInWindow();
+//            return;
+//        }
+//
+//        if(ftxtChapa.getText().trim().equals("-") ){
+//            JOptionPane.showMessageDialog(rootPane, "Revise datos");
+//            ftxtChapa.requestFocusInWindow();
+//            return;
+//        }
+//
+//        if(txtAnho.getText().trim().equals("")){
+//            JOptionPane.showMessageDialog(rootPane, "Debe ingresar datos");
+//            txtAnho.requestFocusInWindow();
+//            return;
+//        }
+//
+//        if(txtCapacidad.getText().trim().equals("")){
+//            JOptionPane.showMessageDialog(rootPane, "Debe ingresar datos");
+//            txtCapacidad.requestFocusInWindow();
+//            return;
+//        }
+//
+//        if (flag){
+//            try{
+//                em.getTransaction().begin();
+//                veh = new Vehiculo(ftxtChapa.getText().trim(),txtModelo.getText().trim(),
+//                    Integer.parseInt(txtAnho.getText().trim()),
+//                    Integer.parseInt(txtCapacidad.getText()),
+//                    Integer.parseInt(txtNro.getText()));
+//                if(!txtChCI.getText().isEmpty()){
+//                    veh.setChofer(chof);
+//                }
+//                em.persist(veh);
+//                em.getTransaction().commit();
+//            }catch(EntityExistsException ex){
+//                JOptionPane.showMessageDialog(rootPane, "Ya se encuentra registrado");
+//            }catch(Exception e){
+//                JOptionPane.showMessageDialog(rootPane, "Error al guardar" + e.getMessage());
+//            }
+//        }else{
+//            String id= ftxtChapa.getText();
+//            em.getTransaction().begin();
+//            veh = em.find(Vehiculo.class, id);
+//            veh.setModelo(txtModelo.getText().trim());
+//            veh.setAnho(Integer.parseInt(txtAnho.getText().trim()));
+//            veh.setCapacidad(Integer.parseInt(txtCapacidad.getText().trim()));
+//            veh.setNro(Integer.parseInt(txtNro.getText().trim()));
+//            if(!txtChCI.getText().isEmpty()){
+//                veh.setChofer(chof);
+//            }
+//            em.getTransaction().commit();
+//        }
+//        cargarTabla("SELECT ve FROM Vehiculo ve ORDER BY ve.matricula");
+//
+//        Util.limpiarCampos(jPanel1);
+//        txtModelo.setEnabled(false);
+//        txtAnho.setEnabled(false);
+//        txtNro.setEnabled(false);
+//        txtCapacidad.setEnabled(false);
+//        ftxtChapa.setEnabled(false);
+//        btnGuardar.setEnabled(false);
+//        btnNuevo.setEnabled(true);
+//        btnEditar.setEnabled(false);
+//        btnChofer.setEnabled(false);
+//        btnEliminar.setEnabled(false);
+//        tabla.setEnabled(true);
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+//        btnBuscarN.setSelected(false);
+//        btnBuscarCI.setSelected(false);
+//        btnBuscarA.setSelected(false);
+//        lbModelo.setText("Modelo:");
+//        lbNumero.setText("Nro:");
+//        lbAnho.setText("Año:");
+//        lbCI.setText("Matrícula:");
+//        lbAvisoN.setText("");
+//        Util.limpiarCampos(jPanel1);
+//        txtModelo.setEnabled(false);
+//        txtAnho.setEnabled(false);
+//        txtNro.setEnabled(false);
+//        txtCapacidad.setEnabled(false);
+//        btnChofer.setEnabled(false);
+//        ftxtChapa.setEnabled(false);
+//        btnGuardar.setEnabled(false);
+//        btnEditar.setEnabled(false);
+//        btnFiltrarM.setEnabled(false);
+//        btnFiltrarA.setEnabled(false);
+//        btnEliminar.setEnabled(false);
+//        btnNuevo.setEnabled(true);
+//        tabla.setEnabled(true);
+//        cargarTabla("SELECT ve FROM Vehiculo ve ORDER BY ve.matricula");
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnCerrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -99,7 +281,13 @@ public class frmViaje extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.toedter.calendar.JDateChooser jDateC;
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnCerrar;
+    private javax.swing.JButton btnGuardar;
+    private com.toedter.calendar.JDateChooser jDCViaje;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
 }
