@@ -19,6 +19,7 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
@@ -31,6 +32,8 @@ public class frmVehiculos extends javax.swing.JFrame {
     DefaultTableModel mtbl;
     String cadena;
     static Chofer chof;
+    boolean dsdefrmViaje;
+    JTextField txtV;
     
     public frmVehiculos() {
         initComponents();
@@ -39,8 +42,21 @@ public class frmVehiculos extends javax.swing.JFrame {
         txtAnho.setDocument(new ControlNum(4));
         txtNro.setDocument(new ControlNum(2));
         txtCapacidad.setDocument(new ControlNum(2));
+        dsdefrmViaje= false;
         cargarTabla("SELECT ve FROM Vehiculo ve ORDER BY ve.matricula");
     }
+    
+    public frmVehiculos(boolean dsdeViaje, JTextField txtVe) {
+        initComponents();
+        emf= Persistence.createEntityManagerFactory("colectivos.odb");
+        em = emf.createEntityManager();
+        txtAnho.setDocument(new ControlNum(4));
+        txtNro.setDocument(new ControlNum(2));
+        txtCapacidad.setDocument(new ControlNum(2));
+        dsdefrmViaje= dsdeViaje;
+        txtV= txtVe;
+        cargarTabla("SELECT ve FROM Vehiculo ve ORDER BY ve.matricula");
+    }    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -708,9 +724,10 @@ public class frmVehiculos extends javax.swing.JFrame {
             btnEditar.setEnabled(true);
             btnEliminar.setEnabled(true);
             ftxtChapa.setText(tabla.getValueAt(tabla.getSelectedRow(), 0).toString());
-            txtModelo.setText(tabla.getValueAt(tabla.getSelectedRow(), 1).toString());
-            txtAnho.setText(tabla.getValueAt(tabla.getSelectedRow(), 2).toString());
-            txtCapacidad.setText(tabla.getValueAt(tabla.getSelectedRow(), 3).toString());
+            txtNro.setText(tabla.getValueAt(tabla.getSelectedRow(), 1).toString());
+            txtModelo.setText(tabla.getValueAt(tabla.getSelectedRow(), 2).toString());
+            txtAnho.setText(tabla.getValueAt(tabla.getSelectedRow(), 3).toString());
+            txtCapacidad.setText(tabla.getValueAt(tabla.getSelectedRow(), 4).toString());
             btnBuscarN.setSelected(false);
             btnBuscarA.setSelected(false);
             btnBuscarCI.setSelected(false);
@@ -721,6 +738,11 @@ public class frmVehiculos extends javax.swing.JFrame {
             }else{
                 txtChNom.setText("");
                 txtChCI.setText("");
+            }
+            
+            if(dsdefrmViaje){
+                frmViaje.veh= em.find(Vehiculo.class, ftxtChapa.getText()); 
+                txtV.setText(String.valueOf(frmViaje.veh.getNro()));
             }
             
         } catch (Exception ex) {

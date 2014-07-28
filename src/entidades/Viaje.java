@@ -15,7 +15,6 @@ public class Viaje {
     java.sql.Date fechaViaje;
     Trayecto trayecto;
     Vehiculo vehiculo;
-    Chofer chofer;
     String estado;
     @OneToMany(mappedBy="viaje") List<Pasaje> pasajes= new ArrayList<Pasaje>();
     
