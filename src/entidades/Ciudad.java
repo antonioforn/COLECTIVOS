@@ -14,7 +14,8 @@ public class Ciudad {
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY) int idCiudad;
     String nombre;
     String orden;
-
+    @ManyToOne(fetch=FetchType.EAGER) Trayecto trayecto;
+            
     public String getOrden() {
         return orden;
     }
@@ -22,7 +23,7 @@ public class Ciudad {
     public void setOrden(String orden) {
         this.orden = orden;
     }
-    @ManyToOne(fetch=FetchType.EAGER) Trayecto trayecto;
+
 
     public Ciudad() {
     }

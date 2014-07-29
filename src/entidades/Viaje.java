@@ -17,6 +17,7 @@ public class Viaje {
     Trayecto trayecto;
     Vehiculo vehiculo;
     String estado;
+    boolean modo=true;
     @OneToMany(mappedBy="viaje") List<Pasaje> pasajes= new ArrayList<Pasaje>();
     
 }
