@@ -138,6 +138,7 @@ public class frmViaje extends javax.swing.JFrame {
 
         lbTrayecto.setText("Trayecto:");
 
+        cmbTrayecto.setEnabled(false);
         cmbTrayecto.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
             public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
@@ -179,6 +180,7 @@ public class frmViaje extends javax.swing.JFrame {
         btnPasajes.setText("-->");
 
         jSpin.setModel(new javax.swing.SpinnerDateModel());
+        jSpin.setEnabled(false);
 
         jLabel4.setText("Hora:");
 
@@ -193,9 +195,15 @@ public class frmViaje extends javax.swing.JFrame {
 
             }
         ));
+        tabla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tablaMousePressed(evt);
+            }
+        });
         jScrollPane2.setViewportView(tabla);
 
         rbtnRetorno.setText("Retorno");
+        rbtnRetorno.setEnabled(false);
 
         btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/adicionar.png"))); // NOI18N
         btnNuevo.setToolTipText("Añadir Ciudad");
@@ -226,6 +234,7 @@ public class frmViaje extends javax.swing.JFrame {
         jLabel5.setText("Estado:");
 
         cmbEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Disponible", "Finalizado" }));
+        cmbEstado.setEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -261,7 +270,7 @@ public class frmViaje extends javax.swing.JFrame {
                                                 .addComponent(jLabel5)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addComponent(cmbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
                                                 .addComponent(cmbTrayecto, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -284,8 +293,8 @@ public class frmViaje extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 547, Short.MAX_VALUE)
-                        .addGap(111, 111, 111)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -395,6 +404,7 @@ public class frmViaje extends javax.swing.JFrame {
                         trayec,
                         veh,
                         "Disponible");
+                via.setModo(!rbtnRetorno.isSelected());
                 em.persist(via);
                 em.getTransaction().commit();
             }catch(EntityExistsException ex){
@@ -463,9 +473,16 @@ public class frmViaje extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbTrayectoPopupMenuWillBecomeInvisible
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-//        flag= true;
-//        lbAvisoN.setText("");
-//        Util.limpiarCampos(jPanel1);
+        flag= true;
+        txtID.setText(null);
+        jDCViaje.setDate(new java.util.Date());
+        jSpin.setValue(new java.util.Date());
+        cmbEstado.setSelectedIndex(0);
+        cmbTrayecto.setSelectedIndex(0);
+        txtVeh.setText(null);
+        rbtnRetorno.setSelected(false);
+        txtPasajes.setText(null);
+
 //        txtModelo.setEnabled(true);
 //        ftxtChapa.setEnabled(true);
 //        txtAnho.setEnabled(true);
@@ -510,6 +527,33 @@ public class frmViaje extends javax.swing.JFrame {
 //        btnEliminar.setEnabled(false);
 //        cargarTabla("SELECT ve FROM Vehiculo ve ORDER BY ve.matricula");
     }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void tablaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMousePressed
+        Viaje vi;
+        vi= em.find(Viaje.class, Integer.parseInt(tabla.getValueAt(tabla.getSelectedRow(), 0).toString()));
+        txtID.setText(String.valueOf(vi.getIdViaje()));
+        jDCViaje.setDate(vi.getFechaViaje());
+        jSpin.setValue(vi.getHoraViaje());
+        
+        for(int i=0; i<cmbEstado.getModel().getSize();i++){
+            if(vi.getEstado().equals(cmbEstado.getItemAt(i).toString())){
+                cmbEstado.setSelectedIndex(i);
+            }
+        }
+        
+        for(int i=0; i<cmbTrayecto.getModel().getSize();i++){
+            if(vi.getTrayecto().getIdTrayecto()==Integer.parseInt(cmbTrayecto.getItemAt(i).toString())){
+                cmbTrayecto.setSelectedIndex(i);
+            }
+        }
+        
+        rbtnRetorno.setSelected(!vi.isModo());
+        veh=vi.getVehiculo();
+        txtVeh.setText(String.valueOf(veh.getNro()));
+        
+        cargarTablaC();
+        btnEditar.setEnabled(true);
+    }//GEN-LAST:event_tablaMousePressed
 
     /**
      * @param args the command line arguments
