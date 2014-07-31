@@ -95,4 +95,9 @@ public class Util {
         return utilDate;
     }
     
+    public static String sqlDateToStr(java.sql.Date sqlDate){
+        DateFormat df= new SimpleDateFormat("dd-MMM-yyyy");
+        return df.format(sqlDate);
+    }
+    
 }

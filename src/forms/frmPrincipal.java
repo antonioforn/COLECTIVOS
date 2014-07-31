@@ -24,6 +24,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         btnChofer = new javax.swing.JButton();
         btnVehiculos = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
+        btnViaje = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -84,6 +85,17 @@ public class frmPrincipal extends javax.swing.JFrame {
         });
         toolBar.add(btnVehiculos);
         toolBar.add(jSeparator1);
+
+        btnViaje.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/viaje.png"))); // NOI18N
+        btnViaje.setFocusable(false);
+        btnViaje.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnViaje.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnViaje.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViajeActionPerformed(evt);
+            }
+        });
+        toolBar.add(btnViaje);
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/abstract.jpg"))); // NOI18N
@@ -148,6 +160,10 @@ public class frmPrincipal extends javax.swing.JFrame {
         new frmVehiculos().setVisible(true);
     }//GEN-LAST:event_btnVehiculosActionPerformed
 
+    private void btnViajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViajeActionPerformed
+        new frmViaje().setVisible(true);
+    }//GEN-LAST:event_btnViajeActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -188,6 +204,7 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnCiudades;
     private javax.swing.JButton btnTrayectos;
     private javax.swing.JButton btnVehiculos;
+    private javax.swing.JButton btnViaje;
     private javax.swing.JDesktopPane dpprincipal;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;

@@ -698,7 +698,7 @@ public class frmViaje extends javax.swing.JFrame {
                 }
                 datos.add(new Object[]{via.getIdViaje() ,
                                         via.getVehiculo().getNro(),
-                                        via.getFechaViaje().toString(),
+                                        Util.sqlDateToStr(via.getFechaViaje()),
                                         via.getHoraViaje().toString(),
                                         via.getTrayecto().getIdTrayecto(),
                                         via.getEstado(),
