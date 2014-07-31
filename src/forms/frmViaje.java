@@ -424,7 +424,26 @@ public class frmViaje extends javax.swing.JFrame {
             via.setEstado(cmbEstado.getSelectedItem().toString());
             if(rbtnRetorno.isSelected()) via.setModo(false);
             em.getTransaction().commit();
-        }      
+        } 
+        txtID.setText(null);
+        jDCViaje.setDate(new java.util.Date());
+        jSpin.setValue(new java.util.Date());
+        jSpin.setEnabled(false);
+        cmbEstado.setSelectedIndex(0);
+        cmbTrayecto.setSelectedIndex(0);
+        cargarTablaC();
+        cmbTrayecto.setEnabled(false);
+        cmbEstado.setEnabled(false);
+        txtVeh.setText(null);
+        rbtnRetorno.setSelected(false);
+        rbtnRetorno.setEnabled(false);
+        txtPasajes.setText(null);
+        btnGuardar.setEnabled(false);
+        btnVeh.setEnabled(false);
+        btnNuevo.setEnabled(true);
+        btnEditar.setEnabled(false);
+        btnEliminar.setEnabled(false);
+        tabla.setEnabled(true);
         cargarTabla("SELECT via FROM Viaje via ORDER BY via.idViaje DESC");
     }//GEN-LAST:event_btnGuardarActionPerformed
 
@@ -450,7 +469,7 @@ public class frmViaje extends javax.swing.JFrame {
         btnEliminar.setEnabled(false);
         tabla.setEnabled(true);
 
-        cargarTabla("SELECT via FROM Viaje via ORDER BY viaje.idViaje DESC");
+        cargarTabla("SELECT via FROM Viaje via ORDER BY via.idViaje DESC");
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
@@ -524,13 +543,42 @@ public class frmViaje extends javax.swing.JFrame {
         em.getTransaction().begin();
         em.remove(via);
         em.getTransaction().commit();
-        btnCancelarActionPerformed(new java.awt.event.ActionEvent(null, 0, "") );
-        cargarTabla("SELECT via FROM Viaje via ORDER BY viaje.idViaje DESC");
+
+        txtID.setText(null);
+        jDCViaje.setDate(new java.util.Date());
+        jSpin.setValue(new java.util.Date());
+        jSpin.setEnabled(false);
+        cmbEstado.setSelectedIndex(0);
+        cmbTrayecto.setSelectedIndex(0);
+        cargarTablaC();
+        cmbTrayecto.setEnabled(false);
+        cmbEstado.setEnabled(false);
+        txtVeh.setText(null);
+        rbtnRetorno.setSelected(false);
+        rbtnRetorno.setEnabled(false);
+        txtPasajes.setText(null);
+        btnGuardar.setEnabled(false);
+        btnVeh.setEnabled(false);
+        btnNuevo.setEnabled(true);
+        btnEditar.setEnabled(false);
+        btnEliminar.setEnabled(false);
+        tabla.setEnabled(true);
+        
+        cargarTabla("SELECT via FROM Viaje via ORDER BY via.idViaje DESC");
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void tablaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMousePressed
         Viaje vi;
-        vi= em.find(Viaje.class, Integer.parseInt(tabla.getValueAt(tabla.getSelectedRow(), 0).toString()));
+        try{
+            int id = Integer.parseInt(tabla.getValueAt(tabla.getSelectedRow(), 0).toString());
+            vi= em.find(Viaje.class, id);            
+        } catch(java.lang.ArrayIndexOutOfBoundsException e){
+            tabla.setEnabled(true);
+            return;
+        }catch(Exception ex){
+            return;
+        }
+        
         txtID.setText(String.valueOf(vi.getIdViaje()));
         jDCViaje.setDate(vi.getFechaViaje());
         jSpin.setValue(vi.getHoraViaje());
@@ -658,7 +706,12 @@ public class frmViaje extends javax.swing.JFrame {
             }
             //Collections.sort(datos, new Comparador());
         }
+        catch(java.lang.ArrayIndexOutOfBoundsException e){
+            System.out.println("java.lang.ArrayIndexOutOfBoundsException");
+            return;
+        }
         catch(Exception ex){
+            System.out.println(ex.getClass().getName());
             return;        
         }
          ModeloTabla modelo= new ModeloTabla(datos, cols);
