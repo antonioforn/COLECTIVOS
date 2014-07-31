@@ -45,7 +45,7 @@ public class frmViaje extends javax.swing.JFrame {
         jDCViaje.setDate(new java.util.Date());
         jSpin.setEditor(new JSpinner.DateEditor(jSpin, "HH:mm"));
         cargarComboTrayec();
-        cargarTabla("SELECT via FROM Viaje via ORDER BY via.idViaje");
+        cargarTabla("SELECT via FROM Viaje via ORDER BY via.idViaje DESC");
         cargarTablaC();
         trayec= devTrayecto(Integer.parseInt(cmbTrayecto.getSelectedItem().toString()));
 
@@ -167,6 +167,7 @@ public class frmViaje extends javax.swing.JFrame {
         txtVeh.setEnabled(false);
 
         btnVeh.setText("-->");
+        btnVeh.setEnabled(false);
         btnVeh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVehActionPerformed(evt);
@@ -424,33 +425,32 @@ public class frmViaje extends javax.swing.JFrame {
             if(rbtnRetorno.isSelected()) via.setModo(false);
             em.getTransaction().commit();
         }      
-        cargarTabla("SELECT via FROM Viaje via ORDER BY via.idViaje");
+        cargarTabla("SELECT via FROM Viaje via ORDER BY via.idViaje DESC");
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-//        btnBuscarN.setSelected(false);
-//        btnBuscarCI.setSelected(false);
-//        btnBuscarA.setSelected(false);
-//        lbModelo.setText("Modelo:");
-//        lbNumero.setText("Nro:");
-//        lbAnho.setText("Año:");
-//        lbCI.setText("Matrícula:");
-//        lbAvisoN.setText("");
-//        Util.limpiarCampos(jPanel1);
-//        txtModelo.setEnabled(false);
-//        txtAnho.setEnabled(false);
-//        txtNro.setEnabled(false);
-//        txtCapacidad.setEnabled(false);
-//        btnChofer.setEnabled(false);
-//        ftxtChapa.setEnabled(false);
-//        btnGuardar.setEnabled(false);
-//        btnEditar.setEnabled(false);
-//        btnFiltrarM.setEnabled(false);
-//        btnFiltrarA.setEnabled(false);
-//        btnEliminar.setEnabled(false);
-//        btnNuevo.setEnabled(true);
-//        tabla.setEnabled(true);
-//        cargarTabla("SELECT ve FROM Vehiculo ve ORDER BY ve.matricula");
+
+        txtID.setText(null);
+        jDCViaje.setDate(new java.util.Date());
+        jSpin.setValue(new java.util.Date());
+        jSpin.setEnabled(false);
+        cmbEstado.setSelectedIndex(0);
+        cmbTrayecto.setSelectedIndex(0);
+        cargarTablaC();
+        cmbTrayecto.setEnabled(false);
+        cmbEstado.setEnabled(false);
+        txtVeh.setText(null);
+        rbtnRetorno.setSelected(false);
+        rbtnRetorno.setEnabled(false);
+        txtPasajes.setText(null);
+        btnGuardar.setEnabled(false);
+        btnVeh.setEnabled(false);
+        btnNuevo.setEnabled(true);
+        btnEditar.setEnabled(false);
+        btnEliminar.setEnabled(false);
+        tabla.setEnabled(true);
+
+        cargarTabla("SELECT via FROM Viaje via ORDER BY viaje.idViaje DESC");
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
@@ -477,55 +477,55 @@ public class frmViaje extends javax.swing.JFrame {
         txtID.setText(null);
         jDCViaje.setDate(new java.util.Date());
         jSpin.setValue(new java.util.Date());
+        jSpin.setEnabled(true);
         cmbEstado.setSelectedIndex(0);
         cmbTrayecto.setSelectedIndex(0);
+        cargarTablaC();
+        cmbTrayecto.setEnabled(true);
+        cmbEstado.setEnabled(true);
         txtVeh.setText(null);
         rbtnRetorno.setSelected(false);
+        rbtnRetorno.setEnabled(true);
         txtPasajes.setText(null);
+        btnGuardar.setEnabled(true);
+        btnVeh.setEnabled(true);
+        btnNuevo.setEnabled(false);
+        btnEditar.setEnabled(false);
+        btnEliminar.setEnabled(false);
+        tabla.setEnabled(false);
 
-//        txtModelo.setEnabled(true);
-//        ftxtChapa.setEnabled(true);
-//        txtAnho.setEnabled(true);
-//        txtNro.setEnabled(true);
-//        txtCapacidad.setEnabled(true);
-//        btnGuardar.setEnabled(true);
-//        btnChofer.setEnabled(true);
-//        btnNuevo.setEnabled(false);
-//        btnEditar.setEnabled(false);
-//        btnEliminar.setEnabled(false);
-//        tabla.setEnabled(false);
-//        ftxtChapa.requestFocusInWindow();
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-//        flag= false;
-//        txtModelo.setEnabled(true);
-//        txtAnho.setEnabled(true);
-//        txtCapacidad.setEnabled(true);
-//        txtModelo.requestFocusInWindow();
-//        tabla.setEnabled(false);
-//        btnGuardar.setEnabled(true);
-//        btnChofer.setEnabled(true);
-//        btnEliminar.setEnabled(false);
-//        btnNuevo.setEnabled(false);
+        flag= false;
+        txtID.setEnabled(true);
+        jSpin.setEnabled(true);
+        cmbTrayecto.setEnabled(true);
+        cmbEstado.setEnabled(true);
+        txtVeh.setEnabled(true);
+        rbtnRetorno.setEnabled(true);
+        btnGuardar.setEnabled(true);
+        btnVeh.setEnabled(true);
+        btnNuevo.setEnabled(false);
+        btnEditar.setEnabled(false);
+        btnEliminar.setEnabled(false);
+        tabla.setEnabled(false);
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-//        int resp = JOptionPane.showConfirmDialog(rootPane, "¿Desea eliminar el registro?", "Eliminar?", JOptionPane.YES_NO_OPTION);
-//
-//        if(resp!=0){
-//            return;
-//        }
-//        String id = ftxtChapa.getText();
-//        Vehiculo ve = em.find(Vehiculo.class, id);
-//        em.getTransaction().begin();
-//        em.remove(ve);
-//        em.getTransaction().commit();
-//        Util.limpiarCampos(jPanel1);
-//        btnEditar.setEnabled(false);
-//        btnChofer.setEnabled(false);
-//        btnEliminar.setEnabled(false);
-//        cargarTabla("SELECT ve FROM Vehiculo ve ORDER BY ve.matricula");
+        int resp = JOptionPane.showConfirmDialog(rootPane, "¿Desea eliminar el registro?", "Eliminar?", JOptionPane.YES_NO_OPTION);
+
+        if(resp!=0){
+            return;
+        }
+        
+        int id = Integer.parseInt(txtID.getText());
+        Viaje via = em.find(Viaje.class, id);
+        em.getTransaction().begin();
+        em.remove(via);
+        em.getTransaction().commit();
+        btnCancelarActionPerformed(new java.awt.event.ActionEvent(null, 0, "") );
+        cargarTabla("SELECT via FROM Viaje via ORDER BY viaje.idViaje DESC");
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void tablaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMousePressed
@@ -553,6 +553,7 @@ public class frmViaje extends javax.swing.JFrame {
         
         cargarTablaC();
         btnEditar.setEnabled(true);
+        btnEliminar.setEnabled(true);
     }//GEN-LAST:event_tablaMousePressed
 
     /**
