@@ -10,6 +10,9 @@
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
     <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
   </SyntheticProperties>
+  <Events>
+    <EventHandler event="windowClosed" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowClosed"/>
+  </Events>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -44,6 +47,9 @@
   </Layout>
   <SubComponents>
     <Container class="javax.swing.JPanel" name="jPanel1">
+      <Properties>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -96,19 +102,19 @@
                                                   </Group>
                                                   <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                      <Component id="jDCPasaje" pref="115" max="32767" attributes="0"/>
-                                                      <Component id="txtNombre" max="32767" attributes="0"/>
                                                       <Component id="cmbInicio" max="32767" attributes="0"/>
+                                                      <Component id="txtNombre" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="jDCPasaje" alignment="0" pref="160" max="32767" attributes="0"/>
                                                   </Group>
-                                                  <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                                                   <Group type="103" groupAlignment="0" attributes="0">
                                                       <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
                                                       <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
                                                   </Group>
                                                   <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                      <Component id="cmbFin" pref="160" max="32767" attributes="0"/>
                                                       <Component id="txtApellido" max="32767" attributes="0"/>
-                                                      <Component id="cmbFin" pref="115" max="32767" attributes="0"/>
                                                   </Group>
                                               </Group>
                                               <Group type="102" alignment="0" attributes="0">
@@ -186,19 +192,29 @@
                       <Component id="jDCPasaje" alignment="1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel6" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtCI" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel8" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtNombre" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel7" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtApellido" alignment="1" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="cmbInicio" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="cmbFin" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="cmbViaje" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabel6" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtCI" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel8" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtNombre" alignment="1" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="cmbInicio" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="cmbViaje" alignment="1" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabel7" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtApellido" alignment="1" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                          <Component id="cmbFin" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="jLabel9" alignment="1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                   <Component id="lbDetalle" min="-2" max="-2" attributes="0"/>
@@ -256,7 +272,6 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel4" alignment="1" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel5" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel9" alignment="1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="457" pref="457" max="-2" attributes="0"/>
               </Group>
@@ -405,6 +420,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtNombre">
+          <Properties>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel7">
           <Properties>
@@ -412,6 +430,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtApellido">
+          <Properties>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel8">
           <Properties>
@@ -421,6 +442,7 @@
         <Component class="javax.swing.JTextField" name="txtCI">
           <Properties>
             <Property name="toolTipText" type="java.lang.String" value="Presione enter"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtCIKeyPressed"/>
@@ -436,6 +458,7 @@
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="0"/>
             </Property>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="popupMenuWillBecomeInvisible" listener="javax.swing.event.PopupMenuListener" parameters="javax.swing.event.PopupMenuEvent" handler="cmbViajePopupMenuWillBecomeInvisible"/>
@@ -451,6 +474,7 @@
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="0"/>
             </Property>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel9">
@@ -463,6 +487,7 @@
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="0"/>
             </Property>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lbDetalle">

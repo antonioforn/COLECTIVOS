@@ -29,7 +29,7 @@ public class frmPasajes extends javax.swing.JFrame {
     EntityManager em;
     ArrayList<Ciudad> ciudades = new ArrayList<Ciudad>();    
     boolean flag=true;  
-    Viaje viaje;
+    public static Viaje viaje;
     Pasajero pasajero;
     
     public frmPasajes() {
@@ -104,6 +104,13 @@ public class frmPasajes extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Pasajes");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
+
+        jPanel1.setEnabled(false);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setText("Pasaje:");
@@ -199,11 +206,16 @@ public class frmPasajes extends javax.swing.JFrame {
 
         jLabel6.setText("Cedula:");
 
+        txtNombre.setEnabled(false);
+
         jLabel7.setText("Apellido");
+
+        txtApellido.setEnabled(false);
 
         jLabel8.setText("Nombre:");
 
         txtCI.setToolTipText("Presione enter");
+        txtCI.setEnabled(false);
         txtCI.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtCIKeyPressed(evt);
@@ -212,6 +224,7 @@ public class frmPasajes extends javax.swing.JFrame {
 
         jLabel4.setText("Viaje:");
 
+        cmbViaje.setEnabled(false);
         cmbViaje.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
             public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
@@ -224,7 +237,11 @@ public class frmPasajes extends javax.swing.JFrame {
 
         jLabel5.setText("Inicio:");
 
+        cmbInicio.setEnabled(false);
+
         jLabel9.setText("Fin:");
+
+        cmbFin.setEnabled(false);
 
         lbDetalle.setText("Detalles de Viaje:");
 
@@ -294,17 +311,17 @@ public class frmPasajes extends javax.swing.JFrame {
                                                     .addComponent(jLabel5))
                                                 .addGap(21, 21, 21)
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                    .addComponent(jDCPasaje, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
+                                                    .addComponent(cmbInicio, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                     .addComponent(txtNombre)
-                                                    .addComponent(cmbInicio, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                                .addGap(40, 40, 40)
+                                                    .addComponent(jDCPasaje, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE))
+                                                .addGap(34, 34, 34)
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                     .addComponent(jLabel7)
                                                     .addComponent(jLabel9))
                                                 .addGap(21, 21, 21)
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                    .addComponent(txtApellido)
-                                                    .addComponent(cmbFin, 0, 115, Short.MAX_VALUE)))
+                                                    .addComponent(cmbFin, 0, 160, Short.MAX_VALUE)
+                                                    .addComponent(txtApellido)))
                                             .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -359,18 +376,24 @@ public class frmPasajes extends javax.swing.JFrame {
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jDCPasaje, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtCI, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtApellido, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cmbInicio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbFin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbViaje, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtCI, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(25, 25, 25)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cmbInicio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbViaje, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtApellido, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(25, 25, 25)
+                        .addComponent(cmbFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel9))
                 .addGap(32, 32, 32)
                 .addComponent(lbDetalle)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -417,8 +440,7 @@ public class frmPasajes extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(457, 457, 457))
         );
 
@@ -484,49 +506,41 @@ public class frmPasajes extends javax.swing.JFrame {
         }
         txtNro.setText(null);
         jDCPasaje.setDate(new java.util.Date());
-        jSpin.setValue(new java.util.Date());
-        jSpin.setEnabled(false);
         cmbEstado.setSelectedIndex(0);
         cmbTrayecto.setSelectedIndex(0);
         cargarTablaC();
         cmbTrayecto.setEnabled(false);
         cmbEstado.setEnabled(false);
         txtVeh.setText(null);
-        rbtnRetorno.setSelected(false);
-        rbtnRetorno.setEnabled(false);
         txtPasajes.setText(null);
         btnGuardar.setEnabled(false);
-        btnVeh.setEnabled(false);
         btnNuevo.setEnabled(true);
         btnEditar.setEnabled(false);
         btnEliminar.setEnabled(false);
         tabla.setEnabled(true);
-        cargarTabla("SELECT via FROM Viaje via ORDER BY via.idViaje DESC");
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
 
         txtNro.setText(null);
         jDCPasaje.setDate(new java.util.Date());
-        jSpin.setValue(new java.util.Date());
-        jSpin.setEnabled(false);
-        cmbEstado.setSelectedIndex(0);
-        cmbTrayecto.setSelectedIndex(0);
-        cargarTablaC();
-        cmbTrayecto.setEnabled(false);
-        cmbEstado.setEnabled(false);
+        cmbViaje.setEnabled(false);
+        cmbInicio.setSelectedIndex(0);
+        cmbFin.setSelectedIndex(0);
+        cmbInicio.setEnabled(false);
+        cmbFin.setEnabled(false);
         txtVeh.setText(null);
-        rbtnRetorno.setSelected(false);
-        rbtnRetorno.setEnabled(false);
         txtPasajes.setText(null);
         btnGuardar.setEnabled(false);
-        btnVeh.setEnabled(false);
         btnNuevo.setEnabled(true);
         btnEditar.setEnabled(false);
         btnEliminar.setEnabled(false);
         tabla.setEnabled(true);
+        cargarCmbViaje();
+        cargarDetalleViaje();// una vez llamado este metodo ya tenemos disponible el objeto "viaje"
+        cargarCombosC();
+        cargarTablaC();        
 
-        cargarTabla("SELECT via FROM Viaje via ORDER BY via.idViaje DESC");
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
@@ -574,19 +588,16 @@ public class frmPasajes extends javax.swing.JFrame {
         flag= true;
         txtNro.setText(null);
         jDCPasaje.setDate(new java.util.Date());
-        jSpin.setValue(new java.util.Date());
-        jSpin.setEnabled(true);
-        cmbEstado.setSelectedIndex(0);
-        cmbTrayecto.setSelectedIndex(0);
+        txtCI.setEnabled(true);
+        txtCI.requestFocusInWindow();
+        cmbViaje.setEnabled(true);
+        cmbInicio.setEnabled(true);
+        cmbFin.setEnabled(true);
+        cargarCmbViaje();
         cargarTablaC();
-        cmbTrayecto.setEnabled(true);
-        cmbEstado.setEnabled(true);
         txtVeh.setText(null);
-        rbtnRetorno.setSelected(false);
-        rbtnRetorno.setEnabled(true);
         txtPasajes.setText(null);
         btnGuardar.setEnabled(true);
-        btnVeh.setEnabled(true);
         btnNuevo.setEnabled(false);
         btnEditar.setEnabled(false);
         btnEliminar.setEnabled(false);
@@ -655,15 +666,22 @@ public class frmPasajes extends javax.swing.JFrame {
         if(evt.getKeyCode()==KeyEvent.VK_ENTER) {
             buscarPasajero();
             if(pasajero!=null){
-            txtNombre.setText(pasajero.getNombre());        
-            txtApellido.setText(pasajero.getApellido());
-            txtNombre.setEnabled(false);
-            txtApellido.setEnabled(false);
+                txtNombre.setText(pasajero.getNombre());        
+                txtApellido.setText(pasajero.getApellido());
+                txtNombre.setEnabled(false);
+                txtApellido.setEnabled(false);
             }else{
-            txtNombre.requestFocusInWindow();
+                txtNombre.setEnabled(true);
+                txtApellido.setEnabled(true);
+                txtNombre.requestFocusInWindow();
             }
         }
     }//GEN-LAST:event_txtCIKeyPressed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        em.close();
+        emf.close();
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments
@@ -749,7 +767,8 @@ public class frmPasajes extends javax.swing.JFrame {
     public void cargarCmbViaje(){
         cmbViaje.removeAllItems();
         TypedQuery<Viaje> q1 = em.createQuery("SELECT via FROM Viaje via ORDER BY via.idViaje DESC", Viaje.class);
-        List<Viaje> results = q1.getResultList();
+        
+        List<Viaje> results = q1.setMaxResults(30).getResultList();
         for(Viaje v: results){
             cmbViaje.addItem(v.getIdViaje());
         }        
