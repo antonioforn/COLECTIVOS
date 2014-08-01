@@ -779,7 +779,7 @@ public class frmPasajes extends javax.swing.JFrame {
                 ciudades.add(c);
             }
             Collections.sort(ciudades, new ComparadorCiudad());
-            
+            //agregar condicion ida o vuelta y aplicar metodo reverse
             for(int i=0; i< ciudades.size(); i++){
                 cmbInicio.addItem(ciudades.get(i).getNombre());
                 cmbFin.addItem(ciudades.get(i).getNombre());
