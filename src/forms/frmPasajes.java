@@ -1,20 +1,29 @@
 
 package forms;
 
+import clasesUtiles.Comparador;
+import clasesUtiles.ComparadorCiudad;
+import clasesUtiles.ModeloTabla;
+import entidades.Ciudad;
 import entidades.Trayecto;
 import entidades.Viaje;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 
 
 public class frmPasajes extends javax.swing.JFrame {
 
     EntityManagerFactory emf;
     EntityManager em;
+    ArrayList<Ciudad> ciudades = new ArrayList<Ciudad>();    
     boolean flag=true;  
     Viaje viaje;
     
@@ -24,7 +33,11 @@ public class frmPasajes extends javax.swing.JFrame {
         em = emf.createEntityManager();        
         jDCPasaje.setEnabled(false);
         jDCPasaje.getCalendarButton().setEnabled(true);
-        jDCPasaje.setDate(new java.util.Date());        
+        jDCPasaje.setDate(new java.util.Date());
+        cargarCmbViaje();
+        cargarDetalleViaje();// una vez llamado este metodo ya tenemos disponible el objeto "viaje"
+        cargarCombosC();
+        cargarTablaC();
         
     }
 
@@ -78,7 +91,7 @@ public class frmPasajes extends javax.swing.JFrame {
         txtPasajes = new javax.swing.JTextField();
         txtTrayecto = new javax.swing.JTextField();
         lbTrayecto1 = new javax.swing.JLabel();
-        txtTrayecto1 = new javax.swing.JTextField();
+        txtEstado = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Pasajes");
@@ -186,6 +199,16 @@ public class frmPasajes extends javax.swing.JFrame {
 
         jLabel4.setText("Viaje:");
 
+        cmbViaje.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+                cmbViajePopupMenuWillBecomeInvisible(evt);
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+        });
+
         jLabel5.setText("Inicio:");
 
         jLabel9.setText("Fin:");
@@ -212,7 +235,7 @@ public class frmPasajes extends javax.swing.JFrame {
 
         lbTrayecto1.setText("Estado:");
 
-        txtTrayecto1.setEnabled(false);
+        txtEstado.setEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -237,11 +260,10 @@ public class frmPasajes extends javax.swing.JFrame {
                                                     .addComponent(jLabel6)
                                                     .addComponent(jLabel4))
                                                 .addGap(27, 27, 27)
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                        .addComponent(txtNro, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
-                                                        .addComponent(txtCI))
-                                                    .addComponent(cmbViaje, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addComponent(txtNro)
+                                                    .addComponent(txtCI)
+                                                    .addComponent(cmbViaje, 0, 108, Short.MAX_VALUE)))
                                             .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addComponent(lbDetalle1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -258,20 +280,18 @@ public class frmPasajes extends javax.swing.JFrame {
                                                     .addComponent(jLabel8)
                                                     .addComponent(jLabel5))
                                                 .addGap(21, 21, 21)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addComponent(jDCPasaje, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
+                                                    .addComponent(txtNombre)
+                                                    .addComponent(cmbInicio, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                .addGap(40, 40, 40)
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                            .addComponent(jDCPasaje, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
-                                                            .addComponent(txtNombre))
-                                                        .addGap(40, 40, 40)
-                                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                            .addComponent(jLabel7)
-                                                            .addComponent(jLabel9))
-                                                        .addGap(21, 21, 21)
-                                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                            .addComponent(cmbFin, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                            .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                                    .addComponent(cmbInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                    .addComponent(jLabel7)
+                                                    .addComponent(jLabel9))
+                                                .addGap(21, 21, 21)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addComponent(txtApellido)
+                                                    .addComponent(cmbFin, 0, 115, Short.MAX_VALUE)))
                                             .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -287,15 +307,15 @@ public class frmPasajes extends javax.swing.JFrame {
                                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                                         .addComponent(lbTrayecto1)
                                                         .addGap(24, 24, 24)
-                                                        .addComponent(txtTrayecto1))
+                                                        .addComponent(txtEstado))
                                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                                         .addComponent(lbTrayecto)
                                                         .addGap(12, 12, 12)
                                                         .addComponent(txtTrayecto, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                                 .addGap(18, 18, 18)
-                                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 133, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -321,30 +341,23 @@ public class frmPasajes extends javax.swing.JFrame {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtNro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jDCPasaje, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtCI, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtApellido, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(25, 25, 25)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(cmbViaje, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmbInicio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(cmbFin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(90, 90, 90)
-                        .addComponent(jLabel5)))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtNro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jDCPasaje, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtCI, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtApellido, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cmbInicio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbFin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbViaje, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
                 .addComponent(lbDetalle)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -365,8 +378,7 @@ public class frmPasajes extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(lbDetalle1)
                                     .addComponent(txtFechaViaje, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -380,12 +392,21 @@ public class frmPasajes extends javax.swing.JFrame {
                                     .addComponent(txtHoraViaje, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(lbPasajes)
                                     .addComponent(txtPasajes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(lbTrayecto1)
-                                        .addComponent(txtTrayecto1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbTrayecto1)
+                                    .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(129, 129, 129))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(21, 21, 21)))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(62, 62, 62))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(457, 457, 457))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -611,6 +632,12 @@ public class frmPasajes extends javax.swing.JFrame {
         cargarTabla("SELECT via FROM Viaje via ORDER BY via.idViaje DESC");
     }//GEN-LAST:event_btnEliminarActionPerformed
 
+    private void cmbViajePopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_cmbViajePopupMenuWillBecomeInvisible
+        cargarDetalleViaje();// una vez llamado este metodo ya tenemos disponible el objeto "viaje"
+        cargarCombosC();
+        cargarTablaC();
+    }//GEN-LAST:event_cmbViajePopupMenuWillBecomeInvisible
+
     /**
      * @param args the command line arguments
      */
@@ -681,13 +708,13 @@ public class frmPasajes extends javax.swing.JFrame {
     private javax.swing.JTable tablaC;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtCI;
+    private javax.swing.JTextField txtEstado;
     private javax.swing.JTextField txtFechaViaje;
     private javax.swing.JTextField txtHoraViaje;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtNro;
     private javax.swing.JTextField txtPasajes;
     private javax.swing.JTextField txtTrayecto;
-    private javax.swing.JTextField txtTrayecto1;
     private javax.swing.JTextField txtVeh;
     // End of variables declaration//GEN-END:variables
 
@@ -702,9 +729,62 @@ public class frmPasajes extends javax.swing.JFrame {
     }
     
     public void cargarDetalleViaje(){
+
             Query query = em.createQuery("SELECT v FROM Viaje v WHERE v.idViaje = " + cmbViaje.getSelectedItem().toString());
             viaje = (Viaje) query.getSingleResult();
-            
+            String modo= viaje.isModo()?"ida":"vuelta"; //operador ternario, pregunta es true? devuelve el primero
+            txtFechaViaje.setText(clasesUtiles.Util.sqlDateToStr(viaje.getFechaViaje()));
+            txtHoraViaje.setText(viaje.getHoraViaje().toString());
+            txtVeh.setText(String.valueOf(viaje.getVehiculo().getNro()));
+            //txtPasajes.setText(null);
+            txtTrayecto.setText(String.valueOf(viaje.getTrayecto().getIdTrayecto()) +" "+modo);
+            txtEstado.setText(viaje.getEstado());
     }
+    
+        private void cargarTablaC() {
+        ArrayList datos = new ArrayList();
+        String[] cols = new String[]{"Id","Ciudad", "Orden"};              
+        try{
+            datos.clear();
+
+            for(Ciudad c: viaje.getTrayecto().getCiudades()){
+                datos.add(new Object[]{c.getIdCiudad(),c.getNombre(), c.getOrden()});
+            }
+            Collections.sort(datos, new Comparador());
+        }
+        catch(Exception ex){
+            System.out.println(ex.getClass().getName());
+            System.out.println(ex.getMessage());
+            return;        
+        }
+         ModeloTabla modelo= new ModeloTabla(datos, cols);
+        tablaC.setModel(modelo);
+        tablaC.getColumnModel().getColumn(0).setMinWidth(0);
+        tablaC.getColumnModel().getColumn(0).setPreferredWidth(0);
+        tablaC.getColumnModel().getColumn(0).setResizable(false);
+        tablaC.getColumnModel().getColumn(1).setPreferredWidth(140);
+        tablaC.getColumnModel().getColumn(1).setResizable(false);
+        tablaC.getColumnModel().getColumn(2).setPreferredWidth(50);
+        tablaC.getColumnModel().getColumn(2).setResizable(false);        
+        tablaC.getTableHeader().setReorderingAllowed(true);
+        tablaC.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        tablaC.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);            
+    }
+        
+        public void cargarCombosC(){
+            ciudades.clear();
+            cmbInicio.removeAllItems();
+            cmbFin.removeAllItems();
+            for(Ciudad c: viaje.getTrayecto().getCiudades()){
+                ciudades.add(c);
+            }
+            Collections.sort(ciudades, new ComparadorCiudad());
+            
+            for(int i=0; i< ciudades.size(); i++){
+                cmbInicio.addItem(ciudades.get(i).getNombre());
+                cmbFin.addItem(ciudades.get(i).getNombre());
+            }
+            
+        }
     
 }
