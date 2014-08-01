@@ -3,10 +3,14 @@ package forms;
 
 import clasesUtiles.Comparador;
 import clasesUtiles.ComparadorCiudad;
+import clasesUtiles.ControlLetr;
+import clasesUtiles.ControlNum;
 import clasesUtiles.ModeloTabla;
 import entidades.Ciudad;
+import entidades.Pasajero;
 import entidades.Trayecto;
 import entidades.Viaje;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -26,11 +30,15 @@ public class frmPasajes extends javax.swing.JFrame {
     ArrayList<Ciudad> ciudades = new ArrayList<Ciudad>();    
     boolean flag=true;  
     Viaje viaje;
+    Pasajero pasajero;
     
     public frmPasajes() {
         initComponents();
         emf= Persistence.createEntityManagerFactory("colectivos.odb");
-        em = emf.createEntityManager();        
+        em = emf.createEntityManager();
+        txtCI.setDocument(new ControlNum(7));
+        txtNombre.setDocument(new ControlLetr(16));
+        txtApellido.setDocument(new ControlLetr(16));
         jDCPasaje.setEnabled(false);
         jDCPasaje.getCalendarButton().setEnabled(true);
         jDCPasaje.setDate(new java.util.Date());
@@ -196,6 +204,11 @@ public class frmPasajes extends javax.swing.JFrame {
         jLabel8.setText("Nombre:");
 
         txtCI.setToolTipText("Presione enter");
+        txtCI.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCIKeyPressed(evt);
+            }
+        });
 
         jLabel4.setText("Viaje:");
 
@@ -638,6 +651,20 @@ public class frmPasajes extends javax.swing.JFrame {
         cargarTablaC();
     }//GEN-LAST:event_cmbViajePopupMenuWillBecomeInvisible
 
+    private void txtCIKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCIKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER) {
+            buscarPasajero();
+            if(pasajero!=null){
+            txtNombre.setText(pasajero.getNombre());        
+            txtApellido.setText(pasajero.getApellido());
+            txtNombre.setEnabled(false);
+            txtApellido.setEnabled(false);
+            }else{
+            txtNombre.requestFocusInWindow();
+            }
+        }
+    }//GEN-LAST:event_txtCIKeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -780,11 +807,17 @@ public class frmPasajes extends javax.swing.JFrame {
             }
             Collections.sort(ciudades, new ComparadorCiudad());
             //agregar condicion ida o vuelta y aplicar metodo reverse
+            if(!viaje.isModo()) Collections.reverse(ciudades); //en caso de que el viaje sea de retorno
             for(int i=0; i< ciudades.size(); i++){
                 cmbInicio.addItem(ciudades.get(i).getNombre());
                 cmbFin.addItem(ciudades.get(i).getNombre());
             }
             
         }
+
+    private void buscarPasajero() {
+        int ci= Integer.parseInt(txtCI.getText());
+        pasajero= em.find(Pasajero.class, ci);
+    }
     
 }
