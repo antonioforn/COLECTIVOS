@@ -2,7 +2,15 @@
 
 package forms;
 
+import clasesUtiles.Comparador;
+import clasesUtiles.ModeloTabla;
+import entidades.Ciudad;
+import static forms.frmPasajes.viaje;
+import java.util.ArrayList;
+import java.util.Collections;
 import javax.persistence.EntityManager;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 
 
 public class frmAsientos extends javax.swing.JFrame {
@@ -25,6 +33,8 @@ public class frmAsientos extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblAsientos = new javax.swing.JTable();
+        btnCerrar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Elegir asiento");
@@ -43,7 +53,28 @@ public class frmAsientos extends javax.swing.JFrame {
 
             }
         ));
+        tblAsientos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblAsientosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblAsientos);
+
+        btnCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Right32Green.png"))); // NOI18N
+        btnCerrar.setToolTipText("Cerrar ventana");
+        btnCerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarActionPerformed(evt);
+            }
+        });
+
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cancel.png"))); // NOI18N
+        btnCancelar.setToolTipText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -51,14 +82,24 @@ public class frmAsientos extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnCancelar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnCerrar)
+                .addGap(106, 106, 106))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -81,6 +122,19 @@ public class frmAsientos extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnCerrarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+
+        dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void tblAsientosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAsientosMouseClicked
+        frmPasajes.txtAsient.setText(tblAsientos.getValueAt(tblAsientos.getSelectedRow(), 1).toString());
+    }//GEN-LAST:event_tblAsientosMouseClicked
 
     /**
      * @param args the command line arguments
@@ -118,12 +172,43 @@ public class frmAsientos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnCerrar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblAsientos;
     // End of variables declaration//GEN-END:variables
 
     private void cargarAsientos() {
-        //frmPasajes.viaje.getVehiculo().getCapacidad()
+        ArrayList datos = new ArrayList();
+        String[] cols = new String[]{"Disponiblidad","Asiento"};
+        int i=0;
+        try{
+            
+            for(Boolean b: frmPasajes.viaje.getAsientos())
+            {
+                i++;
+                if(b){
+                    datos.add(new Object[]{b,i});
+                }
+            }
+            
+            
+        }
+        catch(Exception ex){
+            System.out.println(ex.getClass().getName());
+            System.out.println(ex.getMessage());
+            return;        
+        }
+         ModeloTabla modelo= new ModeloTabla(datos, cols);
+        tblAsientos.setModel(modelo);
+        tblAsientos.getColumnModel().getColumn(0).setMinWidth(0);
+        tblAsientos.getColumnModel().getColumn(0).setPreferredWidth(0);
+        tblAsientos.getColumnModel().getColumn(0).setResizable(false);
+        tblAsientos.getColumnModel().getColumn(1).setPreferredWidth(80);
+        tblAsientos.getColumnModel().getColumn(1).setResizable(false);
+        tblAsientos.getTableHeader().setReorderingAllowed(true);
+        tblAsientos.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        tblAsientos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); 
     }
 }

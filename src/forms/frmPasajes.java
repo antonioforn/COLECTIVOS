@@ -19,7 +19,9 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
 
@@ -31,6 +33,7 @@ public class frmPasajes extends javax.swing.JFrame {
     boolean flag=true;  
     public static Viaje viaje;
     Pasajero pasajero;
+    public static JTextField txtAsient;
     
     public frmPasajes() {
         initComponents();
@@ -46,6 +49,7 @@ public class frmPasajes extends javax.swing.JFrame {
         cargarDetalleViaje();// una vez llamado este metodo ya tenemos disponible el objeto "viaje"
         cargarCombosC();
         cargarTablaC();
+        txtAsient = txtAsiento;
         
     }
 
@@ -100,6 +104,9 @@ public class frmPasajes extends javax.swing.JFrame {
         txtTrayecto = new javax.swing.JTextField();
         lbTrayecto1 = new javax.swing.JLabel();
         txtEstado = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        txtAsiento = new javax.swing.JTextField();
+        btnAsiento = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Pasajes");
@@ -267,6 +274,17 @@ public class frmPasajes extends javax.swing.JFrame {
 
         txtEstado.setEnabled(false);
 
+        jLabel10.setText("Asiento:");
+
+        txtAsiento.setEnabled(false);
+
+        btnAsiento.setText("-->");
+        btnAsiento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAsientoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -305,24 +323,6 @@ public class frmPasajes extends javax.swing.JFrame {
                                         .addGap(26, 26, 26)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jLabel2)
-                                                    .addComponent(jLabel8)
-                                                    .addComponent(jLabel5))
-                                                .addGap(21, 21, 21)
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                    .addComponent(cmbInicio, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                    .addComponent(txtNombre)
-                                                    .addComponent(jDCPasaje, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE))
-                                                .addGap(34, 34, 34)
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jLabel7)
-                                                    .addComponent(jLabel9))
-                                                .addGap(21, 21, 21)
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                    .addComponent(cmbFin, 0, 160, Short.MAX_VALUE)
-                                                    .addComponent(txtApellido)))
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                                         .addComponent(lbPasajes)
@@ -343,9 +343,33 @@ public class frmPasajes extends javax.swing.JFrame {
                                                         .addGap(12, 12, 12)
                                                         .addComponent(txtTrayecto, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                                 .addGap(18, 18, 18)
-                                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jLabel2)
+                                                    .addComponent(jLabel8)
+                                                    .addComponent(jLabel5))
+                                                .addGap(21, 21, 21)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addComponent(cmbInicio, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(txtNombre)
+                                                    .addComponent(jDCPasaje, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE))
+                                                .addGap(34, 34, 34)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jLabel7)
+                                                    .addComponent(jLabel9))
+                                                .addGap(21, 21, 21)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addComponent(cmbFin, 0, 160, Short.MAX_VALUE)
+                                                    .addComponent(txtApellido))
+                                                .addGap(28, 28, 28)
+                                                .addComponent(jLabel10)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(txtAsiento, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(btnAsiento))))
                                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -390,8 +414,12 @@ public class frmPasajes extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtApellido, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(25, 25, 25)
+                            .addComponent(txtApellido, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel10)
+                                .addComponent(txtAsiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnAsiento)))
+                        .addGap(20, 20, 20)
                         .addComponent(cmbFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel9))
                 .addGap(32, 32, 32)
@@ -607,13 +635,11 @@ public class frmPasajes extends javax.swing.JFrame {
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         flag= false;
         txtNro.setEnabled(true);
-        jSpin.setEnabled(true);
+
         cmbTrayecto.setEnabled(true);
         cmbEstado.setEnabled(true);
         txtVeh.setEnabled(true);
-        rbtnRetorno.setEnabled(true);
         btnGuardar.setEnabled(true);
-        btnVeh.setEnabled(true);
         btnNuevo.setEnabled(false);
         btnEditar.setEnabled(false);
         btnEliminar.setEnabled(false);
@@ -635,19 +661,16 @@ public class frmPasajes extends javax.swing.JFrame {
 
         txtNro.setText(null);
         jDCPasaje.setDate(new java.util.Date());
-        jSpin.setValue(new java.util.Date());
-        jSpin.setEnabled(false);
+
         cmbEstado.setSelectedIndex(0);
         cmbTrayecto.setSelectedIndex(0);
         cargarTablaC();
         cmbTrayecto.setEnabled(false);
         cmbEstado.setEnabled(false);
         txtVeh.setText(null);
-        rbtnRetorno.setSelected(false);
-        rbtnRetorno.setEnabled(false);
         txtPasajes.setText(null);
         btnGuardar.setEnabled(false);
-        btnVeh.setEnabled(false);
+
         btnNuevo.setEnabled(true);
         btnEditar.setEnabled(false);
         btnEliminar.setEnabled(false);
@@ -682,6 +705,10 @@ public class frmPasajes extends javax.swing.JFrame {
         em.close();
         emf.close();
     }//GEN-LAST:event_formWindowClosed
+
+    private void btnAsientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsientoActionPerformed
+        new frmAsientos().setVisible(true);
+    }//GEN-LAST:event_btnAsientoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -719,6 +746,7 @@ public class frmPasajes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAsiento;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnCerrar;
     private javax.swing.JButton btnEditar;
@@ -730,6 +758,7 @@ public class frmPasajes extends javax.swing.JFrame {
     private javax.swing.JComboBox cmbViaje;
     private com.toedter.calendar.JDateChooser jDCPasaje;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -752,6 +781,7 @@ public class frmPasajes extends javax.swing.JFrame {
     private javax.swing.JTable tabla;
     private javax.swing.JTable tablaC;
     private javax.swing.JTextField txtApellido;
+    private javax.swing.JTextField txtAsiento;
     private javax.swing.JTextField txtCI;
     private javax.swing.JTextField txtEstado;
     private javax.swing.JTextField txtFechaViaje;
