@@ -47,7 +47,12 @@ public class frmViaje extends javax.swing.JFrame {
         cargarComboTrayec();
         cargarTabla("SELECT via FROM Viaje via ORDER BY via.idViaje DESC");
         cargarTablaC();
-        trayec= devTrayecto(Integer.parseInt(cmbTrayecto.getSelectedItem().toString()));
+        try{
+            trayec= devTrayecto(Integer.parseInt(cmbTrayecto.getSelectedItem().toString()));
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(rootPane, "No hay trayectos cargados.\nAsegúrese de registrar previamente estos.");
+            System.out.println(ex.getClass().getName());
+        }
 
 //        System.out.println(sqlTim.toString());
         
@@ -407,13 +412,15 @@ public class frmViaje extends javax.swing.JFrame {
                         veh,
                         "Disponible");
                 via.setModo(!rbtnRetorno.isSelected());
+                via.setAsientos(marcarAsientos());
                 em.persist(via);
                 em.getTransaction().commit();
             }catch(EntityExistsException ex){
                 JOptionPane.showMessageDialog(rootPane, "Ya se encuentra registrado");
-            }catch(Exception e){
-                JOptionPane.showMessageDialog(rootPane, "Error al guardar" + e.getMessage());
             }
+            //catch(Exception e){
+//                JOptionPane.showMessageDialog(rootPane, "Error al guardar" + e.getMessage());
+//            }
         }else{
             int id=Integer.parseInt(txtID.getText());
             em.getTransaction().begin();
@@ -775,5 +782,13 @@ public class frmViaje extends javax.swing.JFrame {
             }catch(Exception ex){
                 return null;
             }
+        }
+        
+        public ArrayList<Boolean> marcarAsientos(){
+            ArrayList<Boolean>asient= new ArrayList<>(veh.getCapacidad());
+            for(int i=0; i<veh.getCapacidad();i++){
+                asient.add(true);
+            }
+            return asient;
         }
 }

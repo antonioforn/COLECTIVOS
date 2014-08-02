@@ -20,6 +20,9 @@ public class Viaje {
     Vehiculo vehiculo;
     String estado;
     boolean modo=true; //true ida, false retorno
+    ArrayList<Boolean> asientos;
+
+
     @OneToMany(mappedBy="viaje") List<Pasaje> pasajes= new ArrayList<Pasaje>();
 
     public Viaje(java.sql.Date fechaViaje, java.sql.Time horaViaje, Trayecto trayecto, Vehiculo vehiculo, String estado) {
@@ -95,6 +98,14 @@ public class Viaje {
 
     public void setPasajes(List<Pasaje> pasajes) {
         this.pasajes = pasajes;
+    }
+
+    public ArrayList<Boolean> getAsientos() {
+        return asientos;
+    }
+
+    public void setAsientos(ArrayList<Boolean> asientos) {
+        this.asientos = asientos;
     }
     
 }
