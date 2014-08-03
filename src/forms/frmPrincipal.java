@@ -25,6 +25,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         btnVehiculos = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         btnViaje = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -87,6 +88,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         toolBar.add(jSeparator1);
 
         btnViaje.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/viaje.png"))); // NOI18N
+        btnViaje.setToolTipText("Viajes");
         btnViaje.setFocusable(false);
         btnViaje.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnViaje.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -96,6 +98,18 @@ public class frmPrincipal extends javax.swing.JFrame {
             }
         });
         toolBar.add(btnViaje);
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/ticket.png"))); // NOI18N
+        jButton1.setToolTipText("Ventas");
+        jButton1.setFocusable(false);
+        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        toolBar.add(jButton1);
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/abstract.jpg"))); // NOI18N
@@ -164,6 +178,10 @@ public class frmPrincipal extends javax.swing.JFrame {
         new frmViaje().setVisible(true);
     }//GEN-LAST:event_btnViajeActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        new frmPasajes().setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -206,6 +224,7 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnVehiculos;
     private javax.swing.JButton btnViaje;
     private javax.swing.JDesktopPane dpprincipal;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;

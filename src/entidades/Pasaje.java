@@ -3,6 +3,7 @@
 package entidades;
 
 import java.sql.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -15,7 +16,7 @@ public class Pasaje {
     java.sql.Date fechaPas;
     Pasajero cliente;
     int monto;
-    @ManyToOne Viaje viaje;
+    @ManyToOne(cascade=CascadeType.PERSIST) Viaje viaje;
     String ciuInicio;
     String ciuFin;
 

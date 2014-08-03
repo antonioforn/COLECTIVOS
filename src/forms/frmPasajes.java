@@ -82,8 +82,6 @@ public class frmPasajes extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaC = new javax.swing.JTable();
         btnNuevo = new javax.swing.JButton();
-        btnEditar = new javax.swing.JButton();
-        btnEliminar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -178,24 +176,6 @@ public class frmPasajes extends javax.swing.JFrame {
         btnNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNuevoActionPerformed(evt);
-            }
-        });
-
-        btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit32.png"))); // NOI18N
-        btnEditar.setToolTipText("Editar Ciudad");
-        btnEditar.setEnabled(false);
-        btnEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarActionPerformed(evt);
-            }
-        });
-
-        btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/eliminar.png"))); // NOI18N
-        btnEliminar.setToolTipText("Eliminar Ciudad");
-        btnEliminar.setEnabled(false);
-        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarActionPerformed(evt);
             }
         });
 
@@ -371,10 +351,7 @@ public class frmPasajes extends javax.swing.JFrame {
                                         .addGap(18, 18, 18)
                                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(btnNuevo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(btnEditar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(btnEliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(39, 39, 39)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(btnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -454,12 +431,7 @@ public class frmPasajes extends javax.swing.JFrame {
                                 .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGap(108, 108, 108))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnNuevo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEditar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnEliminar))
+                    .addComponent(btnNuevo)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnGuardar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -569,8 +541,7 @@ public class frmPasajes extends javax.swing.JFrame {
         txtPasajes.setText(null);
         btnGuardar.setEnabled(false);
         btnNuevo.setEnabled(true);
-        btnEditar.setEnabled(false);
-        btnEliminar.setEnabled(false);
+
         
     }//GEN-LAST:event_btnGuardarActionPerformed
 
@@ -587,8 +558,6 @@ public class frmPasajes extends javax.swing.JFrame {
         txtPasajes.setText(null);
         btnGuardar.setEnabled(false);
         btnNuevo.setEnabled(true);
-        btnEditar.setEnabled(false);
-        btnEliminar.setEnabled(false);
         
         cargarCmbViaje();
         cargarDetalleViaje();// una vez llamado este metodo ya tenemos disponible el objeto "viaje"
@@ -616,56 +585,8 @@ public class frmPasajes extends javax.swing.JFrame {
         txtPasajes.setText(null);
         btnGuardar.setEnabled(true);
         btnNuevo.setEnabled(false);
-        btnEditar.setEnabled(false);
-        btnEliminar.setEnabled(false);
         
     }//GEN-LAST:event_btnNuevoActionPerformed
-
-    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        flag= false;
-        txtNro.setEnabled(true);
-
-        cmbInicio.setEnabled(true);
-        cmbFin.setEnabled(true);
-        txtVeh.setEnabled(true);
-        btnGuardar.setEnabled(true);
-        btnNuevo.setEnabled(false);
-        btnEditar.setEnabled(false);
-        btnEliminar.setEnabled(false);
-    }//GEN-LAST:event_btnEditarActionPerformed
-
-    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        int resp = JOptionPane.showConfirmDialog(rootPane, "¿Desea eliminar el registro?", "Eliminar?", JOptionPane.YES_NO_OPTION);
-
-        if(resp!=0){
-            return;
-        }
-
-        int id = Integer.parseInt(txtNro.getText());
-        Viaje via = em.find(Viaje.class, id);
-        em.getTransaction().begin();
-        em.remove(via);
-        em.getTransaction().commit();
-
-        txtNro.setText(null);
-        jDCPasaje.setDate(new java.util.Date());
-
-        cmbEstado.setSelectedIndex(0);
-        cmbTrayecto.setSelectedIndex(0);
-        cargarTablaC();
-        cmbTrayecto.setEnabled(false);
-        cmbEstado.setEnabled(false);
-        txtVeh.setText(null);
-        txtPasajes.setText(null);
-        btnGuardar.setEnabled(false);
-
-        btnNuevo.setEnabled(true);
-        btnEditar.setEnabled(false);
-        btnEliminar.setEnabled(false);
-        tabla.setEnabled(true);
-
-        cargarTabla("SELECT via FROM Viaje via ORDER BY via.idViaje DESC");
-    }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void cmbViajePopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_cmbViajePopupMenuWillBecomeInvisible
         cargarDetalleViaje();// una vez llamado este metodo ya tenemos disponible el objeto "viaje"
@@ -742,8 +663,6 @@ public class frmPasajes extends javax.swing.JFrame {
     private javax.swing.JButton btnAsiento;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnCerrar;
-    private javax.swing.JButton btnEditar;
-    private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JComboBox cmbFin;
