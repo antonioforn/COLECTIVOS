@@ -6,7 +6,9 @@ import clasesUtiles.ComparadorCiudad;
 import clasesUtiles.ControlLetr;
 import clasesUtiles.ControlNum;
 import clasesUtiles.ModeloTabla;
+import clasesUtiles.Util;
 import entidades.Ciudad;
+import entidades.Pasaje;
 import entidades.Pasajero;
 import entidades.Trayecto;
 import entidades.Viaje;
@@ -489,26 +491,51 @@ public class frmPasajes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        Viaje via;
-        utilDat= (java.util.Date)jSpin.getValue();// convertims lo q devuelve el spinner al formato java.util.Date
-        sqlTim= new java.sql.Time(utilDat.getTime());// utilizamos lo obtenido en el paso anterior para crear
-        // sqlTim que es del tipo java.sql.Time
-        if(txtVeh.getText().equals("")){
+        Pasaje pasaje;
+        if(txtCI.getText().equals("")){
             JOptionPane.showMessageDialog(rootPane, "Debe ingresar datos");
-            btnVeh.requestFocusInWindow();
+            txtCI.requestFocusInWindow();
             return;
         }
 
+        if(txtMonto.getText().equals("")||Integer.parseInt(txtMonto.getText())==0){
+            JOptionPane.showMessageDialog(rootPane, "Debe ingresar monto");
+            txtMonto.requestFocusInWindow();
+            return;
+        }
+        
+        if(txtAsiento.getText().equals("")){
+            JOptionPane.showMessageDialog(rootPane, "Debe seleccionar asiento");
+            btnAsiento.requestFocusInWindow();
+            return;
+        }        
+        
+        if(pasajero==null){
+            em.getTransaction().begin();
+            pasajero= new Pasajero(Integer.parseInt(txtCI.getText()),
+                                    txtNombre.getText(),
+                                    txtApellido.getText());
+            em.persist(pasajero);
+            em.getTransaction().commit();
+            pasajero= em.find(Pasajero.class, Integer.parseInt(txtCI.getText()));
+        }
         if (flag){
             try{
                 em.getTransaction().begin();
-                via = new Viaje(Util.utilToSql(jDCPasaje.getDate()), //pasamos la fecha que devuelve el chooser
-                    sqlTim,
-                    trayec,
-                    veh,
-                    "Disponible");
-                via.setModo(!rbtnRetorno.isSelected());
-                em.persist(via);
+                pasaje = new Pasaje(Util.utilToSql(jDCPasaje.getDate()),
+                                    pasajero,
+                                    viaje,
+                                    cmbInicio.getSelectedItem().toString(),
+                                    cmbFin.getSelectedItem().toString());
+        
+                
+                pasaje.setMonto(Integer.parseInt(txtMonto.getText()));
+                em.persist(pasaje);
+                em.getTransaction().commit();
+                
+                em.getTransaction().begin();
+                viaje.getAsientos().set(Integer.parseInt(txtAsiento.getText())-1, false);
+                
                 em.getTransaction().commit();
             }catch(EntityExistsException ex){
                 JOptionPane.showMessageDialog(rootPane, "Ya se encuentra registrado");
@@ -516,22 +543,26 @@ public class frmPasajes extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane, "Error al guardar" + e.getMessage());
             }
         }else{
-            int id=Integer.parseInt(txtNro.getText());
-            em.getTransaction().begin();
-            via = em.find(Viaje.class, id);
-            via.setFechaViaje(Util.utilToSql(jDCPasaje.getDate()));
-            via.setHoraViaje(sqlTim);
-            via.setTrayecto(trayec);
-            via.setVehiculo(veh);
-            via.setEstado(cmbEstado.getSelectedItem().toString());
-            
-            em.getTransaction().commit();
+//            int id=Integer.parseInt(txtNro.getText());
+//            em.getTransaction().begin();
+//            via = em.find(Viaje.class, id);
+//            via.setFechaViaje(Util.utilToSql(jDCPasaje.getDate()));
+//            via.setHoraViaje(sqlTim);
+//            via.setTrayecto(trayec);
+//            via.setVehiculo(veh);
+//            via.setEstado(cmbEstado.getSelectedItem().toString());
+//            
+//            em.getTransaction().commit();
         }
         txtNro.setText(null);
         jDCPasaje.setDate(new java.util.Date());
         cmbInicio.setSelectedIndex(0);
         cmbFin.setSelectedIndex(0);
+        cargarCmbViaje();
+        cargarDetalleViaje();// una vez llamado este metodo ya tenemos disponible el objeto "viaje"
+        cargarCombosC();
         cargarTablaC();
+        calcularMonto();
         cmbInicio.setEnabled(false);
         cmbFin.setEnabled(false);
         txtVeh.setText(null);
