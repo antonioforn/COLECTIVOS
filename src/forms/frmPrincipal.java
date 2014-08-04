@@ -1,11 +1,31 @@
 
 package forms;
 
-public class frmPrincipal extends javax.swing.JFrame {
+import entidades.DatoSist;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
+public class frmPrincipal extends javax.swing.JFrame {
+    DatoSist ds;
     
     public frmPrincipal() {
         initComponents();
+        datosIniciales();
+    }
+
+    private void datosIniciales() {
+        EntityManagerFactory emf= Persistence.createEntityManagerFactory("colectivos.odb");
+        EntityManager em= emf.createEntityManager();
+        ds= em.find(DatoSist.class, 1);
+        if(ds==null){
+            em.getTransaction().begin();
+            ds= new DatoSist("COLECTIVOS S.R.L.", 5000);
+            em.getTransaction().commit();
+        }
+        this.setTitle(ds.getNombreEmpresa());
+        em.close();
+        emf.close();
     }
 
     /**
@@ -29,7 +49,10 @@ public class frmPrincipal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        mnSistema = new javax.swing.JMenu();
+        mitAcercaDe = new javax.swing.JMenuItem();
+        mitDatosSist = new javax.swing.JMenuItem();
+        mitSalir = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema COLECTIVOS");
@@ -136,8 +159,28 @@ public class frmPrincipal extends javax.swing.JFrame {
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
+        mnSistema.setText("Sistema");
+
+        mitAcercaDe.setText("Acerca de ...");
+        mitAcercaDe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mitAcercaDeActionPerformed(evt);
+            }
+        });
+        mnSistema.add(mitAcercaDe);
+
+        mitDatosSist.setText("Datos del Sistema");
+        mnSistema.add(mitDatosSist);
+
+        mitSalir.setText("Salir");
+        mitSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mitSalirActionPerformed(evt);
+            }
+        });
+        mnSistema.add(mitSalir);
+
+        jMenuBar1.add(mnSistema);
 
         setJMenuBar(jMenuBar1);
 
@@ -181,6 +224,14 @@ public class frmPrincipal extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         new frmPasajes().setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void mitAcercaDeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitAcercaDeActionPerformed
+        new frmAcercaDe().setVisible(true);
+    }//GEN-LAST:event_mitAcercaDeActionPerformed
+
+    private void mitSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitSalirActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_mitSalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -227,9 +278,12 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JToolBar.Separator jSeparator1;
+    private javax.swing.JMenuItem mitAcercaDe;
+    private javax.swing.JMenuItem mitDatosSist;
+    private javax.swing.JMenuItem mitSalir;
+    private javax.swing.JMenu mnSistema;
     private javax.swing.JToolBar toolBar;
     // End of variables declaration//GEN-END:variables
 }
