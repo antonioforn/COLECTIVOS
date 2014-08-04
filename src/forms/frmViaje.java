@@ -185,6 +185,11 @@ public class frmViaje extends javax.swing.JFrame {
         txtPasajes.setEnabled(false);
 
         btnPasajes.setText("-->");
+        btnPasajes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPasajesActionPerformed(evt);
+            }
+        });
 
         jSpin.setModel(new javax.swing.SpinnerDateModel());
         jSpin.setEnabled(false);
@@ -612,6 +617,10 @@ public class frmViaje extends javax.swing.JFrame {
         btnEditar.setEnabled(true);
         btnEliminar.setEnabled(true);
     }//GEN-LAST:event_tablaMousePressed
+
+    private void btnPasajesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPasajesActionPerformed
+        new frmVentasViaje(em, Integer.parseInt(txtID.getText())).setVisible(true);
+    }//GEN-LAST:event_btnPasajesActionPerformed
 
     /**
      * @param args the command line arguments

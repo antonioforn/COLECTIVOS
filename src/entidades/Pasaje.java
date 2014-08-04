@@ -31,6 +31,14 @@ public class Pasaje {
         this.ciuFin = ciuFin;
     }
 
+    public int getNro() {
+        return nro;
+    }
+
+    public void setNro(int nro) {
+        this.nro = nro;
+    }
+
     public Date getFechaPas() {
         return fechaPas;
     }
