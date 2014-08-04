@@ -21,6 +21,8 @@ public class frmPrincipal extends javax.swing.JFrame {
         if(ds==null){
             em.getTransaction().begin();
             ds= new DatoSist("COLECTIVOS S.R.L.", 5000);
+            ds.setId(1);
+            em.persist(ds);
             em.getTransaction().commit();
         }
         this.setTitle(ds.getNombreEmpresa());
@@ -170,6 +172,11 @@ public class frmPrincipal extends javax.swing.JFrame {
         mnSistema.add(mitAcercaDe);
 
         mitDatosSist.setText("Datos del Sistema");
+        mitDatosSist.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mitDatosSistActionPerformed(evt);
+            }
+        });
         mnSistema.add(mitDatosSist);
 
         mitSalir.setText("Salir");
@@ -232,6 +239,10 @@ public class frmPrincipal extends javax.swing.JFrame {
     private void mitSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitSalirActionPerformed
         System.exit(0);
     }//GEN-LAST:event_mitSalirActionPerformed
+
+    private void mitDatosSistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitDatosSistActionPerformed
+        new frmDatosSist().setVisible(true);
+    }//GEN-LAST:event_mitDatosSistActionPerformed
 
     /**
      * @param args the command line arguments

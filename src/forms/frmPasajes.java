@@ -8,6 +8,7 @@ import clasesUtiles.ControlNum;
 import clasesUtiles.ModeloTabla;
 import clasesUtiles.Util;
 import entidades.Ciudad;
+import entidades.DatoSist;
 import entidades.Pasaje;
 import entidades.Pasajero;
 import entidades.Trayecto;
@@ -55,7 +56,7 @@ public class frmPasajes extends javax.swing.JFrame {
         cargarTablaC();
         calcularMonto();
         txtAsient = txtAsiento;
-        unidadPrecio=5000;
+        unidadPrecio=obtPrecioBase();
         
     }
 
@@ -174,7 +175,7 @@ public class frmPasajes extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tablaC);
 
         btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/adicionar.png"))); // NOI18N
-        btnNuevo.setToolTipText("Añadir Ciudad");
+        btnNuevo.setToolTipText("Nueva venta");
         btnNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNuevoActionPerformed(evt);
@@ -838,6 +839,11 @@ public class frmPasajes extends javax.swing.JFrame {
         Query query = em.createQuery("SELECT c FROM Ciudad c WHERE c.nombre = '" + nombreC+"'");
         Ciudad ciu= (Ciudad) query.getSingleResult();
         return ciu;
+    }
+    
+    private int obtPrecioBase(){
+        DatoSist ds= em.find(DatoSist.class, 1);
+        return ds.getPrecioBase();
     }
     
 }

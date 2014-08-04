@@ -146,7 +146,7 @@ public class frmVehiculos extends javax.swing.JFrame {
         lbModelo.setText("Modelo:");
 
         btnNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/adicionar.png"))); // NOI18N
-        btnNuevo.setToolTipText("Añadir Ciudad");
+        btnNuevo.setToolTipText("Añadir Vehículo");
         btnNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNuevoActionPerformed(evt);
@@ -154,7 +154,7 @@ public class frmVehiculos extends javax.swing.JFrame {
         });
 
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit32.png"))); // NOI18N
-        btnEditar.setToolTipText("Editar Ciudad");
+        btnEditar.setToolTipText("Editar Vehículo");
         btnEditar.setEnabled(false);
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -163,7 +163,7 @@ public class frmVehiculos extends javax.swing.JFrame {
         });
 
         btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/eliminar.png"))); // NOI18N
-        btnEliminar.setToolTipText("Eliminar Ciudad");
+        btnEliminar.setToolTipText("Eliminar Vehículo");
         btnEliminar.setEnabled(false);
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

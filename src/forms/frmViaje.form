@@ -388,7 +388,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/images/adicionar.png"/>
             </Property>
-            <Property name="toolTipText" type="java.lang.String" value="A&#xf1;adir Ciudad"/>
+            <Property name="toolTipText" type="java.lang.String" value="Registrar nuevo viaje"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNuevoActionPerformed"/>
@@ -399,7 +399,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/images/edit32.png"/>
             </Property>
-            <Property name="toolTipText" type="java.lang.String" value="Editar Ciudad"/>
+            <Property name="toolTipText" type="java.lang.String" value="Editar"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
@@ -411,7 +411,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/images/eliminar.png"/>
             </Property>
-            <Property name="toolTipText" type="java.lang.String" value="Eliminar Ciudad"/>
+            <Property name="toolTipText" type="java.lang.String" value="Eliminar"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
