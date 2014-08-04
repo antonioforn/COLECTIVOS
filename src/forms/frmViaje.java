@@ -34,6 +34,7 @@ public class frmViaje extends javax.swing.JFrame {
     java.sql.Time sqlTim;
     java.util.Date utilDat;
     static Vehiculo veh;
+    
     Trayecto trayec;
     
     public frmViaje() {
@@ -606,7 +607,7 @@ public class frmViaje extends javax.swing.JFrame {
         rbtnRetorno.setSelected(!vi.isModo());
         veh=vi.getVehiculo();
         txtVeh.setText(String.valueOf(veh.getNro()));
-        
+        txtPasajes.setText(Util.pasajesVia(vi.getAsientos()));
         cargarTablaC();
         btnEditar.setEnabled(true);
         btnEliminar.setEnabled(true);

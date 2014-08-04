@@ -130,6 +130,7 @@ public class frmPasajes extends javax.swing.JFrame {
 
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/confirmar.png"))); // NOI18N
         btnGuardar.setToolTipText("Guardar");
+        btnGuardar.setEnabled(false);
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);
@@ -539,6 +540,13 @@ public class frmPasajes extends javax.swing.JFrame {
         cmbFin.setEnabled(false);
         txtVeh.setText(null);
         txtPasajes.setText(null);
+        txtNombre.setText(null);
+        txtApellido.setText(null);
+        txtAsiento.setText(null);
+        txtPasajes.setEnabled(false);
+        txtNombre.setEnabled(false);
+        txtApellido.setEnabled(false);
+        
         btnGuardar.setEnabled(false);
         btnNuevo.setEnabled(true);
 
@@ -550,8 +558,12 @@ public class frmPasajes extends javax.swing.JFrame {
         txtNro.setText(null);
         jDCPasaje.setDate(new java.util.Date());
         cmbViaje.setEnabled(false);
-        cmbInicio.setSelectedIndex(0);
-        cmbFin.setSelectedIndex(0);
+        try{
+            cmbInicio.setSelectedIndex(0);
+            cmbFin.setSelectedIndex(0);
+        }catch(IllegalArgumentException ex){
+        
+        }
         cmbInicio.setEnabled(false);
         cmbFin.setEnabled(false);
         txtVeh.setText(null);
@@ -612,6 +624,7 @@ public class frmPasajes extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCIKeyPressed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        em.flush();
         em.close();
         emf.close();
     }//GEN-LAST:event_formWindowClosed
@@ -717,16 +730,19 @@ public class frmPasajes extends javax.swing.JFrame {
     }
     
     public void cargarDetalleViaje(){
-
+            try{
             Query query = em.createQuery("SELECT v FROM Viaje v WHERE v.idViaje = " + cmbViaje.getSelectedItem().toString());
             viaje = (Viaje) query.getSingleResult();
             String modo= viaje.isModo()?"ida":"vuelta"; //operador ternario, pregunta es true? devuelve el primero
             txtFechaViaje.setText(clasesUtiles.Util.sqlDateToStr(viaje.getFechaViaje()));
             txtHoraViaje.setText(viaje.getHoraViaje().toString());
             txtVeh.setText(String.valueOf(viaje.getVehiculo().getNro()));
-            //txtPasajes.setText(null);
+            txtPasajes.setText(Util.pasajesVia(viaje.getAsientos()));
             txtTrayecto.setText(String.valueOf(viaje.getTrayecto().getIdTrayecto()) +" "+modo);
             txtEstado.setText(viaje.getEstado());
+            }catch(NullPointerException ex){
+            
+            }
     }
     
         private void cargarTablaC() {
@@ -760,20 +776,23 @@ public class frmPasajes extends javax.swing.JFrame {
     }
         
         public void cargarCombosC(){
-            ciudades.clear();
-            cmbInicio.removeAllItems();
-            cmbFin.removeAllItems();
-            for(Ciudad c: viaje.getTrayecto().getCiudades()){
-                ciudades.add(c);
-            }
-            Collections.sort(ciudades, new ComparadorCiudad());
-            //agregar condicion ida o vuelta y aplicar metodo reverse
-            if(!viaje.isModo()) Collections.reverse(ciudades); //en caso de que el viaje sea de retorno
-            for(int i=0; i< ciudades.size(); i++){
-                cmbInicio.addItem(ciudades.get(i).getNombre());
-                cmbFin.addItem(ciudades.get(i).getNombre());
-            }
+            try{
+                ciudades.clear();
+                cmbInicio.removeAllItems();
+                cmbFin.removeAllItems();
+                for(Ciudad c: viaje.getTrayecto().getCiudades()){
+                    ciudades.add(c);
+                }
+                Collections.sort(ciudades, new ComparadorCiudad());
+                //agregar condicion ida o vuelta y aplicar metodo reverse
+                if(!viaje.isModo()) Collections.reverse(ciudades); //en caso de que el viaje sea de retorno
+                for(int i=0; i< ciudades.size(); i++){
+                    cmbInicio.addItem(ciudades.get(i).getNombre());
+                    cmbFin.addItem(ciudades.get(i).getNombre());
+                }
+            }catch(NullPointerException ex){
             
+            }
         }
 
     private void buscarPasajero() {
@@ -787,11 +806,15 @@ public class frmPasajes extends javax.swing.JFrame {
         int monto=0;
         int pasos=0;
         boolean band= false;
-        ciuInicio= ciudades.indexOf(retornaCiu(cmbInicio.getSelectedItem().toString()));
-        ciuFin= ciudades.indexOf(retornaCiu(cmbFin.getSelectedItem().toString()));
-        pasos= ciuFin - ciuInicio;
-        monto =pasos * unidadPrecio;
-        txtMonto.setText(String.valueOf(monto));
+        try{
+            ciuInicio= ciudades.indexOf(retornaCiu(cmbInicio.getSelectedItem().toString()));
+            ciuFin= ciudades.indexOf(retornaCiu(cmbFin.getSelectedItem().toString()));
+            pasos= ciuFin - ciuInicio;
+            monto =pasos * unidadPrecio;
+            txtMonto.setText(String.valueOf(monto));
+        }catch(NullPointerException ex){
+        
+        }
     }
     
     private Ciudad retornaCiu(String nombreC){

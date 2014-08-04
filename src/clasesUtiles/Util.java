@@ -9,6 +9,7 @@ import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -98,6 +99,15 @@ public class Util {
     public static String sqlDateToStr(java.sql.Date sqlDate){
         DateFormat df= new SimpleDateFormat("dd-MMM-yyyy");
         return df.format(sqlDate);
+    }
+    
+    public static String pasajesVia(ArrayList<Boolean> asientos){
+        int total=0, vendidos=0;
+        for(Boolean b: asientos){
+            total++;
+            if(!b)vendidos++;
+        }
+        return vendidos +"/"+total  ;
     }
     
 }

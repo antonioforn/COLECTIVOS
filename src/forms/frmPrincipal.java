@@ -62,7 +62,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         });
         toolBar.add(btnTrayectos);
 
-        btnChofer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/workers.png"))); // NOI18N
+        btnChofer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/chofer.png"))); // NOI18N
         btnChofer.setToolTipText("Choferes");
         btnChofer.setFocusable(false);
         btnChofer.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
