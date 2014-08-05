@@ -512,7 +512,8 @@ public class frmPasajes extends javax.swing.JFrame {
                                     pasajero,
                                     viaje,
                                     cmbInicio.getSelectedItem().toString(),
-                                    cmbFin.getSelectedItem().toString());
+                                    cmbFin.getSelectedItem().toString(),
+                                    Integer.parseInt(txtAsient.getText()));
         
                 
                 pasaje.setMonto(Integer.parseInt(txtMonto.getText()));

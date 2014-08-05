@@ -19,16 +19,26 @@ public class Pasaje {
     @ManyToOne(cascade=CascadeType.PERSIST) Viaje viaje;
     String ciuInicio;
     String ciuFin;
+    int nroAsiento;
+
+    public int getNroAsiento() {
+        return nroAsiento;
+    }
+
+    public void setNroAsiento(int nroAsiento) {
+        this.nroAsiento = nroAsiento;
+    }
 
     public Pasaje() {
     }
 
-    public Pasaje(java.sql.Date fechaPas, Pasajero cliente, Viaje viaje, String ciuInicio, String ciuFin) {
+    public Pasaje(java.sql.Date fechaPas, Pasajero cliente, Viaje viaje, String ciuInicio, String ciuFin, int nroAsient) {
         this.fechaPas = fechaPas;
         this.cliente = cliente;
         this.viaje = viaje;
         this.ciuInicio = ciuInicio;
         this.ciuFin = ciuFin;
+        this.nroAsiento= nroAsient;
     }
 
     public int getNro() {

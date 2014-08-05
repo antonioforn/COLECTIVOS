@@ -50,7 +50,16 @@ public class frmPrincipal extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        mnArchivo = new javax.swing.JMenu();
+        mitCiudades = new javax.swing.JMenuItem();
+        mitTrayectos = new javax.swing.JMenuItem();
+        mitChoferes = new javax.swing.JMenuItem();
+        mitVehiculos = new javax.swing.JMenuItem();
+        mitViaje = new javax.swing.JMenuItem();
+        mitPasajes = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
+        mnListas = new javax.swing.JMenu();
+        mitPasajesPorViaje = new javax.swing.JMenuItem();
         mnSistema = new javax.swing.JMenu();
         mitAcercaDe = new javax.swing.JMenuItem();
         mitDatosSist = new javax.swing.JMenuItem();
@@ -158,8 +167,70 @@ public class frmPrincipal extends javax.swing.JFrame {
         dpprincipal.setLayer(toolBar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         dpprincipal.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
+        mnArchivo.setText("Archivo");
+
+        mitCiudades.setText("Ciudades");
+        mitCiudades.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mitCiudadesActionPerformed(evt);
+            }
+        });
+        mnArchivo.add(mitCiudades);
+
+        mitTrayectos.setText("Trayectos");
+        mitTrayectos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mitTrayectosActionPerformed(evt);
+            }
+        });
+        mnArchivo.add(mitTrayectos);
+
+        mitChoferes.setText("Choferes");
+        mitChoferes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mitChoferesActionPerformed(evt);
+            }
+        });
+        mnArchivo.add(mitChoferes);
+
+        mitVehiculos.setText("Vehículos");
+        mitVehiculos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mitVehiculosActionPerformed(evt);
+            }
+        });
+        mnArchivo.add(mitVehiculos);
+
+        mitViaje.setText("Viaje");
+        mitViaje.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mitViajeActionPerformed(evt);
+            }
+        });
+        mnArchivo.add(mitViaje);
+
+        mitPasajes.setText("Pasajes");
+        mitPasajes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mitPasajesActionPerformed(evt);
+            }
+        });
+        mnArchivo.add(mitPasajes);
+        mnArchivo.add(jSeparator2);
+
+        jMenuBar1.add(mnArchivo);
+
+        mnListas.setText("Listas");
+
+        mitPasajesPorViaje.setText("Pasajes por Viaje");
+        mitPasajesPorViaje.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mitPasajesPorViajeActionPerformed(evt);
+            }
+        });
+        mnListas.add(mitPasajesPorViaje);
+
+        jMenuBar1.add(mnListas);
 
         mnSistema.setText("Sistema");
 
@@ -244,6 +315,34 @@ public class frmPrincipal extends javax.swing.JFrame {
         new frmDatosSist().setVisible(true);
     }//GEN-LAST:event_mitDatosSistActionPerformed
 
+    private void mitCiudadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitCiudadesActionPerformed
+        new frmCiudades().setVisible(true);
+    }//GEN-LAST:event_mitCiudadesActionPerformed
+
+    private void mitTrayectosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitTrayectosActionPerformed
+        new frmTrayectos().setVisible(true);
+    }//GEN-LAST:event_mitTrayectosActionPerformed
+
+    private void mitChoferesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitChoferesActionPerformed
+        new frmChoferes().setVisible(true);
+    }//GEN-LAST:event_mitChoferesActionPerformed
+
+    private void mitVehiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitVehiculosActionPerformed
+        new frmVehiculos().setVisible(true);
+    }//GEN-LAST:event_mitVehiculosActionPerformed
+
+    private void mitViajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitViajeActionPerformed
+        new frmViaje().setVisible(true);
+    }//GEN-LAST:event_mitViajeActionPerformed
+
+    private void mitPasajesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitPasajesActionPerformed
+        new frmPasajes().setVisible(true);
+    }//GEN-LAST:event_mitPasajesActionPerformed
+
+    private void mitPasajesPorViajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitPasajesPorViajeActionPerformed
+        new frmVentasViaje().setVisible(true);
+    }//GEN-LAST:event_mitPasajesPorViajeActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -288,12 +387,21 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JDesktopPane dpprincipal;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JToolBar.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JMenuItem mitAcercaDe;
+    private javax.swing.JMenuItem mitChoferes;
+    private javax.swing.JMenuItem mitCiudades;
     private javax.swing.JMenuItem mitDatosSist;
+    private javax.swing.JMenuItem mitPasajes;
+    private javax.swing.JMenuItem mitPasajesPorViaje;
     private javax.swing.JMenuItem mitSalir;
+    private javax.swing.JMenuItem mitTrayectos;
+    private javax.swing.JMenuItem mitVehiculos;
+    private javax.swing.JMenuItem mitViaje;
+    private javax.swing.JMenu mnArchivo;
+    private javax.swing.JMenu mnListas;
     private javax.swing.JMenu mnSistema;
     private javax.swing.JToolBar toolBar;
     // End of variables declaration//GEN-END:variables
