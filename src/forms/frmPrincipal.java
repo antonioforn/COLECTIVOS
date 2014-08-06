@@ -5,13 +5,16 @@ import entidades.DatoSist;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.swing.JToolBar;
 
 public class frmPrincipal extends javax.swing.JFrame {
     DatoSist ds;
+    public static JToolBar toolBarPrinc;
     
     public frmPrincipal() {
         initComponents();
         datosIniciales();
+        toolBarPrinc= toolBar;
     }
 
     private void datosIniciales() {

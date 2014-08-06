@@ -124,6 +124,9 @@ public class frmVentasViaje extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tablaMouseClicked(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tablaMousePressed(evt);
+            }
         });
         jScrollPane1.setViewportView(tabla);
 
@@ -256,8 +259,7 @@ public class frmVentasViaje extends javax.swing.JFrame {
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(jLabel9)
-                                                .addGap(18, 18, 18))
+                                                .addComponent(jLabel9))
                                             .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addComponent(jLabel3)
                                                 .addGap(18, 18, 18)
@@ -384,7 +386,8 @@ public class frmVentasViaje extends javax.swing.JFrame {
         //viaje.getAsientos().set(Integer.parseInt(txtAsiento.getText())-1, false)
         em2.remove(pasaje);
         em2.getTransaction().commit();
-        em2.flush();
+        em2.clear();
+        
         Util.limpiarCampos(jPanel1);
         cargarPasajesViaje();
 //        cargarTabla("SELECT via FROM Viaje via ORDER BY via.idViaje DESC");
@@ -420,6 +423,11 @@ public class frmVentasViaje extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCerrarActionPerformed
 
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
+
+        
+    }//GEN-LAST:event_tablaMouseClicked
+
+    private void tablaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMousePressed
         btnEliminar.setEnabled(true);
         //JOptionPane.showMessageDialog(rootPane, tabla.getValueAt(tabla.getSelectedRow(), 4));
         pasaje= em2.find(Pasaje.class, Integer.parseInt(tabla.getValueAt(tabla.getSelectedRow(), 4).toString()));
@@ -435,7 +443,7 @@ public class frmVentasViaje extends javax.swing.JFrame {
         txtHasta.setText(pasaje.getCiuFin());
         txtCosto.setText(String.valueOf(pasaje.getMonto()));
         
-    }//GEN-LAST:event_tablaMouseClicked
+    }//GEN-LAST:event_tablaMousePressed
 
     /**
      * @param args the command line arguments
@@ -573,7 +581,8 @@ public class frmVentasViaje extends javax.swing.JFrame {
         tabla.getColumnModel().getColumn(8).setResizable(false);          
         tabla.getTableHeader().setReorderingAllowed(true);
         tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);            
+        tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);  
+        System.out.println("finaliza");
     }
     
     private void seleccionarViaje(int n){

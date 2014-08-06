@@ -10,9 +10,11 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.JToolBar;
 
 
 public class Util {
@@ -31,6 +33,18 @@ public class Util {
            }          
        }
     }
+    
+    public static void deshabilitar(JToolBar jTool){
+       for(int i=0; jTool.getComponents().length>i;i++){
+           
+           if(jTool.getComponents()[i]instanceof JButton)
+           {
+               ((JButton)jTool.getComponents()[i]).setEnabled(false);
+           }
+         
+       }
+    }
+    
     
     public static void soloLetras(JTextField txt){
         txt.addKeyListener(new KeyAdapter(){

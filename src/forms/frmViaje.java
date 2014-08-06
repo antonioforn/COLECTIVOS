@@ -620,7 +620,12 @@ public class frmViaje extends javax.swing.JFrame {
     }//GEN-LAST:event_tablaMousePressed
 
     private void btnPasajesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPasajesActionPerformed
-        new frmVentasViaje(em, Integer.parseInt(txtID.getText())).setVisible(true);
+        try{
+            new frmVentasViaje(em, Integer.parseInt(txtID.getText())).setVisible(true);
+        }
+        catch(NumberFormatException Ex){
+            return;
+        }
     }//GEN-LAST:event_btnPasajesActionPerformed
 
     /**

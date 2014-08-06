@@ -483,6 +483,18 @@ public class frmPasajes extends javax.swing.JFrame {
             txtCI.requestFocusInWindow();
             return;
         }
+        
+        if(txtNombre.getText().equals("")){
+            JOptionPane.showMessageDialog(rootPane, "Debe ingresar datos");
+            txtNombre.requestFocusInWindow();
+            return;
+        }
+        
+        if(txtApellido.getText().equals("")){
+            JOptionPane.showMessageDialog(rootPane, "Debe ingresar datos");
+            txtApellido.requestFocusInWindow();
+            return;
+        }        
 
         if(txtMonto.getText().equals("")||Integer.parseInt(txtMonto.getText())==0){
             JOptionPane.showMessageDialog(rootPane, "Debe ingresar monto");
@@ -494,7 +506,19 @@ public class frmPasajes extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Debe seleccionar asiento");
             btnAsiento.requestFocusInWindow();
             return;
+        }
+        
+        if(Integer.parseInt(txtMonto.getText())<0){
+            JOptionPane.showMessageDialog(rootPane, "Revise campos relacionados a ciudades");
+            txtMonto.requestFocusInWindow();
+            return;
         }        
+        
+        if(viaje.getEstado().equals("Finalizado")){
+            JOptionPane.showMessageDialog(rootPane, "Viaje Finalizado");
+             cmbViaje.requestFocusInWindow();
+            return;            
+        }
         
         if(pasajero==null){
             em.getTransaction().begin();
@@ -538,7 +562,6 @@ public class frmPasajes extends javax.swing.JFrame {
 //            via.setTrayecto(trayec);
 //            via.setVehiculo(veh);
 //            via.setEstado(cmbEstado.getSelectedItem().toString());
-//            
 //            em.getTransaction().commit();
         }
         txtNro.setText(null);
@@ -552,6 +575,7 @@ public class frmPasajes extends javax.swing.JFrame {
         calcularMonto();
         cmbInicio.setEnabled(false);
         cmbFin.setEnabled(false);
+        cmbViaje.setEnabled(false);
         txtVeh.setText(null);
         txtPasajes.setText(null);
         txtNombre.setText(null);
@@ -560,6 +584,7 @@ public class frmPasajes extends javax.swing.JFrame {
         txtPasajes.setEnabled(false);
         txtNombre.setEnabled(false);
         txtApellido.setEnabled(false);
+        txtCI.setEnabled(false);
         
         btnGuardar.setEnabled(false);
         btnNuevo.setEnabled(true);
