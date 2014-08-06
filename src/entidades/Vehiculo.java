@@ -18,7 +18,7 @@ public class Vehiculo {
      String modelo;
      int anho;
      int capacidad;
-     @OneToOne(cascade=CascadeType.PERSIST) Chofer chofer;  
+     @OneToOne Chofer chofer;  
 
     public Vehiculo() {
     }

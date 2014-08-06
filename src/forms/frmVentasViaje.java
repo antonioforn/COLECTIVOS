@@ -14,6 +14,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
@@ -25,6 +26,7 @@ public class frmVentasViaje extends javax.swing.JFrame {
     boolean flag=true;
     DefaultTableModel mtbl;
     boolean segundoConstructor;
+    Pasaje pasaje;
 
     public frmVentasViaje(EntityManager em, int n) {
         initComponents();
@@ -35,6 +37,10 @@ public class frmVentasViaje extends javax.swing.JFrame {
         jSpinHoraV.setEditor(new JSpinner.DateEditor(jSpinHoraV, "HH:mm"));                
         segundoConstructor=false;
         cargarCmbViaje();
+        if(cmbViaje.getModel().getSize()==0){
+            System.out.println("Saliendo por aca");
+            return;
+        }
         seleccionarViaje(n);
         cargarPasajesViaje();
     }
@@ -114,6 +120,11 @@ public class frmVentasViaje extends javax.swing.JFrame {
 
             }
         ));
+        tabla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabla);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -362,38 +373,20 @@ public class frmVentasViaje extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbViajePopupMenuWillBecomeInvisible
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-//        int resp = JOptionPane.showConfirmDialog(rootPane, "¿Desea eliminar el registro?", "Eliminar?", JOptionPane.YES_NO_OPTION);
-//
-//        if(resp!=0){
-//            return;
-//        }
-//
-//        int id = Integer.parseInt(txtID.getText());
-//        Viaje via = em.find(Viaje.class, id);
-//        em.getTransaction().begin();
-//        em.remove(via);
-//        em.getTransaction().commit();
-//
-//        txtID.setText(null);
-//        jDCViaje.setDate(new java.util.Date());
-//        jSpin.setValue(new java.util.Date());
-//        jSpin.setEnabled(false);
-//        cmbEstado.setSelectedIndex(0);
-//        cmbTrayecto.setSelectedIndex(0);
-//        cargarTablaC();
-//        cmbTrayecto.setEnabled(false);
-//        cmbEstado.setEnabled(false);
-//        txtVeh.setText(null);
-//        rbtnRetorno.setSelected(false);
-//        rbtnRetorno.setEnabled(false);
-//        txtPasajes.setText(null);
-//        btnGuardar.setEnabled(false);
-//        btnVeh.setEnabled(false);
-//        btnNuevo.setEnabled(true);
-//        btnEditar.setEnabled(false);
-//        btnEliminar.setEnabled(false);
-//        tabla.setEnabled(true);
-//
+        int resp = JOptionPane.showConfirmDialog(rootPane, "¿Desea eliminar el registro?", "Eliminar?", JOptionPane.YES_NO_OPTION);
+
+        if(resp!=0){
+            return;
+        }
+        
+        em2.getTransaction().begin();
+        pasaje.getViaje().getAsientos().set(pasaje.getNroAsiento()-1, true);
+        //viaje.getAsientos().set(Integer.parseInt(txtAsiento.getText())-1, false)
+        em2.remove(pasaje);
+        em2.getTransaction().commit();
+        em2.flush();
+        Util.limpiarCampos(jPanel1);
+        cargarPasajesViaje();
 //        cargarTabla("SELECT via FROM Viaje via ORDER BY via.idViaje DESC");
     }//GEN-LAST:event_btnEliminarActionPerformed
 
@@ -425,6 +418,24 @@ public class frmVentasViaje extends javax.swing.JFrame {
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
         dispose();
     }//GEN-LAST:event_btnCerrarActionPerformed
+
+    private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
+        btnEliminar.setEnabled(true);
+        //JOptionPane.showMessageDialog(rootPane, tabla.getValueAt(tabla.getSelectedRow(), 4));
+        pasaje= em2.find(Pasaje.class, Integer.parseInt(tabla.getValueAt(tabla.getSelectedRow(), 4).toString()));
+        jDCFechaV.setDate(Util.utilToSql(pasaje.getViaje().getFechaViaje()));
+        jSpinHoraV.setValue(pasaje.getViaje().getHoraViaje());
+        txtNroVeh.setText(String.valueOf(pasaje.getViaje().getVehiculo().getNro()));
+        txtIdPasaje.setText(String.valueOf(pasaje.getNro()));
+        jDCFechaPas.setDate(Util.utilToSql(pasaje.getFechaPas()));
+        txtCliente.setText(pasaje.getCliente().getNombre() +" "+ pasaje.getCliente().getApellido());
+        txtCI.setText(String.valueOf(pasaje.getCliente().getCi()));
+        txtNroAsiento.setText(String.valueOf(pasaje.getNroAsiento()));
+        txtDesde.setText(pasaje.getCiuInicio());
+        txtHasta.setText(pasaje.getCiuFin());
+        txtCosto.setText(String.valueOf(pasaje.getMonto()));
+        
+    }//GEN-LAST:event_tablaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -555,7 +566,11 @@ public class frmVentasViaje extends javax.swing.JFrame {
         tabla.getColumnModel().getColumn(5).setPreferredWidth(90);
         tabla.getColumnModel().getColumn(5).setResizable(false);        
         tabla.getColumnModel().getColumn(6).setPreferredWidth(120);
-        tabla.getColumnModel().getColumn(6).setResizable(false);        
+        tabla.getColumnModel().getColumn(6).setResizable(false);
+        tabla.getColumnModel().getColumn(7).setPreferredWidth(70);
+        tabla.getColumnModel().getColumn(7).setResizable(false);          
+        tabla.getColumnModel().getColumn(8).setPreferredWidth(60);
+        tabla.getColumnModel().getColumn(8).setResizable(false);          
         tabla.getTableHeader().setReorderingAllowed(true);
         tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);            

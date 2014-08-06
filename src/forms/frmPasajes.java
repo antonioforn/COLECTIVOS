@@ -652,6 +652,7 @@ public class frmPasajes extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbFinPopupMenuWillBecomeInvisible
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        if( cmbViaje.getModel().getSize()==0) return;
         new frmVentasViaje(em, Integer.parseInt(cmbViaje.getSelectedItem().toString())).setVisible(true);
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
@@ -743,6 +744,10 @@ public class frmPasajes extends javax.swing.JFrame {
         TypedQuery<Viaje> q1 = em.createQuery("SELECT via FROM Viaje via ORDER BY via.idViaje DESC", Viaje.class);
         
         List<Viaje> results = q1.setMaxResults(30).getResultList();
+        if(results.isEmpty()){
+            JOptionPane.showMessageDialog(rootPane, "Deben registrarse viajes antes");
+            this.jPanel1.setEnabled(false);
+        }
         for(Viaje v: results){
             cmbViaje.addItem(v.getIdViaje());
         }        
@@ -844,7 +849,8 @@ public class frmPasajes extends javax.swing.JFrame {
     
     private int obtPrecioBase(){
         DatoSist ds= em.find(DatoSist.class, 1);
-        return ds.getPrecioBase();
+        if (ds!=null)return ds.getPrecioBase();
+        else return 0;
     }
     
 }

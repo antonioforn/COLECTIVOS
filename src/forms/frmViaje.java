@@ -437,6 +437,7 @@ public class frmViaje extends javax.swing.JFrame {
             via.setVehiculo(veh);
             via.setEstado(cmbEstado.getSelectedItem().toString());
             if(rbtnRetorno.isSelected()) via.setModo(false);
+            via.setAsientos(marcarAsientos());
             em.getTransaction().commit();
         } 
         txtID.setText(null);

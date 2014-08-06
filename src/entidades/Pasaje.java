@@ -14,7 +14,7 @@ import javax.persistence.OneToOne;
 public class Pasaje {
     @Id @GeneratedValue int nro;
     java.sql.Date fechaPas;
-    Pasajero cliente;
+    @OneToOne Pasajero cliente;
     int monto;
     @ManyToOne(cascade=CascadeType.PERSIST) Viaje viaje;
     String ciuInicio;
