@@ -2,6 +2,7 @@
 
 package forms;
 
+import clasesUtiles.ControlNum;
 import clasesUtiles.ModeloTabla;
 import clasesUtiles.Util;
 import entidades.Pasaje;
@@ -47,6 +48,7 @@ public class frmVentasViaje extends javax.swing.JFrame {
         }
         seleccionarViaje(n);
         cargarPasajesViaje();
+        txtCosto.setDocument(new ControlNum(6));        
     }
     
     public frmVentasViaje() {
@@ -64,6 +66,7 @@ public class frmVentasViaje extends javax.swing.JFrame {
         segundoConstructor=true;
         cargarCmbViaje();
         cargarPasajesViaje();
+        txtCosto.setDocument(new ControlNum(6));
     }
 
     /**

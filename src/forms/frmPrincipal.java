@@ -67,6 +67,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         mitPasajeros = new javax.swing.JMenuItem();
         mnListas = new javax.swing.JMenu();
         mitPasajesPorViaje = new javax.swing.JMenuItem();
+        mitPasajerosyViajes = new javax.swing.JMenuItem();
         mnSistema = new javax.swing.JMenu();
         mitAcercaDe = new javax.swing.JMenuItem();
         mitDatosSist = new javax.swing.JMenuItem();
@@ -246,6 +247,14 @@ public class frmPrincipal extends javax.swing.JFrame {
         });
         mnListas.add(mitPasajesPorViaje);
 
+        mitPasajerosyViajes.setText("Pasajeros y Viajes");
+        mitPasajerosyViajes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mitPasajerosyViajesActionPerformed(evt);
+            }
+        });
+        mnListas.add(mitPasajerosyViajes);
+
         jMenuBar1.add(mnListas);
 
         mnSistema.setText("Sistema");
@@ -363,6 +372,10 @@ public class frmPrincipal extends javax.swing.JFrame {
         new frmPasajeros().setVisible(true);
     }//GEN-LAST:event_mitPasajerosActionPerformed
 
+    private void mitPasajerosyViajesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mitPasajerosyViajesActionPerformed
+        new frmViajesyPasajeros().setVisible(true);
+    }//GEN-LAST:event_mitPasajerosyViajesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -415,6 +428,7 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem mitCiudades;
     private javax.swing.JMenuItem mitDatosSist;
     private javax.swing.JMenuItem mitPasajeros;
+    private javax.swing.JMenuItem mitPasajerosyViajes;
     private javax.swing.JMenuItem mitPasajes;
     private javax.swing.JMenuItem mitPasajesPorViaje;
     private javax.swing.JMenuItem mitSalir;

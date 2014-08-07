@@ -1,6 +1,7 @@
 
 package forms;
 
+import clasesUtiles.ControlLetr;
 import clasesUtiles.ControlNum;
 import clasesUtiles.ModeloTabla;
 import clasesUtiles.Util;
@@ -33,7 +34,7 @@ public class frmPasajeros extends javax.swing.JFrame {
     String cadena;
     JTextField chNom;
     JTextField chCI;
-    boolean tofrmVehic;
+    boolean tofrmVyP;
     
     public frmPasajeros() {
         initComponents();
@@ -45,9 +46,11 @@ public class frmPasajeros extends javax.swing.JFrame {
         chCI= new JTextField();
         chNom.setText("");
         chCI.setText("");
-        tofrmVehic= false;
+        tofrmVyP= false;
         lbVolver.setText(null);
-        Util.deshabilitar(frmPrincipal.toolBarPrinc, frmPrincipal.menuBarPrinc);        
+        Util.deshabilitar(frmPrincipal.toolBarPrinc, frmPrincipal.menuBarPrinc);   
+        txtNombre.setDocument(new ControlLetr(16));
+        txtApellido.setDocument(new ControlLetr(16));
     }
     
     public frmPasajeros(JTextField chNom, JTextField chCI) {
@@ -58,8 +61,10 @@ public class frmPasajeros extends javax.swing.JFrame {
         cargarTabla("SELECT psro FROM Pasajero psro ORDER BY psro.apellido");
         this.chNom= chNom;
         this.chCI= chCI;
-        tofrmVehic= true;
-        Util.deshabilitar(frmPrincipal.toolBarPrinc, frmPrincipal.menuBarPrinc);        
+        tofrmVyP= true;
+        Util.deshabilitar(frmPrincipal.toolBarPrinc, frmPrincipal.menuBarPrinc);
+        txtNombre.setDocument(new ControlLetr(16));
+        txtApellido.setDocument(new ControlLetr(16));        
     }
     
     /**
@@ -398,6 +403,8 @@ public class frmPasajeros extends javax.swing.JFrame {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         btnBuscarN.setSelected(false);
         lbNombre.setText("Nombre:");
+        lbApellido.setText("Apellido:");
+        lbCI.setText("CI:");
         Util.limpiarCampos(jPanel1);
         txtNombre.setEnabled(false);
         txtApellido.setEnabled(false);
@@ -482,9 +489,9 @@ public class frmPasajeros extends javax.swing.JFrame {
             btnBuscarN.setSelected(false);
             btnBuscarA.setSelected(false);
             btnBuscarCI.setSelected(false);
-            if(tofrmVehic== true){
-                chNom.setText(txtNombre.getText()+" "+ txtApellido.getText());
-                chCI.setText(txtCI.getText());
+            if(tofrmVyP== true){
+                frmViajesyPasajeros.ced.setText(txtCI.getText());
+                frmViajesyPasajeros.ced.setEnabled(true);
                 //frmVehiculos.chof = returnChofer(txtCI.getText());
             }
         } catch (Exception ex) {
@@ -493,7 +500,7 @@ public class frmPasajeros extends javax.swing.JFrame {
     }//GEN-LAST:event_tablaMousePressed
 
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
-        Util.soloLetras(txtNombre);
+        //Util.soloLetras(txtNombre);
         if(btnBuscarN.isSelected()){
             cargarTabla("SELECT psro FROM Pasajero psro WHERE psro.nombre LIKE '%" + txtNombre.getText().trim() + "%'");
         }
@@ -537,6 +544,8 @@ public class frmPasajeros extends javax.swing.JFrame {
             txtApellido.setEnabled(false);
             lbCI.setText("CI:");
             txtCI.setEnabled(false);
+            btnBuscarA.setSelected(false);
+            btnBuscarCI.setSelected(false);            
        }else{
             lbNombre.setText("Nombre:");
             txtNombre.setEnabled(false);           
@@ -545,7 +554,7 @@ public class frmPasajeros extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarNActionPerformed
 
     private void txtApellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoKeyTyped
-        Util.soloLetras(txtApellido);
+        //Util.soloLetras(txtApellido);
         if(btnBuscarA.isSelected()){
             cargarTabla("SELECT psro FROM Pasajero psro WHERE psro.apellido LIKE '%" + txtApellido.getText().trim() + "%'");
         }
@@ -560,9 +569,13 @@ public class frmPasajeros extends javax.swing.JFrame {
             lbNombre.setText("Nombre:");
             txtNombre.setEnabled(false);
             lbCI.setText("CI:");
-            txtCI.setEnabled(false);            
+            txtCI.setEnabled(false);   
+            btnBuscarCI.setSelected(false);
+            btnBuscarN.setSelected(false);
        }else{
-            lbApellido.setText("Nombre:");
+            lbApellido.setText("Apellido:");
+            lbNombre.setText("Nombre:");
+            lbCI.setText("CI:");
             txtApellido.setEnabled(false);           
             cargarTabla("SELECT psro FROM Pasajero psro ORDER BY psro.apellido");
        }
@@ -579,10 +592,13 @@ public class frmPasajeros extends javax.swing.JFrame {
             lbApellido.setText("Apellido:");
             txtApellido.setEnabled(false);
             lbComentario.setEnabled(true);
+            btnBuscarA.setSelected(false);
+            btnBuscarN.setSelected(false);
        }else{
             lbApellido.setText("Apellido:");
             txtApellido.setEnabled(false);
             lbCI.setText("CI:");
+            lbNombre.setText("Nombre:");
             txtCI.setEnabled(false);
             txtCI.setText(null);
             lbComentario.setEnabled(false);

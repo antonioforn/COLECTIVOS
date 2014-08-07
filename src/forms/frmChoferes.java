@@ -1,6 +1,7 @@
 
 package forms;
 
+import clasesUtiles.ControlLetr;
 import clasesUtiles.ControlNum;
 import clasesUtiles.ModeloTabla;
 import clasesUtiles.Util;
@@ -46,7 +47,9 @@ public class frmChoferes extends javax.swing.JFrame {
         chCI.setText("");
         tofrmVehic= false;
         lbVolver.setText(null);
-        Util.deshabilitar(frmPrincipal.toolBarPrinc, frmPrincipal.menuBarPrinc);        
+        Util.deshabilitar(frmPrincipal.toolBarPrinc, frmPrincipal.menuBarPrinc);      
+        txtNombre.setDocument(new ControlLetr(16));
+        txtApellido.setDocument(new ControlLetr(16));        
     }
     
     public frmChoferes(JTextField chNom, JTextField chCI) {
@@ -58,7 +61,9 @@ public class frmChoferes extends javax.swing.JFrame {
         this.chNom= chNom;
         this.chCI= chCI;
         tofrmVehic= true;
-        Util.deshabilitar(frmPrincipal.toolBarPrinc, frmPrincipal.menuBarPrinc);        
+        Util.deshabilitar(frmPrincipal.toolBarPrinc, frmPrincipal.menuBarPrinc);  
+        txtNombre.setDocument(new ControlLetr(16));
+        txtApellido.setDocument(new ControlLetr(16));        
     }
     
     /**
@@ -397,6 +402,8 @@ public class frmChoferes extends javax.swing.JFrame {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         btnBuscarN.setSelected(false);
         lbNombre.setText("Nombre:");
+        lbApellido.setText("Apellido:");
+        lbCI.setText("CI:");        
         Util.limpiarCampos(jPanel1);
         txtNombre.setEnabled(false);
         txtApellido.setEnabled(false);
@@ -536,8 +543,12 @@ public class frmChoferes extends javax.swing.JFrame {
             txtApellido.setEnabled(false);
             lbCI.setText("CI:");
             txtCI.setEnabled(false);
+            btnBuscarA.setSelected(false);
+            btnBuscarCI.setSelected(false);            
        }else{
             lbNombre.setText("Nombre:");
+            lbApellido.setText("Apellido:");
+            lbCI.setText("CI:");
             txtNombre.setEnabled(false);           
             cargarTabla("SELECT ch FROM Chofer ch ORDER BY ch.apellido");
        }
@@ -559,9 +570,13 @@ public class frmChoferes extends javax.swing.JFrame {
             lbNombre.setText("Nombre:");
             txtNombre.setEnabled(false);
             lbCI.setText("CI:");
-            txtCI.setEnabled(false);            
+            txtCI.setEnabled(false);   
+            btnBuscarCI.setSelected(false);
+            btnBuscarN.setSelected(false);            
        }else{
-            lbApellido.setText("Nombre:");
+            lbApellido.setText("Apellido:");
+            lbNombre.setText("Nombre:");
+            lbCI.setText("CI:");
             txtApellido.setEnabled(false);           
             cargarTabla("SELECT ch FROM Chofer ch ORDER BY ch.apellido");
        }
@@ -578,8 +593,12 @@ public class frmChoferes extends javax.swing.JFrame {
             lbApellido.setText("Apellido:");
             txtApellido.setEnabled(false);
             lbComentario.setEnabled(true);
+            btnBuscarA.setSelected(false);
+            btnBuscarN.setSelected(false);
        }else{
             lbApellido.setText("Apellido:");
+            lbNombre.setText("Nombre:");
+            lbCI.setText("CI:");
             txtApellido.setEnabled(false);
             lbCI.setText("CI:");
             txtCI.setEnabled(false);

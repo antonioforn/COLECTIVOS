@@ -58,6 +58,7 @@ public class frmPasajes extends javax.swing.JFrame {
         calcularMonto();
         txtAsient = txtAsiento;
         unidadPrecio=obtPrecioBase();
+        txtMonto.setDocument(new ControlNum(6));        
         
     }
 
