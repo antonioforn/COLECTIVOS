@@ -42,6 +42,7 @@ public class frmPasajes extends javax.swing.JFrame {
     
     public frmPasajes() {
         initComponents();
+        Util.deshabilitar(frmPrincipal.toolBarPrinc, frmPrincipal.menuBarPrinc);
         emf= Persistence.createEntityManagerFactory("colectivos.odb");
         em = emf.createEntityManager();
         txtCI.setDocument(new ControlNum(7));
@@ -666,6 +667,7 @@ public class frmPasajes extends javax.swing.JFrame {
         em.flush();
         em.close();
         emf.close();
+        Util.habilitar(frmPrincipal.toolBarPrinc, frmPrincipal.menuBarPrinc);        
     }//GEN-LAST:event_formWindowClosed
 
     private void btnAsientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsientoActionPerformed

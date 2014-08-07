@@ -5,16 +5,19 @@ import entidades.DatoSist;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.swing.JMenuBar;
 import javax.swing.JToolBar;
 
 public class frmPrincipal extends javax.swing.JFrame {
     DatoSist ds;
     public static JToolBar toolBarPrinc;
+    public static JMenuBar menuBarPrinc;
     
     public frmPrincipal() {
         initComponents();
         datosIniciales();
         toolBarPrinc= toolBar;
+        menuBarPrinc= jMenuBar1;
     }
 
     private void datosIniciales() {
@@ -74,6 +77,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         dpprincipal.setBackground(java.awt.SystemColor.controlHighlight);
 
         toolBar.setRollover(true);
+        toolBar.setEnabled(false);
 
         btnCiudades.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/rsz_city.png"))); // NOI18N
         btnCiudades.setToolTipText("Ciudades");

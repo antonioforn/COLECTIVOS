@@ -44,6 +44,7 @@ public class frmVehiculos extends javax.swing.JFrame {
         txtCapacidad.setDocument(new ControlNum(2));
         dsdefrmViaje= false;
         cargarTabla("SELECT ve FROM Vehiculo ve ORDER BY ve.matricula");
+        Util.deshabilitar(frmPrincipal.toolBarPrinc, frmPrincipal.menuBarPrinc);        
     }
     
     public frmVehiculos(boolean dsdeViaje, JTextField txtVe) {
@@ -57,6 +58,7 @@ public class frmVehiculos extends javax.swing.JFrame {
         txtV= txtVe;
         lbAviso.setText("Volver");
         cargarTabla("SELECT ve FROM Vehiculo ve ORDER BY ve.matricula");
+        Util.deshabilitar(frmPrincipal.toolBarPrinc, frmPrincipal.menuBarPrinc);        
     }    
     
     /**
@@ -481,7 +483,7 @@ public class frmVehiculos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        // TODO add your handling code here:
+        Util.habilitar(frmPrincipal.toolBarPrinc, frmPrincipal.menuBarPrinc);
         em.close();
         emf.close();
     }//GEN-LAST:event_formWindowClosed

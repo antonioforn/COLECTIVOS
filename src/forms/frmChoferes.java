@@ -46,6 +46,7 @@ public class frmChoferes extends javax.swing.JFrame {
         chCI.setText("");
         tofrmVehic= false;
         lbVolver.setText(null);
+        Util.deshabilitar(frmPrincipal.toolBarPrinc, frmPrincipal.menuBarPrinc);        
     }
     
     public frmChoferes(JTextField chNom, JTextField chCI) {
@@ -57,6 +58,7 @@ public class frmChoferes extends javax.swing.JFrame {
         this.chNom= chNom;
         this.chCI= chCI;
         tofrmVehic= true;
+        Util.deshabilitar(frmPrincipal.toolBarPrinc, frmPrincipal.menuBarPrinc);        
     }
     
     /**
@@ -373,7 +375,7 @@ public class frmChoferes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        // TODO add your handling code here:
+        Util.habilitar(frmPrincipal.toolBarPrinc, frmPrincipal.menuBarPrinc);
         em.close();
         emf.close();
     }//GEN-LAST:event_formWindowClosed

@@ -30,6 +30,7 @@ public class frmVentasViaje extends javax.swing.JFrame {
 
     public frmVentasViaje(EntityManager em, int n) {
         initComponents();
+        Util.deshabilitar(frmPrincipal.toolBarPrinc, frmPrincipal.menuBarPrinc);        
         em2= em;
         jDCFechaV.setEnabled(false);
         jDCFechaV.getCalendarButton().setEnabled(true);
@@ -47,6 +48,7 @@ public class frmVentasViaje extends javax.swing.JFrame {
     
     public frmVentasViaje() {
         initComponents();
+        Util.deshabilitar(frmPrincipal.toolBarPrinc, frmPrincipal.menuBarPrinc);        
         emf2= Persistence.createEntityManagerFactory("colectivos.odb");
         em2 = emf2.createEntityManager();
         jDCFechaV.setEnabled(false);
@@ -365,6 +367,7 @@ public class frmVentasViaje extends javax.swing.JFrame {
             em2.close();
             emf2.close();
         }
+        Util.habilitar(frmPrincipal.toolBarPrinc, frmPrincipal.menuBarPrinc);        
     }//GEN-LAST:event_formWindowClosed
 
     private void cmbViajePopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_cmbViajePopupMenuWillBecomeInvisible

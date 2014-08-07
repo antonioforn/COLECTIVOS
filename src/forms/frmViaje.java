@@ -39,6 +39,7 @@ public class frmViaje extends javax.swing.JFrame {
     
     public frmViaje() {
         initComponents();
+        Util.deshabilitar(frmPrincipal.toolBarPrinc, frmPrincipal.menuBarPrinc);        
         emf= Persistence.createEntityManagerFactory("colectivos.odb");
         em = emf.createEntityManager();        
         jDCViaje.setEnabled(false);
@@ -498,6 +499,7 @@ public class frmViaje extends javax.swing.JFrame {
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         em.close();
         emf.close();
+        Util.habilitar(frmPrincipal.toolBarPrinc, frmPrincipal.menuBarPrinc);        
     }//GEN-LAST:event_formWindowClosed
 
     private void cmbTrayectoPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_cmbTrayectoPopupMenuWillBecomeInvisible

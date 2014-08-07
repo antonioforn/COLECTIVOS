@@ -38,6 +38,7 @@ public class frmTrayectos extends javax.swing.JFrame {
         cargarTabla();
         formatearTabla();
         cargarCiudades("SELECT ciu FROM Ciudad ciu ORDER BY ciu.orden");
+        Util.deshabilitar(frmPrincipal.toolBarPrinc, frmPrincipal.menuBarPrinc);        
     }
 
     /**
@@ -323,7 +324,7 @@ public class frmTrayectos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        // TODO add your handling code here:
+        Util.habilitar(frmPrincipal.toolBarPrinc, frmPrincipal.menuBarPrinc);
         em.close();
         emf.close();
     }//GEN-LAST:event_formWindowClosed

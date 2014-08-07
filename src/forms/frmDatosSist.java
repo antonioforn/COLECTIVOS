@@ -2,6 +2,7 @@
 
 package forms;
 
+import clasesUtiles.Util;
 import entidades.DatoSist;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -22,6 +23,7 @@ public class frmDatosSist extends javax.swing.JFrame {
             txtPrecio.setText(String.valueOf(ds.getPrecioBase()));
             
         }
+    Util.deshabilitar(frmPrincipal.toolBarPrinc, frmPrincipal.menuBarPrinc);        
         
     }
 
@@ -48,6 +50,11 @@ public class frmDatosSist extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Datos del Sistema:");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setText("Datos del Sistema:");
@@ -179,6 +186,12 @@ public class frmDatosSist extends javax.swing.JFrame {
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
         dispose();
     }//GEN-LAST:event_btnCerrarActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+       Util.habilitar(frmPrincipal.toolBarPrinc, frmPrincipal.menuBarPrinc);
+       em.close();
+       emf.close();
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments
