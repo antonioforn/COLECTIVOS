@@ -20,7 +20,7 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
-public class frmVentasViaje extends javax.swing.JFrame {
+public class frmViajesyPasajeros extends javax.swing.JFrame {
     EntityManagerFactory emf2;
     EntityManager em2;
     boolean flag=true;
@@ -28,16 +28,13 @@ public class frmVentasViaje extends javax.swing.JFrame {
     boolean segundoConstructor;
     Pasaje pasaje;
 
-    public frmVentasViaje(EntityManager em, int n) {
+    public frmViajesyPasajeros(EntityManager em, int n) {
         initComponents();
         Util.deshabilitar(frmPrincipal.toolBarPrinc, frmPrincipal.menuBarPrinc);        
         em2= em;
         jDCFechaV.setEnabled(false);
         jDCFechaV.getCalendarButton().setEnabled(true);
         jDCFechaV.setDate(new java.util.Date());
-        jDCFechaPas.setEnabled(false);
-        jDCFechaPas.getCalendarButton().setEnabled(true);
-        jDCFechaPas.setDate(new java.util.Date());        
         jSpinHoraV.setEditor(new JSpinner.DateEditor(jSpinHoraV, "HH:mm"));                
         segundoConstructor=false;
         cargarCmbViaje();
@@ -49,7 +46,7 @@ public class frmVentasViaje extends javax.swing.JFrame {
         cargarPasajesViaje();
     }
     
-    public frmVentasViaje() {
+    public frmViajesyPasajeros() {
         initComponents();
         Util.deshabilitar(frmPrincipal.toolBarPrinc, frmPrincipal.menuBarPrinc);        
         emf2= Persistence.createEntityManagerFactory("colectivos.odb");
@@ -57,9 +54,6 @@ public class frmVentasViaje extends javax.swing.JFrame {
         jDCFechaV.setEnabled(false);
         jDCFechaV.getCalendarButton().setEnabled(true);
         jDCFechaV.setDate(new java.util.Date());
-        jDCFechaPas.setEnabled(false);
-        jDCFechaPas.getCalendarButton().setEnabled(true);
-        jDCFechaPas.setDate(new java.util.Date());        
         jSpinHoraV.setEditor(new JSpinner.DateEditor(jSpinHoraV, "HH:mm"));        
         segundoConstructor=true;
         cargarCmbViaje();
@@ -403,7 +397,7 @@ public class frmVentasViaje extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-            Util.limpiarCampos(jPanel1);
+
 //        txtID.setText(null);
 //        jDCViaje.setDate(new java.util.Date());
 //        jSpin.setValue(new java.util.Date());
@@ -471,20 +465,20 @@ public class frmVentasViaje extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmVentasViaje.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmViajesyPasajeros.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmVentasViaje.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmViajesyPasajeros.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmVentasViaje.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmViajesyPasajeros.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmVentasViaje.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmViajesyPasajeros.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmVentasViaje().setVisible(true);
+                new frmViajesyPasajeros().setVisible(true);
             }
         });
     }

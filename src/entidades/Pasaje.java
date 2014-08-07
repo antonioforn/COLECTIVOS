@@ -6,13 +6,14 @@ import java.sql.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @Entity
 public class Pasaje {
-    @Id @GeneratedValue int nro;
+    @Id @GeneratedValue(strategy=GenerationType.IDENTITY) int nro;
     java.sql.Date fechaPas;
     @OneToOne Pasajero cliente;
     int monto;

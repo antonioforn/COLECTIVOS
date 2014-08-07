@@ -9,21 +9,40 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Viaje {
     @Id @GeneratedValue int idViaje;
     java.sql.Date fechaViaje;
     java.sql.Time horaViaje;
-    Trayecto trayecto;
-    Vehiculo vehiculo;
+    @OneToOne Trayecto trayecto;
+    @OneToOne Vehiculo vehiculo;
     String estado;
     boolean modo=true; //true ida, false retorno
     ArrayList<Boolean> asientos;
-
-
     @OneToMany(mappedBy="viaje") List<Pasaje> pasajes= new ArrayList<Pasaje>();
+    
+        @ManyToMany
+        @JoinTable(name="Viaje_Pasajero", 
+        joinColumns= 
+                @JoinColumn(name="IdViaje", referencedColumnName="idViaje"),
+        inverseJoinColumns=
+                @JoinColumn(name="IdPasajero", referencedColumnName="ci")
+        )
+    private List<Pasajero> pasajeros= new ArrayList<Pasajero>();
+
+    public List<Pasajero> getPasajeros() {
+        return pasajeros;
+    }
+
+    public void setPasajeros(List<Pasajero> pasajeros) {
+        this.pasajeros = pasajeros;
+    }
 
     public Viaje(java.sql.Date fechaViaje, java.sql.Time horaViaje, Trayecto trayecto, Vehiculo vehiculo, String estado) {
         this.fechaViaje = fechaViaje;

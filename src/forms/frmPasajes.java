@@ -545,10 +545,13 @@ public class frmPasajes extends javax.swing.JFrame {
                 em.persist(pasaje);
                 em.getTransaction().commit();
                 
+
                 em.getTransaction().begin();
                 viaje.getAsientos().set(Integer.parseInt(txtAsiento.getText())-1, false);
-                
+                viaje.getPasajeros().add(pasajero);
                 em.getTransaction().commit();
+                em.flush();
+                em.clear();
             }catch(EntityExistsException ex){
                 JOptionPane.showMessageDialog(rootPane, "Ya se encuentra registrado");
             }catch(Exception e){

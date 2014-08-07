@@ -37,7 +37,8 @@ public class Util {
     }
     
     public static void deshabilitar(JToolBar jTool, JMenuBar jMenuBar){
-       for(int i=0; jTool.getComponents().length>i;i++){
+       if(jTool==null ||jMenuBar ==null) return;
+        for(int i=0; jTool.getComponents().length>i;i++){
            
            if(jTool.getComponents()[i]instanceof JButton)
            {
@@ -55,7 +56,8 @@ public class Util {
     }
 
     public static void habilitar(JToolBar jTool, JMenuBar jMenuBar){
-       for(int i=0; jTool.getComponents().length>i;i++){
+       if(jTool==null ||jMenuBar ==null) return;
+        for(int i=0; jTool.getComponents().length>i;i++){
            
            if(jTool.getComponents()[i]instanceof JButton)
            {
